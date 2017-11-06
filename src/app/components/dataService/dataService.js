@@ -212,7 +212,7 @@ function dataService($rootScope, $filter) {
         product.quality = 1;
       }
 
-      product.quality = product.quality * (1 + manufacture.bonus / 100);
+      product.quality = product.quality * (1 + (manufacture.bonus + product.qbp) / 100);
 
       // TEXES & PROFIT
       if (manufacture.incomeTaxCoefficient === angular.undefined) {
