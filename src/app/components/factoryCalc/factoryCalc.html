@@ -108,11 +108,24 @@
                     </button>
                     <div class="alert alert-secondary" role="alert">
                       <span class="{{ingredient.img}} sprite" title="{{ingredient.name}}"></span>
+                      <span class="badge badge-warning align-top"
+                            ng-show="ingredient.mq"
+                            data-toggle="tooltip"
+                            data-placement="left"
+                            title="Минимальное качество">
+                        {{ingredient.mq}}
+                      </span>
                       <div class="input-group input-group-sm">
                         <span class="input-group-addon" data-toggle="tooltip" data-placement="left"
                               title="Качество">#</span>
-                        <input class="form-control" type="number" min="1" step="0.01" ng-change="$ctrl.doCalc()"
-                               placeholder="Качество" ng-model="ingredient.quality" ng-disabled="ingredient.sourceMnf">
+                        <input class="form-control"
+                               type="number"
+                               ng-min="ingredient.mq"
+                               step="0.01"
+                               ng-change="$ctrl.doCalc()"
+                               placeholder="Качество"
+                               ng-model="ingredient.quality"
+                               ng-disabled="ingredient.sourceMnf">
                       </div>
                       <div class="input-group input-group-sm">
                         <span class="input-group-addon" data-toggle="tooltip" data-placement="left"
