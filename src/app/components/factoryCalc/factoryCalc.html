@@ -149,7 +149,7 @@
                       <span class="{{$ctrl.manufacture.e.sym}} sprite"
                             title="{{$ctrl.manufacture.e.c}}"></span>
                       <span class="badge badge-light align-top" data-toggle="tooltip" data-placement="top"
-                            title="Рекомендованное качество животных">
+                            title="Рекомендованное качество животных" ng-show="$ctrl.manufacture.recommendedAnimals">
                         {{$ctrl.manufacture.recommendedAnimals | number : 2}}
                       </span>
                       <div class="input-group input-group-sm">
@@ -193,6 +193,7 @@
                       </div>
                     </div>
                   </div>
+                  <!--------------------------- Ingredients proportions --------------------------->
                   <div class="col-md-12 pb-2">
                     <div class="progress">
                       <div ng-repeat="ingredient in $ctrl.manufacture.ip"
@@ -233,6 +234,14 @@
               <tbody>
               <tr class="row" ng-repeat="product in $ctrl.manufacture.rp">
                 <td class="d-inline-block col-1">
+                  <span class="badge align-top"
+                        ng-class="{'badge-danger': product.qbp < 0, 'badge-success': product.qbp > 0}"
+                        ng-show="product.qbp"
+                        data-toggle="tooltip"
+                        data-placement="left"
+                        title="Бонус к качеству">
+                        {{product.qbp}}%
+                  </span>
                   <span class="{{product.img}} sprite cursor-pointer"></span>
                   <button type="button" class="btn btn-sm btn-success float-right cursor-pointer"
                           ng-show="product.targetMnfId !== angular.undefined"
