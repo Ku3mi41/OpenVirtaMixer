@@ -1,0 +1,45 @@
+<div id="productSelector" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header"><input type="text"
+                                       class="form-control col-md-5"
+                                       placeholder="Поиск товара..."
+                                       ng-model="$ctrl.search"
+                                       ng-change="$ctrl.searchProducts()">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-4 pt-1 pb-1" ng-repeat="product in $ctrl.products">
+            <div class="alert alert-secondary productBlock cursor-pointer"
+                 ng-click="$ctrl.selectProduct(product)"
+                 role="alert">
+              <div class="row">
+                <div class="col-md-3">
+                <span class="{{product.rp[0].img}} sprite"></span>
+                <span class="{{product.rp[1].img}} sprite"></span>
+                </div>
+                <div class="col-md-9">
+                  <span class="badge badge-success badge-pill" data-toggle="tooltip" data-placement="top"
+                        title="Технология" ng-if="product.technology">
+                    {{product.technology}}
+                  </span>
+                  <span class="badge badge-primary" data-toggle="tooltip" data-placement="top"
+                        title="{{product.rp[0].name}}" ng-if="product.rp[0].quantity">
+                    {{product.rp[0].quantity}} / {{product.rp[0].quality | number:2}}
+                  </span>
+                  <span class="badge badge-secondary" data-toggle="tooltip" data-placement="top"
+                        title="product.rp[1].name" ng-if="product.rp[1].quantity">
+                    {{product.rp[1].quantity}} / {{product.rp[1].quality | number:2}}
+                  </span>
+                  {{product.s}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="jumbotron">
+  <h1 class="display-4">Добро пожаловать!</h1>
+  <p class="lead">Для начала работы вам необходимо выбрать товар, производственную цепочку которого, вы желаете
+    рассчитать.</p>
+  <hr>
+  <p class="lead text-center">
+    Выбрано производство:
+    <em ng-show="$ctrl.selectedProduct()">
+      <span class="{{$ctrl.selectedProduct().rp[0].img}} sprite"></span>
+      {{$ctrl.selectedProduct().s}}
+      <br><br>
+    </em>
+    <button class="btn btn-primary btn-lg cursor-pointer" data-toggle="modal" data-target="#productSelector">
+      Выбрать товар
+    </button>
+    <button class="btn btn-secondary btn-lg cursor-pointer"
+            ng-click="$ctrl.showManufactureCalc()"
+            ng-show="$ctrl.selectedProduct()">
+      Рассчитать
+    </button>
+  </p>
+  <p>
+    <em>Структура производственной цепочки будет отображена после настройки производства хотя бы одного исходного
+      компонента.</em>
+  </p>
+</div>

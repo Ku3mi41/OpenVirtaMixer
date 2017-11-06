@@ -1,0 +1,293 @@
+<div id="factoryCalc" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        «{{$ctrl.manufacture.s}}»
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span>×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table">
+              <thead class="thead-default">
+              <tr>
+                <th class="text-center">
+                  Работники
+                  <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                          title="Квалификация работников" ng-show="$ctrl.manufacture.workersQualification">
+                    {{$ctrl.manufacture.workersQualification | number : 2}}
+                  </button>
+                </th>
+                <th class="text-center">
+                  <span ng-if="$ctrl.manufacture.e.pc !== 'Животные'">Станки</span>
+                  <span ng-if="$ctrl.manufacture.e.pc === 'Животные'">Технология</span>
+                  <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                          ng-if="$ctrl.manufacture.e.pc !== 'Животные'"
+                          title="Качество станков" ng-show="$ctrl.manufacture.machinesQuality">
+                    {{$ctrl.manufacture.machinesQuality | number: 2}}
+                  </button>
+                </th>
+                <th class="text-center">
+                  Бонусы
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                      {{$ctrl.manufacture.bonus}} %
+                    </button>
+                    <div class="dropdown-menu small-menu">
+                      <a class="dropdown-item" ng-click="$ctrl.setBonus(0)">+0%</a>
+                      <a class="dropdown-item" ng-click="$ctrl.setBonus(1)">+1%</a>
+                      <a class="dropdown-item" ng-click="$ctrl.setBonus(10)">+10%</a>
+                      <a class="dropdown-item" ng-click="$ctrl.setBonus(11)">+11%</a>
+                      <a class="dropdown-item" ng-click="$ctrl.setBonus(15)">+15%</a>
+                      <a class="dropdown-item" ng-click="$ctrl.setBonus(16)">+16%</a>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-addon" data-toggle="tooltip" data-placement="top"
+                          title="Количество работников">#</span>
+                    <input class="form-control" type="number" placeholder="Количество" min="1"
+                           ng-change="$ctrl.doCalc()"
+                           ng-model="$ctrl.manufacture.workersQuantity">
+                    <input class="form-control" type="number" placeholder="Зарплата" min="1" ng-change="$ctrl.doCalc()"
+                           ng-model="$ctrl.manufacture.workersSalary">
+                    <span class="input-group-addon" data-toggle="tooltip" data-placement="top"
+                          title="Зарплата одного работника">$</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-addon" data-toggle="tooltip" data-placement="top"
+                          title="Технология">#</span>
+                    <input class="form-control" type="number" placeholder="Технология" min="1"
+                           ng-change="$ctrl.doCalc()"
+                           ng-model="$ctrl.manufacture.technology"></div>
+                </td>
+                <td>
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-addon">Эфф., %</span>
+                    <input class="form-control" type="number" placeholder="Эффективность" min="1"
+                           ng-change="$ctrl.doCalc()" max="100" ng-model="$ctrl.manufacture.efficiency"></div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header pt-2 pb-2 text-center">
+                Сырье
+                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                        title="Стоимость сырья" ng-show="$ctrl.manufacture.totalIngredientsPrice">
+                  {{$ctrl.manufacture.totalIngredientsPrice | number : 2}} $
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="row justify-content-center">
+                  <!--------------------------- Factory --------------------------->
+                  <div class="col-md-3 text-center"
+                       ng-repeat="ingredient in $ctrl.manufacture.ip">
+                    <button type="button" class="btn btn-sm btn-secondary float-right cursor-pointer"
+                            ng-show="!ingredient.sourceMnf"
+                            ng-click="$ctrl.addSource(ingredient.pi, ingredient.quantity, $index)"
+                            tabindex="999">
+                      <strong>+</strong>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-success float-right cursor-pointer"
+                            ng-show="ingredient.sourceMnf"
+                            ng-click="$ctrl.changeManufacture(ingredient.sourceMnf)">
+                      <strong>&#8662;</strong>
+                    </button>
+                    <div class="alert alert-secondary" role="alert">
+                      <span class="{{ingredient.img}} sprite" title="{{ingredient.name}}"></span>
+                      <div class="input-group input-group-sm">
+                        <span class="input-group-addon" data-toggle="tooltip" data-placement="left"
+                              title="Качество">#</span>
+                        <input class="form-control" type="number" min="1" step="0.01" ng-change="$ctrl.doCalc()"
+                               placeholder="Качество" ng-model="ingredient.quality" ng-disabled="ingredient.sourceMnf">
+                      </div>
+                      <div class="input-group input-group-sm">
+                        <span class="input-group-addon" data-toggle="tooltip" data-placement="left"
+                              title="Цена">$</span>
+                        <input class="form-control" type="number" ng-change="$ctrl.doCalc()" placeholder="Цена"
+                               step="0.01" ng-disabled="ingredient.sourceMnf" ng-model="ingredient.price">
+                      </div>
+                      <span class="badge badge-light" ng-show="ingredient.quantity">
+                        {{ingredient.quantity | number : 0}} шт.
+                      </span>
+                      <br>
+                      <span class="badge badge-secondary" ng-show="ingredient.totalPrice">
+                        {{ingredient.totalPrice | number : 2}} $
+                      </span>
+                    </div>
+                  </div>
+                  <!--------------------------- Farm --------------------------->
+                  <div class="col-md-3 text-center"
+                       ng-if="$ctrl.manufacture.e.pc === 'Животные'">
+                    <div class="alert alert-secondary" role="alert">
+                      <span class="{{$ctrl.manufacture.e.sym}} sprite"
+                            title="{{$ctrl.manufacture.e.c}}"></span>
+                      <span class="badge badge-light align-top" data-toggle="tooltip" data-placement="top"
+                            title="Рекомендованное качество животных">
+                        {{$ctrl.manufacture.recommendedAnimals | number : 2}}
+                      </span>
+                      <div class="input-group input-group-sm">
+                        <span class="input-group-addon" data-toggle="tooltip" data-placement="left"
+                              title="Качество животных">#</span>
+                        <input class="form-control" type="number" min="1" step="0.01" ng-change="$ctrl.doCalc()"
+                               placeholder="Качество животных" ng-model="$ctrl.manufacture.machinesQuality">
+                      </div>
+                    </div>
+                  </div>
+                  <!--------------------------- Plant --------------------------->
+                  <div class="col-md-3 text-center"
+                       ng-if="$ctrl.manufacture.e.sym === 'tractor' || $ctrl.manufacture.e.sym === 'saw'">
+                    <div class="alert alert-secondary" role="alert">
+                      <span class="{{$ctrl.manufacture.e.sym}} sprite"
+                            title="{{$ctrl.manufacture.e.c}}"></span>
+                      <div class="input-group input-group-sm">
+                        <span class="input-group-addon" data-toggle="tooltip" data-placement="left"
+                              title="Базовое качество">#</span>
+                        <input class="form-control" type="number" min="1" step="0.01" ng-change="$ctrl.doCalc()"
+                               placeholder="Базовое качество" ng-model="$ctrl.manufacture.baseQuality">
+                      </div>
+                    </div>
+                  </div>
+                  <!--------------------------- Mine --------------------------->
+                  <div class="col-md-3 text-center" ng-if="$ctrl.manufacture.e.sym === 'drill'">
+                    <div class="alert alert-secondary" role="alert">
+                      <span class="{{$ctrl.manufacture.e.sym === 'tractor' ? 'farm' : 'mine'}} sprite"
+                            title="{{$ctrl.manufacture.e.c}}"></span>
+                      <div class="input-group input-group-sm">
+                        <span class="input-group-addon fixed-width" data-toggle="tooltip" data-placement="left"
+                              title="Базовое качество">#</span>
+                        <input class="form-control" type="number" min="1" step="0.25" ng-change="$ctrl.doCalc()"
+                               placeholder="Базовое качество" ng-model="$ctrl.manufacture.baseQuality">
+                      </div>
+                      <div class="input-group input-group-sm">
+                        <span class="input-group-addon fixed-width" data-toggle="tooltip" data-placement="left"
+                              title="Сложность добычи">©</span>
+                        <input class="form-control" type="number" min="1" step="1" ng-change="$ctrl.doCalc()"
+                               placeholder="Сложность добычи" ng-model="$ctrl.manufacture.mineDifficult">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 pb-2">
+                    <div class="progress">
+                      <div ng-repeat="ingredient in $ctrl.manufacture.ip"
+                           ng-style="{'background-color':$ctrl.getColorByString(ingredient.name),
+                           'width': $ctrl.calculateIngredientPercent(ingredient) + '%'}"
+                           ng-attr-title="{{ingredient.name}} {{$ctrl.calculateIngredientPercent(ingredient)|number:2}}%"
+                           class="progress-bar cursor-help"
+                           role="progressbar"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 pt-3 text-center">
+            <table class="table">
+              <thead>
+              <tr class="row">
+                <th class="text-center d-inline-block col-1">Товар</th>
+                <th class="text-center d-inline-block col-2">Кол-во</th>
+                <th class="text-center d-inline-block col-1">Кач-во</th>
+                <th class="text-center d-inline-block col-2">C\c<br>Налог</th>
+                <th class="text-center d-inline-block col-2">С\с + налог</th>
+                <th class="text-center d-inline-block col-2">
+                  Цена
+                </th>
+                <th class="text-center d-inline-block col-2">
+                  Прибыль
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-addon" data-toggle="tooltip" data-placement="left"
+                          title="Налог на прибыль">%</span>
+                    <input class="form-control" type="number" min="0" step="1" ng-change="$ctrl.doCalc()"
+                           placeholder="Качество" ng-model="$ctrl.manufacture.incomeTaxCoefficient">
+                  </div>
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="row" ng-repeat="product in $ctrl.manufacture.rp">
+                <td class="d-inline-block col-1">
+                  <span class="{{product.img}} sprite cursor-pointer"></span>
+                  <button type="button" class="btn btn-sm btn-success float-right cursor-pointer"
+                          ng-show="product.targetMnfId !== angular.undefined"
+                          ng-click="$ctrl.changeManufacture(product.targetMnfId)">
+                    <strong>&#8664;</strong>
+                  </button>
+                </td>
+                <td class="d-inline-block col-2">
+                  <span class="badge badge-light" ng-show="product.quantity">
+                    {{product.quantity | number : 0}} шт.
+                  </span>
+                  <span class="badge badge-light" title="В неделю" data-toggle="tooltip" data-placement="bottom"
+                        ng-if="$ctrl.manufacture.e.sym === 'tractor'" ng-show="product.quantity">
+                    {{product.quantity / 52 | number : 0}} шт.
+                  </span>
+                </td>
+                <td class="d-inline-block col-1">
+                  <span class="badge badge-info" ng-show="product.quality">
+                    {{product.quality | number : 2}}
+                  </span>
+                </td>
+                <td class="d-inline-block col-2">
+                  <span class="badge badge-info" data-toggle="tooltip" data-placement="top" title="Себестоимость"
+                        ng-show="product.netCost">
+                    {{product.netCost | number : 2}} $
+                  </span><br>
+                  <span class="badge badge-primary" data-toggle="tooltip" data-placement="top" title="Налог на прибыль"
+                        ng-show="product.incomeTax > product.envdTax">
+                    {{product.incomeTax | number : 2}} $
+                  </span>
+                  <span class="badge badge-warning" data-toggle="tooltip" data-placement="top" title="ЕНВД"
+                        ng-show="product.envdTax >= product.incomeTax">
+                    {{product.envdTax | number : 2}} $
+                  </span>
+                  <span class="badge badge-info cursor-help"
+                        ng-attr-title="Переход с\на ЕНВД при цене продажи ${{product.changeTaxPoint}}">
+                    i
+                  </span>
+                </td>
+                <td class="d-inline-block col-2">
+                  <span class="badge badge-secondary"
+                        title="Себестоимость + налог">
+                    {{product.totalCost | number : 2}} $
+                  </span>
+                </td>
+                <td class="d-inline-block col-2">
+                  <input class="form-control-sm form-control" type="number" min="0" step="0.01"
+                         ng-change="$ctrl.doCalc()"
+                         placeholder="Цена" ng-model="product.price">
+                </td>
+                <td class="d-inline-block col-2">
+                  <span class="badge"
+                        ng-class="{'badge-success' : product.profit > 0, 'badge-danger': product.profit <= 0}">
+                    {{product.profit | number : 2}} $
+                  </span>
+                  <span class="badge" ng-if="$ctrl.manufacture.e.sym === 'tractor'"
+                        title="В неделю" data-toggle="tooltip"
+                        data-placement="bottom"
+                        ng-class="{'badge-success' : product.profit > 0, 'badge-danger': product.profit <= 0}">
+                    {{product.profit / 52 | number : 2}} $
+                  </span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
