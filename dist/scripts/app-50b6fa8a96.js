@@ -17898,8 +17898,8 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     });
 }
 
-angular.module('app').run(['$templateCache', function($templateCache) {$templateCache.put('app/containers/App.html','<div class="container-fluid">\n  <div class="row justify-content-center">\n    <div class="jumbotron jumbotron-fluid col-md-12 p-2">\n      <div class="container">\n        <div class="row">\n          <div class="col-8">\n            <h1 class="display-5">OpenVirtaMixer</h1>\n            <p class="lead">\u0418\u043D\u0441\u0442\u0440\u0443\u043C\u0435\u043D\u0442 \u0434\u043B\u044F \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043D\u043E\u0433\u043E \u0440\u0430\u0441\u0447\u0435\u0442\u0430 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0441\u0442\u0432\u0430.</p>\n          </div>\n          <div class="col-4" ng-if="$ctrl.data.nodes.length > 1">\n            <div class="alert alert-dark" role="alert">\n              <h5>\u0422\u0438\u043F \u0434\u0438\u0430\u0433\u0440\u0430\u043C\u043C\u044B</h5>\n              <div class="form-check form-check-inline">\n                <label class="form-check-label">\n                  <input class="form-check-input" type="radio" name="inlineRadioOptions" value="scheme" ng-model="$ctrl.mapType" ng-change="$ctrl.changeMapType()"> \u0421\u0445\u0435\u043C\u0430\n                </label>\n              </div>\n              <div class="form-check form-check-inline">\n                <label class="form-check-label">\n                  <input class="form-check-input" type="radio" name="inlineRadioOptions" value="value" ng-model="$ctrl.mapType" ng-change="$ctrl.changeMapType()"> \u041E\u0431\u044A\u0435\u043C\n                </label>\n              </div>\n              <div class="form-check form-check-inline">\n                <label class="form-check-label">\n                  <input class="form-check-input" type="radio" name="inlineRadioOptions" value="cost" ng-model="$ctrl.mapType" ng-change="$ctrl.changeMapType()"> \u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C\n                </label>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div id="flow" class="col-md-12">\n      <ng-sankey ng-if="$ctrl.data.nodes.length > 1" id="sankeyChart" options="$ctrl.options" data="$ctrl.data"></ng-sankey>\n    </div>\n    <welcome-block ng-show="$ctrl.data.nodes.length < 2" class="col-md-6" show-manufacture-calc="$ctrl.showManufactureCalc(0)"></welcome-block>\n    <product-selector></product-selector>\n    <factory-calc></factory-calc>\n  </div>\n</div>\n');
-$templateCache.put('app/components/factoryCalc/factoryCalc.html','<div id="factoryCalc" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">\r\n  <div class="modal-dialog modal-lg">\r\n    <div class="modal-content">\r\n      <div class="modal-header">\r\n        \xAB{{$ctrl.manufacture.s}}\xBB\r\n        <button type="button" class="close" data-dismiss="modal" aria-label="Close">\r\n          <span>\xD7</span>\r\n        </button>\r\n      </div>\r\n      <div class="modal-body">\r\n        <div class="row">\r\n          <div class="col-md-12">\r\n            <table class="table">\r\n              <thead class="thead-default">\r\n              <tr>\r\n                <th class="text-center">\r\n                  \u0420\u0430\u0431\u043E\u0442\u043D\u0438\u043A\u0438\r\n                  <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="\u041A\u0432\u0430\u043B\u0438\u0444\u0438\u043A\u0430\u0446\u0438\u044F \u0440\u0430\u0431\u043E\u0442\u043D\u0438\u043A\u043E\u0432" ng-show="$ctrl.manufacture.workersQualification">\r\n                    {{$ctrl.manufacture.workersQualification | number : 2}}\r\n                  </button>\r\n                </th>\r\n                <th class="text-center">\r\n                  <span ng-if="$ctrl.manufacture.e.pc !== \'\u0416\u0438\u0432\u043E\u0442\u043D\u044B\u0435\'">\u0421\u0442\u0430\u043D\u043A\u0438</span>\r\n                  <span ng-if="$ctrl.manufacture.e.pc === \'\u0416\u0438\u0432\u043E\u0442\u043D\u044B\u0435\'">\u0422\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u044F</span>\r\n                  <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" ng-if="$ctrl.manufacture.e.pc !== \'\u0416\u0438\u0432\u043E\u0442\u043D\u044B\u0435\'" title="\u041A\u0430\u0447\u0435\u0441\u0442\u0432\u043E \u0441\u0442\u0430\u043D\u043A\u043E\u0432" ng-show="$ctrl.manufacture.machinesQuality">\r\n                    {{$ctrl.manufacture.machinesQuality | number: 2}}\r\n                  </button>\r\n                </th>\r\n                <th class="text-center">\r\n                  \u0411\u043E\u043D\u0443\u0441\u044B\r\n                  <div class="btn-group">\r\n                    <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\r\n                      {{$ctrl.manufacture.bonus}} %\r\n                    </button>\r\n                    <div class="dropdown-menu small-menu">\r\n                      <a class="dropdown-item" ng-click="$ctrl.setBonus(0)">+0%</a>\r\n                      <a class="dropdown-item" ng-click="$ctrl.setBonus(1)">+1%</a>\r\n                      <a class="dropdown-item" ng-click="$ctrl.setBonus(10)">+10%</a>\r\n                      <a class="dropdown-item" ng-click="$ctrl.setBonus(11)">+11%</a>\r\n                      <a class="dropdown-item" ng-click="$ctrl.setBonus(15)">+15%</a>\r\n                      <a class="dropdown-item" ng-click="$ctrl.setBonus(16)">+16%</a>\r\n                    </div>\r\n                  </div>\r\n                </th>\r\n              </tr>\r\n              </thead>\r\n              <tbody>\r\n              <tr>\r\n                <td>\r\n                  <div class="input-group input-group-sm">\r\n                    <span class="input-group-addon" data-toggle="tooltip" data-placement="top" title="\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0440\u0430\u0431\u043E\u0442\u043D\u0438\u043A\u043E\u0432">#</span>\r\n                    <input class="form-control" type="number" placeholder="\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E" min="1" ng-change="$ctrl.doCalc()" ng-model="$ctrl.manufacture.workersQuantity">\r\n                    <input class="form-control" type="number" placeholder="\u0417\u0430\u0440\u043F\u043B\u0430\u0442\u0430" min="1" ng-change="$ctrl.doCalc()" ng-model="$ctrl.manufacture.workersSalary">\r\n                    <span class="input-group-addon" data-toggle="tooltip" data-placement="top" title="\u0417\u0430\u0440\u043F\u043B\u0430\u0442\u0430 \u043E\u0434\u043D\u043E\u0433\u043E \u0440\u0430\u0431\u043E\u0442\u043D\u0438\u043A\u0430">$</span>\r\n                  </div>\r\n                </td>\r\n                <td>\r\n                  <div class="input-group input-group-sm">\r\n                    <span class="input-group-addon" data-toggle="tooltip" data-placement="top" title="\u0422\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u044F">#</span>\r\n                    <input class="form-control" type="number" placeholder="\u0422\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u044F" min="1" ng-change="$ctrl.doCalc()" ng-model="$ctrl.manufacture.technology"></div>\r\n                </td>\r\n                <td>\r\n                  <div class="input-group input-group-sm">\r\n                    <span class="input-group-addon">\u042D\u0444\u0444., %</span>\r\n                    <input class="form-control" type="number" placeholder="\u042D\u0444\u0444\u0435\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C" min="1" ng-change="$ctrl.doCalc()" max="100" ng-model="$ctrl.manufacture.efficiency"></div>\r\n                </td>\r\n              </tr>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n          <div class="col-md-12">\r\n            <div class="card">\r\n              <div class="card-header pt-2 pb-2 text-center">\r\n                \u0421\u044B\u0440\u044C\u0435\r\n                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0441\u044B\u0440\u044C\u044F" ng-show="$ctrl.manufacture.totalIngredientsPrice">\r\n                  {{$ctrl.manufacture.totalIngredientsPrice | number : 2}} $\r\n                </button>\r\n              </div>\r\n              <div class="card-body">\r\n                <div class="row justify-content-center">\r\n                  <!--------------------------- Factory --------------------------->\r\n                  <div class="col-md-3 text-center" ng-repeat="ingredient in $ctrl.manufacture.ip">\r\n                    <button type="button" class="btn btn-sm btn-secondary float-right cursor-pointer" ng-show="!ingredient.sourceMnf" ng-click="$ctrl.addSource(ingredient.pi, ingredient.quantity, $index)" tabindex="999">\r\n                      <strong>+</strong>\r\n                    </button>\r\n                    <button type="button" class="btn btn-sm btn-success float-right cursor-pointer" ng-show="ingredient.sourceMnf" ng-click="$ctrl.changeManufacture(ingredient.sourceMnf)">\r\n                      <strong>&#8662;</strong>\r\n                    </button>\r\n                    <div class="alert alert-secondary" role="alert">\r\n                      <span class="{{ingredient.img}} sprite" title="{{ingredient.name}}"></span>\r\n                      <div class="input-group input-group-sm">\r\n                        <span class="input-group-addon" data-toggle="tooltip" data-placement="left" title="\u041A\u0430\u0447\u0435\u0441\u0442\u0432\u043E">#</span>\r\n                        <input class="form-control" type="number" min="1" step="0.01" ng-change="$ctrl.doCalc()" placeholder="\u041A\u0430\u0447\u0435\u0441\u0442\u0432\u043E" ng-model="ingredient.quality" ng-disabled="ingredient.sourceMnf">\r\n                      </div>\r\n                      <div class="input-group input-group-sm">\r\n                        <span class="input-group-addon" data-toggle="tooltip" data-placement="left" title="\u0426\u0435\u043D\u0430">$</span>\r\n                        <input class="form-control" type="number" ng-change="$ctrl.doCalc()" placeholder="\u0426\u0435\u043D\u0430" step="0.01" ng-disabled="ingredient.sourceMnf" ng-model="ingredient.price">\r\n                      </div>\r\n                      <span class="badge badge-light" ng-show="ingredient.quantity">\r\n                        {{ingredient.quantity | number : 0}} \u0448\u0442.\r\n                      </span>\r\n                      <br>\r\n                      <span class="badge badge-secondary" ng-show="ingredient.totalPrice">\r\n                        {{ingredient.totalPrice | number : 2}} $\r\n                      </span>\r\n                    </div>\r\n                  </div>\r\n                  <!--------------------------- Farm --------------------------->\r\n                  <div class="col-md-3 text-center" ng-if="$ctrl.manufacture.e.pc === \'\u0416\u0438\u0432\u043E\u0442\u043D\u044B\u0435\'">\r\n                    <div class="alert alert-secondary" role="alert">\r\n                      <span class="{{$ctrl.manufacture.e.sym}} sprite" title="{{$ctrl.manufacture.e.c}}"></span>\r\n                      <span class="badge badge-light align-top" data-toggle="tooltip" data-placement="top" title="\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u043E\u0432\u0430\u043D\u043D\u043E\u0435 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E \u0436\u0438\u0432\u043E\u0442\u043D\u044B\u0445">\r\n                        {{$ctrl.manufacture.recommendedAnimals | number : 2}}\r\n                      </span>\r\n                      <div class="input-group input-group-sm">\r\n                        <span class="input-group-addon" data-toggle="tooltip" data-placement="left" title="\u041A\u0430\u0447\u0435\u0441\u0442\u0432\u043E \u0436\u0438\u0432\u043E\u0442\u043D\u044B\u0445">#</span>\r\n                        <input class="form-control" type="number" min="1" step="0.01" ng-change="$ctrl.doCalc()" placeholder="\u041A\u0430\u0447\u0435\u0441\u0442\u0432\u043E \u0436\u0438\u0432\u043E\u0442\u043D\u044B\u0445" ng-model="$ctrl.manufacture.machinesQuality">\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                  <!--------------------------- Plant --------------------------->\r\n                  <div class="col-md-3 text-center" ng-if="$ctrl.manufacture.e.sym === \'tractor\' || $ctrl.manufacture.e.sym === \'saw\'">\r\n                    <div class="alert alert-secondary" role="alert">\r\n                      <span class="{{$ctrl.manufacture.e.sym}} sprite" title="{{$ctrl.manufacture.e.c}}"></span>\r\n                      <div class="input-group input-group-sm">\r\n                        <span class="input-group-addon" data-toggle="tooltip" data-placement="left" title="\u0411\u0430\u0437\u043E\u0432\u043E\u0435 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E">#</span>\r\n                        <input class="form-control" type="number" min="1" step="0.01" ng-change="$ctrl.doCalc()" placeholder="\u0411\u0430\u0437\u043E\u0432\u043E\u0435 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E" ng-model="$ctrl.manufacture.baseQuality">\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                  <!--------------------------- Mine --------------------------->\r\n                  <div class="col-md-3 text-center" ng-if="$ctrl.manufacture.e.sym === \'drill\'">\r\n                    <div class="alert alert-secondary" role="alert">\r\n                      <span class="{{$ctrl.manufacture.e.sym === \'tractor\' ? \'farm\' : \'mine\'}} sprite" title="{{$ctrl.manufacture.e.c}}"></span>\r\n                      <div class="input-group input-group-sm">\r\n                        <span class="input-group-addon fixed-width" data-toggle="tooltip" data-placement="left" title="\u0411\u0430\u0437\u043E\u0432\u043E\u0435 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E">#</span>\r\n                        <input class="form-control" type="number" min="1" step="0.25" ng-change="$ctrl.doCalc()" placeholder="\u0411\u0430\u0437\u043E\u0432\u043E\u0435 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E" ng-model="$ctrl.manufacture.baseQuality">\r\n                      </div>\r\n                      <div class="input-group input-group-sm">\r\n                        <span class="input-group-addon fixed-width" data-toggle="tooltip" data-placement="left" title="\u0421\u043B\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0434\u043E\u0431\u044B\u0447\u0438">\xA9</span>\r\n                        <input class="form-control" type="number" min="1" step="1" ng-change="$ctrl.doCalc()" placeholder="\u0421\u043B\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0434\u043E\u0431\u044B\u0447\u0438" ng-model="$ctrl.manufacture.mineDifficult">\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                  <div class="col-md-12 pb-2">\r\n                    <div class="progress">\r\n                      <div ng-repeat="ingredient in $ctrl.manufacture.ip" ng-style="{\'background-color\':$ctrl.getColorByString(ingredient.name),\r\n                           \'width\': $ctrl.calculateIngredientPercent(ingredient) + \'%\'}" ng-attr-title="{{ingredient.name}} {{$ctrl.calculateIngredientPercent(ingredient)|number:2}}%" class="progress-bar cursor-help" role="progressbar"></div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class="col-md-12 pt-3 text-center">\r\n            <table class="table">\r\n              <thead>\r\n              <tr class="row">\r\n                <th class="text-center d-inline-block col-1">\u0422\u043E\u0432\u0430\u0440</th>\r\n                <th class="text-center d-inline-block col-2">\u041A\u043E\u043B-\u0432\u043E</th>\r\n                <th class="text-center d-inline-block col-1">\u041A\u0430\u0447-\u0432\u043E</th>\r\n                <th class="text-center d-inline-block col-2">C\\c<br>\u041D\u0430\u043B\u043E\u0433</th>\r\n                <th class="text-center d-inline-block col-2">\u0421\\\u0441 + \u043D\u0430\u043B\u043E\u0433</th>\r\n                <th class="text-center d-inline-block col-2">\r\n                  \u0426\u0435\u043D\u0430\r\n                </th>\r\n                <th class="text-center d-inline-block col-2">\r\n                  \u041F\u0440\u0438\u0431\u044B\u043B\u044C\r\n                  <div class="input-group input-group-sm">\r\n                    <span class="input-group-addon" data-toggle="tooltip" data-placement="left" title="\u041D\u0430\u043B\u043E\u0433 \u043D\u0430 \u043F\u0440\u0438\u0431\u044B\u043B\u044C">%</span>\r\n                    <input class="form-control" type="number" min="0" step="1" ng-change="$ctrl.doCalc()" placeholder="\u041A\u0430\u0447\u0435\u0441\u0442\u0432\u043E" ng-model="$ctrl.manufacture.incomeTaxCoefficient">\r\n                  </div>\r\n                </th>\r\n              </tr>\r\n              </thead>\r\n              <tbody>\r\n              <tr class="row" ng-repeat="product in $ctrl.manufacture.rp">\r\n                <td class="d-inline-block col-1">\r\n                  <span class="{{product.img}} sprite cursor-pointer"></span>\r\n                  <button type="button" class="btn btn-sm btn-success float-right cursor-pointer" ng-show="product.targetMnfId !== angular.undefined" ng-click="$ctrl.changeManufacture(product.targetMnfId)">\r\n                    <strong>&#8664;</strong>\r\n                  </button>\r\n                </td>\r\n                <td class="d-inline-block col-2">\r\n                  <span class="badge badge-light" ng-show="product.quantity">\r\n                    {{product.quantity | number : 0}} \u0448\u0442.\r\n                  </span>\r\n                  <span class="badge badge-light" title="\u0412 \u043D\u0435\u0434\u0435\u043B\u044E" data-toggle="tooltip" data-placement="bottom" ng-if="$ctrl.manufacture.e.sym === \'tractor\'" ng-show="product.quantity">\r\n                    {{product.quantity / 52 | number : 0}} \u0448\u0442.\r\n                  </span>\r\n                </td>\r\n                <td class="d-inline-block col-1">\r\n                  <span class="badge badge-info" ng-show="product.quality">\r\n                    {{product.quality | number : 2}}\r\n                  </span>\r\n                </td>\r\n                <td class="d-inline-block col-2">\r\n                  <span class="badge badge-info" data-toggle="tooltip" data-placement="top" title="\u0421\u0435\u0431\u0435\u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C" ng-show="product.netCost">\r\n                    {{product.netCost | number : 2}} $\r\n                  </span><br>\r\n                  <span class="badge badge-primary" data-toggle="tooltip" data-placement="top" title="\u041D\u0430\u043B\u043E\u0433 \u043D\u0430 \u043F\u0440\u0438\u0431\u044B\u043B\u044C" ng-show="product.incomeTax > product.envdTax">\r\n                    {{product.incomeTax | number : 2}} $\r\n                  </span>\r\n                  <span class="badge badge-warning" data-toggle="tooltip" data-placement="top" title="\u0415\u041D\u0412\u0414" ng-show="product.envdTax >= product.incomeTax">\r\n                    {{product.envdTax | number : 2}} $\r\n                  </span>\r\n                  <span class="badge badge-info cursor-help" ng-show="product.netCost" ng-attr-title="\u041F\u0435\u0440\u0435\u0445\u043E\u0434 \u0441\\\u043D\u0430 \u0415\u041D\u0412\u0414 \u043F\u0440\u0438 \u0446\u0435\u043D\u0435 \u043F\u0440\u043E\u0434\u0430\u0436\u0438 ${{product.changeTaxPoint}}">\r\n                    i\r\n                  </span>\r\n                </td>\r\n                <td class="d-inline-block col-2">\r\n                  <span class="badge badge-secondary" title="\u0421\u0435\u0431\u0435\u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C + \u043D\u0430\u043B\u043E\u0433">\r\n                    {{product.totalCost | number : 2}} $\r\n                  </span>\r\n                </td>\r\n                <td class="d-inline-block col-2">\r\n                  <input class="form-control-sm form-control" type="number" min="0" step="0.01" ng-change="$ctrl.doCalc()" placeholder="\u0426\u0435\u043D\u0430" ng-model="product.price">\r\n                </td>\r\n                <td class="d-inline-block col-2">\r\n                  <span class="badge" ng-class="{\'badge-success\' : product.profit > 0, \'badge-danger\': product.profit <= 0}">\r\n                    {{product.profit | number : 2}} $\r\n                  </span>\r\n                  <span class="badge" ng-if="$ctrl.manufacture.e.sym === \'tractor\'" title="\u0412 \u043D\u0435\u0434\u0435\u043B\u044E" data-toggle="tooltip" data-placement="bottom" ng-class="{\'badge-success\' : product.profit > 0, \'badge-danger\': product.profit <= 0}">\r\n                    {{product.profit / 52 | number : 2}} $\r\n                  </span>\r\n                </td>\r\n              </tr>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n');
+angular.module('app').run(['$templateCache', function($templateCache) {$templateCache.put('app/containers/App.html','<div class="container-fluid">\r\n  <div class="row justify-content-center">\r\n    <div class="jumbotron jumbotron-fluid col-md-12 p-2">\r\n      <div class="container">\r\n        <div class="row">\r\n          <div class="col-8">\r\n            <h1 class="display-5">OpenVirtaMixer</h1>\r\n            <p class="lead">\u0418\u043D\u0441\u0442\u0440\u0443\u043C\u0435\u043D\u0442 \u0434\u043B\u044F \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043D\u043E\u0433\u043E \u0440\u0430\u0441\u0447\u0435\u0442\u0430 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0441\u0442\u0432\u0430.</p>\r\n          </div>\r\n          <div class="col-4" ng-if="$ctrl.data.nodes.length > 1">\r\n            <div class="alert alert-dark" role="alert">\r\n              <h5>\u0422\u0438\u043F \u0434\u0438\u0430\u0433\u0440\u0430\u043C\u043C\u044B</h5>\r\n              <div class="form-check form-check-inline">\r\n                <label class="form-check-label">\r\n                  <input class="form-check-input" type="radio" name="inlineRadioOptions" value="scheme" ng-model="$ctrl.mapType" ng-change="$ctrl.changeMapType()"> \u0421\u0445\u0435\u043C\u0430\r\n                </label>\r\n              </div>\r\n              <div class="form-check form-check-inline">\r\n                <label class="form-check-label">\r\n                  <input class="form-check-input" type="radio" name="inlineRadioOptions" value="value" ng-model="$ctrl.mapType" ng-change="$ctrl.changeMapType()"> \u041E\u0431\u044A\u0435\u043C\r\n                </label>\r\n              </div>\r\n              <div class="form-check form-check-inline">\r\n                <label class="form-check-label">\r\n                  <input class="form-check-input" type="radio" name="inlineRadioOptions" value="cost" ng-model="$ctrl.mapType" ng-change="$ctrl.changeMapType()"> \u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C\r\n                </label>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div id="flow" class="col-md-12">\r\n      <ng-sankey ng-if="$ctrl.data.nodes.length > 1" id="sankeyChart" options="$ctrl.options" data="$ctrl.data"></ng-sankey>\r\n    </div>\r\n    <welcome-block ng-show="$ctrl.data.nodes.length < 2" class="col-md-6" show-manufacture-calc="$ctrl.showManufactureCalc(0)"></welcome-block>\r\n    <product-selector></product-selector>\r\n    <factory-calc></factory-calc>\r\n  </div>\r\n</div>\r\n');
+$templateCache.put('app/components/factoryCalc/factoryCalc.html','<div id="factoryCalc" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">\r\n  <div class="modal-dialog modal-lg">\r\n    <div class="modal-content">\r\n      <div class="modal-header">\r\n        \xAB{{$ctrl.manufacture.s}}\xBB\r\n        <button type="button" class="close" data-dismiss="modal" aria-label="Close">\r\n          <span>\xD7</span>\r\n        </button>\r\n      </div>\r\n      <div class="modal-body">\r\n        <div class="row">\r\n          <div class="col-md-12">\r\n            <table class="table">\r\n              <thead class="thead-default">\r\n              <tr>\r\n                <th class="text-center">\r\n                  \u0420\u0430\u0431\u043E\u0442\u043D\u0438\u043A\u0438\r\n                  <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="\u041A\u0432\u0430\u043B\u0438\u0444\u0438\u043A\u0430\u0446\u0438\u044F \u0440\u0430\u0431\u043E\u0442\u043D\u0438\u043A\u043E\u0432" ng-show="$ctrl.manufacture.workersQualification">\r\n                    {{$ctrl.manufacture.workersQualification | number : 2}}\r\n                  </button>\r\n                </th>\r\n                <th class="text-center">\r\n                  <span ng-if="$ctrl.manufacture.e.pc !== \'\u0416\u0438\u0432\u043E\u0442\u043D\u044B\u0435\'">\u0421\u0442\u0430\u043D\u043A\u0438</span>\r\n                  <span ng-if="$ctrl.manufacture.e.pc === \'\u0416\u0438\u0432\u043E\u0442\u043D\u044B\u0435\'">\u0422\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u044F</span>\r\n                  <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" ng-if="$ctrl.manufacture.e.pc !== \'\u0416\u0438\u0432\u043E\u0442\u043D\u044B\u0435\'" title="\u041A\u0430\u0447\u0435\u0441\u0442\u0432\u043E \u0441\u0442\u0430\u043D\u043A\u043E\u0432" ng-show="$ctrl.manufacture.machinesQuality">\r\n                    {{$ctrl.manufacture.machinesQuality | number: 2}}\r\n                  </button>\r\n                </th>\r\n                <th class="text-center">\r\n                  \u0411\u043E\u043D\u0443\u0441\u044B\r\n                  <div class="btn-group">\r\n                    <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\r\n                      {{$ctrl.manufacture.bonus}} %\r\n                    </button>\r\n                    <div class="dropdown-menu small-menu">\r\n                      <a class="dropdown-item" ng-click="$ctrl.setBonus(0)">+0%</a>\r\n                      <a class="dropdown-item" ng-click="$ctrl.setBonus(1)">+1%</a>\r\n                      <a class="dropdown-item" ng-click="$ctrl.setBonus(10)">+10%</a>\r\n                      <a class="dropdown-item" ng-click="$ctrl.setBonus(11)">+11%</a>\r\n                      <a class="dropdown-item" ng-click="$ctrl.setBonus(15)">+15%</a>\r\n                      <a class="dropdown-item" ng-click="$ctrl.setBonus(16)">+16%</a>\r\n                    </div>\r\n                  </div>\r\n                </th>\r\n              </tr>\r\n              </thead>\r\n              <tbody>\r\n              <tr>\r\n                <td>\r\n                  <div class="input-group input-group-sm">\r\n                    <span class="input-group-addon" data-toggle="tooltip" data-placement="top" title="\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0440\u0430\u0431\u043E\u0442\u043D\u0438\u043A\u043E\u0432">#</span>\r\n                    <input class="form-control" type="number" placeholder="\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E" min="1" ng-change="$ctrl.doCalc()" ng-model="$ctrl.manufacture.workersQuantity">\r\n                    <input class="form-control" type="number" placeholder="\u0417\u0430\u0440\u043F\u043B\u0430\u0442\u0430" min="1" ng-change="$ctrl.doCalc()" ng-model="$ctrl.manufacture.workersSalary">\r\n                    <span class="input-group-addon" data-toggle="tooltip" data-placement="top" title="\u0417\u0430\u0440\u043F\u043B\u0430\u0442\u0430 \u043E\u0434\u043D\u043E\u0433\u043E \u0440\u0430\u0431\u043E\u0442\u043D\u0438\u043A\u0430">$</span>\r\n                  </div>\r\n                </td>\r\n                <td>\r\n                  <div class="input-group input-group-sm">\r\n                    <span class="input-group-addon" data-toggle="tooltip" data-placement="top" title="\u0422\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u044F">#</span>\r\n                    <input class="form-control" type="number" placeholder="\u0422\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u044F" min="1" ng-change="$ctrl.doCalc()" ng-model="$ctrl.manufacture.technology"></div>\r\n                </td>\r\n                <td>\r\n                  <div class="input-group input-group-sm">\r\n                    <span class="input-group-addon">\u042D\u0444\u0444., %</span>\r\n                    <input class="form-control" type="number" placeholder="\u042D\u0444\u0444\u0435\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C" min="1" ng-change="$ctrl.doCalc()" max="100" ng-model="$ctrl.manufacture.efficiency"></div>\r\n                </td>\r\n              </tr>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n          <div class="col-md-12">\r\n            <div class="card">\r\n              <div class="card-header pt-2 pb-2 text-center">\r\n                \u0421\u044B\u0440\u044C\u0435\r\n                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0441\u044B\u0440\u044C\u044F" ng-show="$ctrl.manufacture.totalIngredientsPrice">\r\n                  {{$ctrl.manufacture.totalIngredientsPrice | number : 2}} $\r\n                </button>\r\n              </div>\r\n              <div class="card-body">\r\n                <div class="row justify-content-center">\r\n                  <!--------------------------- Factory --------------------------->\r\n                  <div class="col-md-3 text-center" ng-repeat="ingredient in $ctrl.manufacture.ip">\r\n                    <button type="button" class="btn btn-sm btn-secondary float-right cursor-pointer" ng-show="!ingredient.sourceMnf" ng-click="$ctrl.addSource(ingredient.pi, ingredient.quantity, $index)" tabindex="999">\r\n                      <strong>+</strong>\r\n                    </button>\r\n                    <button type="button" class="btn btn-sm btn-success float-right cursor-pointer" ng-show="ingredient.sourceMnf" ng-click="$ctrl.changeManufacture(ingredient.sourceMnf)">\r\n                      <strong>&#8662;</strong>\r\n                    </button>\r\n                    <div class="alert alert-secondary" role="alert">\r\n                      <span class="{{ingredient.img}} sprite" title="{{ingredient.name}}"></span>\r\n                      <span class="badge badge-warning align-top" ng-show="ingredient.mq" data-toggle="tooltip" data-placement="left" title="\u041C\u0438\u043D\u0438\u043C\u0430\u043B\u044C\u043D\u043E\u0435 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E">\r\n                        {{ingredient.mq}}\r\n                      </span>\r\n                      <div class="input-group input-group-sm">\r\n                        <span class="input-group-addon" data-toggle="tooltip" data-placement="left" title="\u041A\u0430\u0447\u0435\u0441\u0442\u0432\u043E">#</span>\r\n                        <input class="form-control" type="number" ng-min="ingredient.mq" step="0.01" ng-change="$ctrl.doCalc()" placeholder="\u041A\u0430\u0447\u0435\u0441\u0442\u0432\u043E" ng-model="ingredient.quality" ng-disabled="ingredient.sourceMnf">\r\n                      </div>\r\n                      <div class="input-group input-group-sm">\r\n                        <span class="input-group-addon" data-toggle="tooltip" data-placement="left" title="\u0426\u0435\u043D\u0430">$</span>\r\n                        <input class="form-control" type="number" ng-change="$ctrl.doCalc()" placeholder="\u0426\u0435\u043D\u0430" step="0.01" ng-disabled="ingredient.sourceMnf" ng-model="ingredient.price">\r\n                      </div>\r\n                      <span class="badge badge-light" ng-show="ingredient.quantity">\r\n                        {{ingredient.quantity | number : 0}} \u0448\u0442.\r\n                      </span>\r\n                      <br>\r\n                      <span class="badge badge-secondary" ng-show="ingredient.totalPrice">\r\n                        {{ingredient.totalPrice | number : 2}} $\r\n                      </span>\r\n                    </div>\r\n                  </div>\r\n                  <!--------------------------- Farm --------------------------->\r\n                  <div class="col-md-3 text-center" ng-if="$ctrl.manufacture.e.pc === \'\u0416\u0438\u0432\u043E\u0442\u043D\u044B\u0435\'">\r\n                    <div class="alert alert-secondary" role="alert">\r\n                      <span class="{{$ctrl.manufacture.e.sym}} sprite" title="{{$ctrl.manufacture.e.c}}"></span>\r\n                      <span class="badge badge-light align-top" data-toggle="tooltip" data-placement="top" title="\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u043E\u0432\u0430\u043D\u043D\u043E\u0435 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E \u0436\u0438\u0432\u043E\u0442\u043D\u044B\u0445" ng-show="$ctrl.manufacture.recommendedAnimals">\r\n                        {{$ctrl.manufacture.recommendedAnimals | number : 2}}\r\n                      </span>\r\n                      <div class="input-group input-group-sm">\r\n                        <span class="input-group-addon" data-toggle="tooltip" data-placement="left" title="\u041A\u0430\u0447\u0435\u0441\u0442\u0432\u043E \u0436\u0438\u0432\u043E\u0442\u043D\u044B\u0445">#</span>\r\n                        <input class="form-control" type="number" min="1" step="0.01" ng-change="$ctrl.doCalc()" placeholder="\u041A\u0430\u0447\u0435\u0441\u0442\u0432\u043E \u0436\u0438\u0432\u043E\u0442\u043D\u044B\u0445" ng-model="$ctrl.manufacture.machinesQuality">\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                  <!--------------------------- Plant --------------------------->\r\n                  <div class="col-md-3 text-center" ng-if="$ctrl.manufacture.e.sym === \'tractor\' || $ctrl.manufacture.e.sym === \'saw\'">\r\n                    <div class="alert alert-secondary" role="alert">\r\n                      <span class="{{$ctrl.manufacture.e.sym}} sprite" title="{{$ctrl.manufacture.e.c}}"></span>\r\n                      <div class="input-group input-group-sm">\r\n                        <span class="input-group-addon" data-toggle="tooltip" data-placement="left" title="\u0411\u0430\u0437\u043E\u0432\u043E\u0435 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E">#</span>\r\n                        <input class="form-control" type="number" min="1" step="0.01" ng-change="$ctrl.doCalc()" placeholder="\u0411\u0430\u0437\u043E\u0432\u043E\u0435 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E" ng-model="$ctrl.manufacture.baseQuality">\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                  <!--------------------------- Mine --------------------------->\r\n                  <div class="col-md-3 text-center" ng-if="$ctrl.manufacture.e.sym === \'drill\'">\r\n                    <div class="alert alert-secondary" role="alert">\r\n                      <span class="{{$ctrl.manufacture.e.sym === \'tractor\' ? \'farm\' : \'mine\'}} sprite" title="{{$ctrl.manufacture.e.c}}"></span>\r\n                      <div class="input-group input-group-sm">\r\n                        <span class="input-group-addon fixed-width" data-toggle="tooltip" data-placement="left" title="\u0411\u0430\u0437\u043E\u0432\u043E\u0435 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E">#</span>\r\n                        <input class="form-control" type="number" min="1" step="0.25" ng-change="$ctrl.doCalc()" placeholder="\u0411\u0430\u0437\u043E\u0432\u043E\u0435 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E" ng-model="$ctrl.manufacture.baseQuality">\r\n                      </div>\r\n                      <div class="input-group input-group-sm">\r\n                        <span class="input-group-addon fixed-width" data-toggle="tooltip" data-placement="left" title="\u0421\u043B\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0434\u043E\u0431\u044B\u0447\u0438">\xA9</span>\r\n                        <input class="form-control" type="number" min="1" step="1" ng-change="$ctrl.doCalc()" placeholder="\u0421\u043B\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0434\u043E\u0431\u044B\u0447\u0438" ng-model="$ctrl.manufacture.mineDifficult">\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                  <!--------------------------- Ingredients proportions --------------------------->\r\n                  <div class="col-md-12 pb-2">\r\n                    <div class="progress">\r\n                      <div ng-repeat="ingredient in $ctrl.manufacture.ip" ng-style="{\'background-color\':$ctrl.getColorByString(ingredient.name),\r\n                           \'width\': $ctrl.calculateIngredientPercent(ingredient) + \'%\'}" ng-attr-title="{{ingredient.name}} {{$ctrl.calculateIngredientPercent(ingredient)|number:2}}%" class="progress-bar cursor-help" role="progressbar"></div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class="col-md-12 pt-3 text-center">\r\n            <table class="table">\r\n              <thead>\r\n              <tr class="row">\r\n                <th class="text-center d-inline-block col-1">\u0422\u043E\u0432\u0430\u0440</th>\r\n                <th class="text-center d-inline-block col-2">\u041A\u043E\u043B-\u0432\u043E</th>\r\n                <th class="text-center d-inline-block col-1">\u041A\u0430\u0447-\u0432\u043E</th>\r\n                <th class="text-center d-inline-block col-2">C\\c<br>\u041D\u0430\u043B\u043E\u0433</th>\r\n                <th class="text-center d-inline-block col-2">\u0421\\\u0441 + \u043D\u0430\u043B\u043E\u0433</th>\r\n                <th class="text-center d-inline-block col-2">\r\n                  \u0426\u0435\u043D\u0430\r\n                </th>\r\n                <th class="text-center d-inline-block col-2">\r\n                  \u041F\u0440\u0438\u0431\u044B\u043B\u044C\r\n                  <div class="input-group input-group-sm">\r\n                    <span class="input-group-addon" data-toggle="tooltip" data-placement="left" title="\u041D\u0430\u043B\u043E\u0433 \u043D\u0430 \u043F\u0440\u0438\u0431\u044B\u043B\u044C">%</span>\r\n                    <input class="form-control" type="number" min="0" step="1" ng-change="$ctrl.doCalc()" placeholder="\u041A\u0430\u0447\u0435\u0441\u0442\u0432\u043E" ng-model="$ctrl.manufacture.incomeTaxCoefficient">\r\n                  </div>\r\n                </th>\r\n              </tr>\r\n              </thead>\r\n              <tbody>\r\n              <tr class="row" ng-repeat="product in $ctrl.manufacture.rp">\r\n                <td class="d-inline-block col-1">\r\n                  <span class="badge align-top" ng-class="{\'badge-danger\': product.qbp < 0, \'badge-success\': product.qbp > 0}" ng-show="product.qbp" data-toggle="tooltip" data-placement="left" title="\u0411\u043E\u043D\u0443\u0441 \u043A \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0443">\r\n                        {{product.qbp}}%\r\n                  </span>\r\n                  <span class="{{product.img}} sprite cursor-pointer"></span>\r\n                  <button type="button" class="btn btn-sm btn-success float-right cursor-pointer" ng-show="product.targetMnfId !== angular.undefined" ng-click="$ctrl.changeManufacture(product.targetMnfId)">\r\n                    <strong>&#8664;</strong>\r\n                  </button>\r\n                </td>\r\n                <td class="d-inline-block col-2">\r\n                  <span class="badge badge-light" ng-show="product.quantity">\r\n                    {{product.quantity | number : 0}} \u0448\u0442.\r\n                  </span>\r\n                  <span class="badge badge-light" title="\u0412 \u043D\u0435\u0434\u0435\u043B\u044E" data-toggle="tooltip" data-placement="bottom" ng-if="$ctrl.manufacture.e.sym === \'tractor\'" ng-show="product.quantity">\r\n                    {{product.quantity / 52 | number : 0}} \u0448\u0442.\r\n                  </span>\r\n                </td>\r\n                <td class="d-inline-block col-1">\r\n                  <span class="badge badge-info" ng-show="product.quality">\r\n                    {{product.quality | number : 2}}\r\n                  </span>\r\n                </td>\r\n                <td class="d-inline-block col-2">\r\n                  <span class="badge badge-info" data-toggle="tooltip" data-placement="top" title="\u0421\u0435\u0431\u0435\u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C" ng-show="product.netCost">\r\n                    {{product.netCost | number : 2}} $\r\n                  </span><br>\r\n                  <span class="badge badge-primary" data-toggle="tooltip" data-placement="top" title="\u041D\u0430\u043B\u043E\u0433 \u043D\u0430 \u043F\u0440\u0438\u0431\u044B\u043B\u044C" ng-show="product.incomeTax > product.envdTax">\r\n                    {{product.incomeTax | number : 2}} $\r\n                  </span>\r\n                  <span class="badge badge-warning" data-toggle="tooltip" data-placement="top" title="\u0415\u041D\u0412\u0414" ng-show="product.envdTax >= product.incomeTax">\r\n                    {{product.envdTax | number : 2}} $\r\n                  </span>\r\n                  <span class="badge badge-info cursor-help" ng-show="product.netCost" ng-attr-title="\u041F\u0435\u0440\u0435\u0445\u043E\u0434 \u0441\\\u043D\u0430 \u0415\u041D\u0412\u0414 \u043F\u0440\u0438 \u0446\u0435\u043D\u0435 \u043F\u0440\u043E\u0434\u0430\u0436\u0438 ${{product.changeTaxPoint}}">\r\n                    i\r\n                  </span>\r\n                </td>\r\n                <td class="d-inline-block col-2">\r\n                  <span class="badge badge-secondary" title="\u0421\u0435\u0431\u0435\u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C + \u043D\u0430\u043B\u043E\u0433">\r\n                    {{product.totalCost | number : 2}} $\r\n                  </span>\r\n                </td>\r\n                <td class="d-inline-block col-2">\r\n                  <input class="form-control-sm form-control" type="number" min="0" step="0.01" ng-change="$ctrl.doCalc()" placeholder="\u0426\u0435\u043D\u0430" ng-model="product.price">\r\n                </td>\r\n                <td class="d-inline-block col-2">\r\n                  <span class="badge" ng-class="{\'badge-success\' : product.profit > 0, \'badge-danger\': product.profit <= 0}">\r\n                    {{product.profit | number : 2}} $\r\n                  </span>\r\n                  <span class="badge" ng-if="$ctrl.manufacture.e.sym === \'tractor\'" title="\u0412 \u043D\u0435\u0434\u0435\u043B\u044E" data-toggle="tooltip" data-placement="bottom" ng-class="{\'badge-success\' : product.profit > 0, \'badge-danger\': product.profit <= 0}">\r\n                    {{product.profit / 52 | number : 2}} $\r\n                  </span>\r\n                </td>\r\n              </tr>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n');
 $templateCache.put('app/components/productSelector/productSelector.html','<div id="productSelector" class="modal fade" tabindex="-1" role="dialog">\r\n  <div class="modal-dialog modal-lg">\r\n    <div class="modal-content">\r\n      <div class="modal-header"><input type="text" class="form-control col-md-5" placeholder="\u041F\u043E\u0438\u0441\u043A \u0442\u043E\u0432\u0430\u0440\u0430..." ng-model="$ctrl.search" ng-change="$ctrl.searchProducts()">\r\n        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>\xD7</span>\r\n        </button>\r\n      </div>\r\n      <div class="modal-body">\r\n        <div class="row">\r\n          <div class="col-md-4 pt-1 pb-1" ng-repeat="product in $ctrl.products">\r\n            <div class="alert alert-secondary productBlock cursor-pointer" ng-click="$ctrl.selectProduct(product)" role="alert">\r\n              <div class="row">\r\n                <div class="col-md-3">\r\n                <span class="{{product.rp[0].img}} sprite"></span>\r\n                <span class="{{product.rp[1].img}} sprite"></span>\r\n                </div>\r\n                <div class="col-md-9">\r\n                  <span class="badge badge-success badge-pill" data-toggle="tooltip" data-placement="top" title="\u0422\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u044F" ng-if="product.technology">\r\n                    {{product.technology}}\r\n                  </span>\r\n                  <span class="badge badge-primary" data-toggle="tooltip" data-placement="top" title="{{product.rp[0].name}}" ng-if="product.rp[0].quantity">\r\n                    {{product.rp[0].quantity}} / {{product.rp[0].quality | number:2}}\r\n                  </span>\r\n                  <span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="product.rp[1].name" ng-if="product.rp[1].quantity">\r\n                    {{product.rp[1].quantity}} / {{product.rp[1].quality | number:2}}\r\n                  </span>\r\n                  {{product.s}}\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n');
 $templateCache.put('app/components/welcomeBlock/welcomeBlock.html','<div class="jumbotron">\r\n  <h1 class="display-4">\u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C!</h1>\r\n  <p class="lead">\u0414\u043B\u044F \u043D\u0430\u0447\u0430\u043B\u0430 \u0440\u0430\u0431\u043E\u0442\u044B \u0432\u0430\u043C \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u0432\u044B\u0431\u0440\u0430\u0442\u044C \u0442\u043E\u0432\u0430\u0440, \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0441\u0442\u0432\u0435\u043D\u043D\u0443\u044E \u0446\u0435\u043F\u043E\u0447\u043A\u0443 \u043A\u043E\u0442\u043E\u0440\u043E\u0433\u043E, \u0432\u044B \u0436\u0435\u043B\u0430\u0435\u0442\u0435\r\n    \u0440\u0430\u0441\u0441\u0447\u0438\u0442\u0430\u0442\u044C.</p>\r\n  <hr>\r\n  <p class="lead text-center">\r\n    \u0412\u044B\u0431\u0440\u0430\u043D\u043E \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0441\u0442\u0432\u043E:\r\n    <em ng-show="$ctrl.selectedProduct()">\r\n      <span class="{{$ctrl.selectedProduct().rp[0].img}} sprite"></span>\r\n      {{$ctrl.selectedProduct().s}}\r\n      <br><br>\r\n    </em>\r\n    <button class="btn btn-primary btn-lg cursor-pointer" data-toggle="modal" data-target="#productSelector">\r\n      \u0412\u044B\u0431\u0440\u0430\u0442\u044C \u0442\u043E\u0432\u0430\u0440\r\n    </button>\r\n    <button class="btn btn-secondary btn-lg cursor-pointer" ng-click="$ctrl.showManufactureCalc()" ng-show="$ctrl.selectedProduct()">\r\n      \u0420\u0430\u0441\u0441\u0447\u0438\u0442\u0430\u0442\u044C\r\n    </button>\r\n  </p>\r\n  <p>\r\n    <em>\u0421\u0442\u0440\u0443\u043A\u0442\u0443\u0440\u0430 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0441\u0442\u0432\u0435\u043D\u043D\u043E\u0439 \u0446\u0435\u043F\u043E\u0447\u043A\u0438 \u0431\u0443\u0434\u0435\u0442 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0430 \u043F\u043E\u0441\u043B\u0435 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0441\u0442\u0432\u0430 \u0445\u043E\u0442\u044F \u0431\u044B \u043E\u0434\u043D\u043E\u0433\u043E \u0438\u0441\u0445\u043E\u0434\u043D\u043E\u0433\u043E\r\n      \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442\u0430.</em>\r\n  </p>\r\n</div>\r\n');}]);
 !function(){function n(n){return n&&(n.ownerDocument||n.document||n).documentElement}function t(n){return n&&(n.ownerDocument&&n.ownerDocument.defaultView||n.document&&n||n.defaultView)}function e(n,t){return t>n?-1:n>t?1:n>=t?0:NaN}function r(n){return null===n?NaN:+n}function i(n){return!isNaN(n)}function u(n){return{left:function(t,e,r,i){for(arguments.length<3&&(r=0),arguments.length<4&&(i=t.length);i>r;){var u=r+i>>>1;n(t[u],e)<0?r=u+1:i=u}return r},right:function(t,e,r,i){for(arguments.length<3&&(r=0),arguments.length<4&&(i=t.length);i>r;){var u=r+i>>>1;n(t[u],e)>0?i=u:r=u+1}return r}}}function o(n){return n.length}function a(n){for(var t=1;n*t%1;)t*=10;return t}function l(n,t){for(var e in t)Object.defineProperty(n.prototype,e,{value:t[e],enumerable:!1})}function c(){this._=Object.create(null)}function f(n){return(n+="")===bo||n[0]===_o?_o+n:n}function s(n){return(n+="")[0]===_o?n.slice(1):n}function h(n){return f(n)in this._}function p(n){return(n=f(n))in this._&&delete this._[n]}function g(){var n=[];for(var t in this._)n.push(s(t));return n}function v(){var n=0;for(var t in this._)++n;return n}function d(){for(var n in this._)return!1;return!0}function y(){this._=Object.create(null)}function m(n){return n}function M(n,t,e){return function(){var r=e.apply(t,arguments);return r===t?n:r}}function x(n,t){if(t in n)return t;t=t.charAt(0).toUpperCase()+t.slice(1);for(var e=0,r=wo.length;r>e;++e){var i=wo[e]+t;if(i in n)return i}}function b(){}function _(){}function w(n){function t(){for(var t,r=e,i=-1,u=r.length;++i<u;)(t=r[i].on)&&t.apply(this,arguments);return n}var e=[],r=new c;return t.on=function(t,i){var u,o=r.get(t);return arguments.length<2?o&&o.on:(o&&(o.on=null,e=e.slice(0,u=e.indexOf(o)).concat(e.slice(u+1)),r.remove(t)),i&&e.push(r.set(t,{on:i})),n)},t}function S(){ao.event.preventDefault()}function k(){for(var n,t=ao.event;n=t.sourceEvent;)t=n;return t}function N(n){for(var t=new _,e=0,r=arguments.length;++e<r;)t[arguments[e]]=w(t);return t.of=function(e,r){return function(i){try{var u=i.sourceEvent=ao.event;i.target=n,ao.event=i,t[i.type].apply(e,r)}finally{ao.event=u}}},t}function E(n){return ko(n,Co),n}function A(n){return"function"==typeof n?n:function(){return No(n,this)}}function C(n){return"function"==typeof n?n:function(){return Eo(n,this)}}function z(n,t){function e(){this.removeAttribute(n)}function r(){this.removeAttributeNS(n.space,n.local)}function i(){this.setAttribute(n,t)}function u(){this.setAttributeNS(n.space,n.local,t)}function o(){var e=t.apply(this,arguments);null==e?this.removeAttribute(n):this.setAttribute(n,e)}function a(){var e=t.apply(this,arguments);null==e?this.removeAttributeNS(n.space,n.local):this.setAttributeNS(n.space,n.local,e)}return n=ao.ns.qualify(n),null==t?n.local?r:e:"function"==typeof t?n.local?a:o:n.local?u:i}function L(n){return n.trim().replace(/\s+/g," ")}function q(n){return new RegExp("(?:^|\\s+)"+ao.requote(n)+"(?:\\s+|$)","g")}function T(n){return(n+"").trim().split(/^|\s+/)}function R(n,t){function e(){for(var e=-1;++e<i;)n[e](this,t)}function r(){for(var e=-1,r=t.apply(this,arguments);++e<i;)n[e](this,r)}n=T(n).map(D);var i=n.length;return"function"==typeof t?r:e}function D(n){var t=q(n);return function(e,r){if(i=e.classList)return r?i.add(n):i.remove(n);var i=e.getAttribute("class")||"";r?(t.lastIndex=0,t.test(i)||e.setAttribute("class",L(i+" "+n))):e.setAttribute("class",L(i.replace(t," ")))}}function P(n,t,e){function r(){this.style.removeProperty(n)}function i(){this.style.setProperty(n,t,e)}function u(){var r=t.apply(this,arguments);null==r?this.style.removeProperty(n):this.style.setProperty(n,r,e)}return null==t?r:"function"==typeof t?u:i}function U(n,t){function e(){delete this[n]}function r(){this[n]=t}function i(){var e=t.apply(this,arguments);null==e?delete this[n]:this[n]=e}return null==t?e:"function"==typeof t?i:r}function j(n){function t(){var t=this.ownerDocument,e=this.namespaceURI;return e===zo&&t.documentElement.namespaceURI===zo?t.createElement(n):t.createElementNS(e,n)}function e(){return this.ownerDocument.createElementNS(n.space,n.local)}return"function"==typeof n?n:(n=ao.ns.qualify(n)).local?e:t}function F(){var n=this.parentNode;n&&n.removeChild(this)}function H(n){return{__data__:n}}function O(n){return function(){return Ao(this,n)}}function I(n){return arguments.length||(n=e),function(t,e){return t&&e?n(t.__data__,e.__data__):!t-!e}}function Y(n,t){for(var e=0,r=n.length;r>e;e++)for(var i,u=n[e],o=0,a=u.length;a>o;o++)(i=u[o])&&t(i,o,e);return n}function Z(n){return ko(n,qo),n}function V(n){var t,e;return function(r,i,u){var o,a=n[u].update,l=a.length;for(u!=e&&(e=u,t=0),i>=t&&(t=i+1);!(o=a[t])&&++t<l;);return o}}function X(n,t,e){function r(){var t=this[o];t&&(this.removeEventListener(n,t,t.$),delete this[o])}function i(){var i=l(t,co(arguments));r.call(this),this.addEventListener(n,this[o]=i,i.$=e),i._=t}function u(){var t,e=new RegExp("^__on([^.]+)"+ao.requote(n)+"$");for(var r in this)if(t=r.match(e)){var i=this[r];this.removeEventListener(t[1],i,i.$),delete this[r]}}var o="__on"+n,a=n.indexOf("."),l=$;a>0&&(n=n.slice(0,a));var c=To.get(n);return c&&(n=c,l=B),a?t?i:r:t?b:u}function $(n,t){return function(e){var r=ao.event;ao.event=e,t[0]=this.__data__;try{n.apply(this,t)}finally{ao.event=r}}}function B(n,t){var e=$(n,t);return function(n){var t=this,r=n.relatedTarget;r&&(r===t||8&r.compareDocumentPosition(t))||e.call(t,n)}}function W(e){var r=".dragsuppress-"+ ++Do,i="click"+r,u=ao.select(t(e)).on("touchmove"+r,S).on("dragstart"+r,S).on("selectstart"+r,S);if(null==Ro&&(Ro="onselectstart"in e?!1:x(e.style,"userSelect")),Ro){var o=n(e).style,a=o[Ro];o[Ro]="none"}return function(n){if(u.on(r,null),Ro&&(o[Ro]=a),n){var t=function(){u.on(i,null)};u.on(i,function(){S(),t()},!0),setTimeout(t,0)}}}function J(n,e){e.changedTouches&&(e=e.changedTouches[0]);var r=n.ownerSVGElement||n;if(r.createSVGPoint){var i=r.createSVGPoint();if(0>Po){var u=t(n);if(u.scrollX||u.scrollY){r=ao.select("body").append("svg").style({position:"absolute",top:0,left:0,margin:0,padding:0,border:"none"},"important");var o=r[0][0].getScreenCTM();Po=!(o.f||o.e),r.remove()}}return Po?(i.x=e.pageX,i.y=e.pageY):(i.x=e.clientX,i.y=e.clientY),i=i.matrixTransform(n.getScreenCTM().inverse()),[i.x,i.y]}var a=n.getBoundingClientRect();return[e.clientX-a.left-n.clientLeft,e.clientY-a.top-n.clientTop]}function G(){return ao.event.changedTouches[0].identifier}function K(n){return n>0?1:0>n?-1:0}function Q(n,t,e){return(t[0]-n[0])*(e[1]-n[1])-(t[1]-n[1])*(e[0]-n[0])}function nn(n){return n>1?0:-1>n?Fo:Math.acos(n)}function tn(n){return n>1?Io:-1>n?-Io:Math.asin(n)}function en(n){return((n=Math.exp(n))-1/n)/2}function rn(n){return((n=Math.exp(n))+1/n)/2}function un(n){return((n=Math.exp(2*n))-1)/(n+1)}function on(n){return(n=Math.sin(n/2))*n}function an(){}function ln(n,t,e){return this instanceof ln?(this.h=+n,this.s=+t,void(this.l=+e)):arguments.length<2?n instanceof ln?new ln(n.h,n.s,n.l):_n(""+n,wn,ln):new ln(n,t,e)}function cn(n,t,e){function r(n){return n>360?n-=360:0>n&&(n+=360),60>n?u+(o-u)*n/60:180>n?o:240>n?u+(o-u)*(240-n)/60:u}function i(n){return Math.round(255*r(n))}var u,o;return n=isNaN(n)?0:(n%=360)<0?n+360:n,t=isNaN(t)?0:0>t?0:t>1?1:t,e=0>e?0:e>1?1:e,o=.5>=e?e*(1+t):e+t-e*t,u=2*e-o,new mn(i(n+120),i(n),i(n-120))}function fn(n,t,e){return this instanceof fn?(this.h=+n,this.c=+t,void(this.l=+e)):arguments.length<2?n instanceof fn?new fn(n.h,n.c,n.l):n instanceof hn?gn(n.l,n.a,n.b):gn((n=Sn((n=ao.rgb(n)).r,n.g,n.b)).l,n.a,n.b):new fn(n,t,e)}function sn(n,t,e){return isNaN(n)&&(n=0),isNaN(t)&&(t=0),new hn(e,Math.cos(n*=Yo)*t,Math.sin(n)*t)}function hn(n,t,e){return this instanceof hn?(this.l=+n,this.a=+t,void(this.b=+e)):arguments.length<2?n instanceof hn?new hn(n.l,n.a,n.b):n instanceof fn?sn(n.h,n.c,n.l):Sn((n=mn(n)).r,n.g,n.b):new hn(n,t,e)}function pn(n,t,e){var r=(n+16)/116,i=r+t/500,u=r-e/200;return i=vn(i)*na,r=vn(r)*ta,u=vn(u)*ea,new mn(yn(3.2404542*i-1.5371385*r-.4985314*u),yn(-.969266*i+1.8760108*r+.041556*u),yn(.0556434*i-.2040259*r+1.0572252*u))}function gn(n,t,e){return n>0?new fn(Math.atan2(e,t)*Zo,Math.sqrt(t*t+e*e),n):new fn(NaN,NaN,n)}function vn(n){return n>.206893034?n*n*n:(n-4/29)/7.787037}function dn(n){return n>.008856?Math.pow(n,1/3):7.787037*n+4/29}function yn(n){return Math.round(255*(.00304>=n?12.92*n:1.055*Math.pow(n,1/2.4)-.055))}function mn(n,t,e){return this instanceof mn?(this.r=~~n,this.g=~~t,void(this.b=~~e)):arguments.length<2?n instanceof mn?new mn(n.r,n.g,n.b):_n(""+n,mn,cn):new mn(n,t,e)}function Mn(n){return new mn(n>>16,n>>8&255,255&n)}function xn(n){return Mn(n)+""}function bn(n){return 16>n?"0"+Math.max(0,n).toString(16):Math.min(255,n).toString(16)}function _n(n,t,e){var r,i,u,o=0,a=0,l=0;if(r=/([a-z]+)\((.*)\)/.exec(n=n.toLowerCase()))switch(i=r[2].split(","),r[1]){case"hsl":return e(parseFloat(i[0]),parseFloat(i[1])/100,parseFloat(i[2])/100);case"rgb":return t(Nn(i[0]),Nn(i[1]),Nn(i[2]))}return(u=ua.get(n))?t(u.r,u.g,u.b):(null==n||"#"!==n.charAt(0)||isNaN(u=parseInt(n.slice(1),16))||(4===n.length?(o=(3840&u)>>4,o=o>>4|o,a=240&u,a=a>>4|a,l=15&u,l=l<<4|l):7===n.length&&(o=(16711680&u)>>16,a=(65280&u)>>8,l=255&u)),t(o,a,l))}function wn(n,t,e){var r,i,u=Math.min(n/=255,t/=255,e/=255),o=Math.max(n,t,e),a=o-u,l=(o+u)/2;return a?(i=.5>l?a/(o+u):a/(2-o-u),r=n==o?(t-e)/a+(e>t?6:0):t==o?(e-n)/a+2:(n-t)/a+4,r*=60):(r=NaN,i=l>0&&1>l?0:r),new ln(r,i,l)}function Sn(n,t,e){n=kn(n),t=kn(t),e=kn(e);var r=dn((.4124564*n+.3575761*t+.1804375*e)/na),i=dn((.2126729*n+.7151522*t+.072175*e)/ta),u=dn((.0193339*n+.119192*t+.9503041*e)/ea);return hn(116*i-16,500*(r-i),200*(i-u))}function kn(n){return(n/=255)<=.04045?n/12.92:Math.pow((n+.055)/1.055,2.4)}function Nn(n){var t=parseFloat(n);return"%"===n.charAt(n.length-1)?Math.round(2.55*t):t}function En(n){return"function"==typeof n?n:function(){return n}}function An(n){return function(t,e,r){return 2===arguments.length&&"function"==typeof e&&(r=e,e=null),Cn(t,e,n,r)}}function Cn(n,t,e,r){function i(){var n,t=l.status;if(!t&&Ln(l)||t>=200&&300>t||304===t){try{n=e.call(u,l)}catch(r){return void o.error.call(u,r)}o.load.call(u,n)}else o.error.call(u,l)}var u={},o=ao.dispatch("beforesend","progress","load","error"),a={},l=new XMLHttpRequest,c=null;return!this.XDomainRequest||"withCredentials"in l||!/^(http(s)?:)?\/\//.test(n)||(l=new XDomainRequest),"onload"in l?l.onload=l.onerror=i:l.onreadystatechange=function(){l.readyState>3&&i()},l.onprogress=function(n){var t=ao.event;ao.event=n;try{o.progress.call(u,l)}finally{ao.event=t}},u.header=function(n,t){return n=(n+"").toLowerCase(),arguments.length<2?a[n]:(null==t?delete a[n]:a[n]=t+"",u)},u.mimeType=function(n){return arguments.length?(t=null==n?null:n+"",u):t},u.responseType=function(n){return arguments.length?(c=n,u):c},u.response=function(n){return e=n,u},["get","post"].forEach(function(n){u[n]=function(){return u.send.apply(u,[n].concat(co(arguments)))}}),u.send=function(e,r,i){if(2===arguments.length&&"function"==typeof r&&(i=r,r=null),l.open(e,n,!0),null==t||"accept"in a||(a.accept=t+",*/*"),l.setRequestHeader)for(var f in a)l.setRequestHeader(f,a[f]);return null!=t&&l.overrideMimeType&&l.overrideMimeType(t),null!=c&&(l.responseType=c),null!=i&&u.on("error",i).on("load",function(n){i(null,n)}),o.beforesend.call(u,l),l.send(null==r?null:r),u},u.abort=function(){return l.abort(),u},ao.rebind(u,o,"on"),null==r?u:u.get(zn(r))}function zn(n){return 1===n.length?function(t,e){n(null==t?e:null)}:n}function Ln(n){var t=n.responseType;return t&&"text"!==t?n.response:n.responseText}function qn(n,t,e){var r=arguments.length;2>r&&(t=0),3>r&&(e=Date.now());var i=e+t,u={c:n,t:i,n:null};return aa?aa.n=u:oa=u,aa=u,la||(ca=clearTimeout(ca),la=1,fa(Tn)),u}function Tn(){var n=Rn(),t=Dn()-n;t>24?(isFinite(t)&&(clearTimeout(ca),ca=setTimeout(Tn,t)),la=0):(la=1,fa(Tn))}function Rn(){for(var n=Date.now(),t=oa;t;)n>=t.t&&t.c(n-t.t)&&(t.c=null),t=t.n;return n}function Dn(){for(var n,t=oa,e=1/0;t;)t.c?(t.t<e&&(e=t.t),t=(n=t).n):t=n?n.n=t.n:oa=t.n;return aa=n,e}function Pn(n,t){return t-(n?Math.ceil(Math.log(n)/Math.LN10):1)}function Un(n,t){var e=Math.pow(10,3*xo(8-t));return{scale:t>8?function(n){return n/e}:function(n){return n*e},symbol:n}}function jn(n){var t=n.decimal,e=n.thousands,r=n.grouping,i=n.currency,u=r&&e?function(n,t){for(var i=n.length,u=[],o=0,a=r[0],l=0;i>0&&a>0&&(l+a+1>t&&(a=Math.max(1,t-l)),u.push(n.substring(i-=a,i+a)),!((l+=a+1)>t));)a=r[o=(o+1)%r.length];return u.reverse().join(e)}:m;return function(n){var e=ha.exec(n),r=e[1]||" ",o=e[2]||">",a=e[3]||"-",l=e[4]||"",c=e[5],f=+e[6],s=e[7],h=e[8],p=e[9],g=1,v="",d="",y=!1,m=!0;switch(h&&(h=+h.substring(1)),(c||"0"===r&&"="===o)&&(c=r="0",o="="),p){case"n":s=!0,p="g";break;case"%":g=100,d="%",p="f";break;case"p":g=100,d="%",p="r";break;case"b":case"o":case"x":case"X":"#"===l&&(v="0"+p.toLowerCase());case"c":m=!1;case"d":y=!0,h=0;break;case"s":g=-1,p="r"}"$"===l&&(v=i[0],d=i[1]),"r"!=p||h||(p="g"),null!=h&&("g"==p?h=Math.max(1,Math.min(21,h)):"e"!=p&&"f"!=p||(h=Math.max(0,Math.min(20,h)))),p=pa.get(p)||Fn;var M=c&&s;return function(n){var e=d;if(y&&n%1)return"";var i=0>n||0===n&&0>1/n?(n=-n,"-"):"-"===a?"":a;if(0>g){var l=ao.formatPrefix(n,h);n=l.scale(n),e=l.symbol+d}else n*=g;n=p(n,h);var x,b,_=n.lastIndexOf(".");if(0>_){var w=m?n.lastIndexOf("e"):-1;0>w?(x=n,b=""):(x=n.substring(0,w),b=n.substring(w))}else x=n.substring(0,_),b=t+n.substring(_+1);!c&&s&&(x=u(x,1/0));var S=v.length+x.length+b.length+(M?0:i.length),k=f>S?new Array(S=f-S+1).join(r):"";return M&&(x=u(k+x,k.length?f-b.length:1/0)),i+=v,n=x+b,("<"===o?i+n+k:">"===o?k+i+n:"^"===o?k.substring(0,S>>=1)+i+n+k.substring(S):i+(M?n:k+n))+e}}}function Fn(n){return n+""}function Hn(){this._=new Date(arguments.length>1?Date.UTC.apply(this,arguments):arguments[0])}function On(n,t,e){function r(t){var e=n(t),r=u(e,1);return r-t>t-e?e:r}function i(e){return t(e=n(new va(e-1)),1),e}function u(n,e){return t(n=new va(+n),e),n}function o(n,r,u){var o=i(n),a=[];if(u>1)for(;r>o;)e(o)%u||a.push(new Date(+o)),t(o,1);else for(;r>o;)a.push(new Date(+o)),t(o,1);return a}function a(n,t,e){try{va=Hn;var r=new Hn;return r._=n,o(r,t,e)}finally{va=Date}}n.floor=n,n.round=r,n.ceil=i,n.offset=u,n.range=o;var l=n.utc=In(n);return l.floor=l,l.round=In(r),l.ceil=In(i),l.offset=In(u),l.range=a,n}function In(n){return function(t,e){try{va=Hn;var r=new Hn;return r._=t,n(r,e)._}finally{va=Date}}}function Yn(n){function t(n){function t(t){for(var e,i,u,o=[],a=-1,l=0;++a<r;)37===n.charCodeAt(a)&&(o.push(n.slice(l,a)),null!=(i=ya[e=n.charAt(++a)])&&(e=n.charAt(++a)),(u=A[e])&&(e=u(t,null==i?"e"===e?" ":"0":i)),o.push(e),l=a+1);return o.push(n.slice(l,a)),o.join("")}var r=n.length;return t.parse=function(t){var r={y:1900,m:0,d:1,H:0,M:0,S:0,L:0,Z:null},i=e(r,n,t,0);if(i!=t.length)return null;"p"in r&&(r.H=r.H%12+12*r.p);var u=null!=r.Z&&va!==Hn,o=new(u?Hn:va);return"j"in r?o.setFullYear(r.y,0,r.j):"W"in r||"U"in r?("w"in r||(r.w="W"in r?1:0),o.setFullYear(r.y,0,1),o.setFullYear(r.y,0,"W"in r?(r.w+6)%7+7*r.W-(o.getDay()+5)%7:r.w+7*r.U-(o.getDay()+6)%7)):o.setFullYear(r.y,r.m,r.d),o.setHours(r.H+(r.Z/100|0),r.M+r.Z%100,r.S,r.L),u?o._:o},t.toString=function(){return n},t}function e(n,t,e,r){for(var i,u,o,a=0,l=t.length,c=e.length;l>a;){if(r>=c)return-1;if(i=t.charCodeAt(a++),37===i){if(o=t.charAt(a++),u=C[o in ya?t.charAt(a++):o],!u||(r=u(n,e,r))<0)return-1}else if(i!=e.charCodeAt(r++))return-1}return r}function r(n,t,e){_.lastIndex=0;var r=_.exec(t.slice(e));return r?(n.w=w.get(r[0].toLowerCase()),e+r[0].length):-1}function i(n,t,e){x.lastIndex=0;var r=x.exec(t.slice(e));return r?(n.w=b.get(r[0].toLowerCase()),e+r[0].length):-1}function u(n,t,e){N.lastIndex=0;var r=N.exec(t.slice(e));return r?(n.m=E.get(r[0].toLowerCase()),e+r[0].length):-1}function o(n,t,e){S.lastIndex=0;var r=S.exec(t.slice(e));return r?(n.m=k.get(r[0].toLowerCase()),e+r[0].length):-1}function a(n,t,r){return e(n,A.c.toString(),t,r)}function l(n,t,r){return e(n,A.x.toString(),t,r)}function c(n,t,r){return e(n,A.X.toString(),t,r)}function f(n,t,e){var r=M.get(t.slice(e,e+=2).toLowerCase());return null==r?-1:(n.p=r,e)}var s=n.dateTime,h=n.date,p=n.time,g=n.periods,v=n.days,d=n.shortDays,y=n.months,m=n.shortMonths;t.utc=function(n){function e(n){try{va=Hn;var t=new va;return t._=n,r(t)}finally{va=Date}}var r=t(n);return e.parse=function(n){try{va=Hn;var t=r.parse(n);return t&&t._}finally{va=Date}},e.toString=r.toString,e},t.multi=t.utc.multi=ct;var M=ao.map(),x=Vn(v),b=Xn(v),_=Vn(d),w=Xn(d),S=Vn(y),k=Xn(y),N=Vn(m),E=Xn(m);g.forEach(function(n,t){M.set(n.toLowerCase(),t)});var A={a:function(n){return d[n.getDay()]},A:function(n){return v[n.getDay()]},b:function(n){return m[n.getMonth()]},B:function(n){return y[n.getMonth()]},c:t(s),d:function(n,t){return Zn(n.getDate(),t,2)},e:function(n,t){return Zn(n.getDate(),t,2)},H:function(n,t){return Zn(n.getHours(),t,2)},I:function(n,t){return Zn(n.getHours()%12||12,t,2)},j:function(n,t){return Zn(1+ga.dayOfYear(n),t,3)},L:function(n,t){return Zn(n.getMilliseconds(),t,3)},m:function(n,t){return Zn(n.getMonth()+1,t,2)},M:function(n,t){return Zn(n.getMinutes(),t,2)},p:function(n){return g[+(n.getHours()>=12)]},S:function(n,t){return Zn(n.getSeconds(),t,2)},U:function(n,t){return Zn(ga.sundayOfYear(n),t,2)},w:function(n){return n.getDay()},W:function(n,t){return Zn(ga.mondayOfYear(n),t,2)},x:t(h),X:t(p),y:function(n,t){return Zn(n.getFullYear()%100,t,2)},Y:function(n,t){return Zn(n.getFullYear()%1e4,t,4)},Z:at,"%":function(){return"%"}},C={a:r,A:i,b:u,B:o,c:a,d:tt,e:tt,H:rt,I:rt,j:et,L:ot,m:nt,M:it,p:f,S:ut,U:Bn,w:$n,W:Wn,x:l,X:c,y:Gn,Y:Jn,Z:Kn,"%":lt};return t}function Zn(n,t,e){var r=0>n?"-":"",i=(r?-n:n)+"",u=i.length;return r+(e>u?new Array(e-u+1).join(t)+i:i)}function Vn(n){return new RegExp("^(?:"+n.map(ao.requote).join("|")+")","i")}function Xn(n){for(var t=new c,e=-1,r=n.length;++e<r;)t.set(n[e].toLowerCase(),e);return t}function $n(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+1));return r?(n.w=+r[0],e+r[0].length):-1}function Bn(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e));return r?(n.U=+r[0],e+r[0].length):-1}function Wn(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e));return r?(n.W=+r[0],e+r[0].length):-1}function Jn(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+4));return r?(n.y=+r[0],e+r[0].length):-1}function Gn(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+2));return r?(n.y=Qn(+r[0]),e+r[0].length):-1}function Kn(n,t,e){return/^[+-]\d{4}$/.test(t=t.slice(e,e+5))?(n.Z=-t,e+5):-1}function Qn(n){return n+(n>68?1900:2e3)}function nt(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+2));return r?(n.m=r[0]-1,e+r[0].length):-1}function tt(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+2));return r?(n.d=+r[0],e+r[0].length):-1}function et(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+3));return r?(n.j=+r[0],e+r[0].length):-1}function rt(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+2));return r?(n.H=+r[0],e+r[0].length):-1}function it(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+2));return r?(n.M=+r[0],e+r[0].length):-1}function ut(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+2));return r?(n.S=+r[0],e+r[0].length):-1}function ot(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+3));return r?(n.L=+r[0],e+r[0].length):-1}function at(n){var t=n.getTimezoneOffset(),e=t>0?"-":"+",r=xo(t)/60|0,i=xo(t)%60;return e+Zn(r,"0",2)+Zn(i,"0",2)}function lt(n,t,e){Ma.lastIndex=0;var r=Ma.exec(t.slice(e,e+1));return r?e+r[0].length:-1}function ct(n){for(var t=n.length,e=-1;++e<t;)n[e][0]=this(n[e][0]);return function(t){for(var e=0,r=n[e];!r[1](t);)r=n[++e];return r[0](t)}}function ft(){}function st(n,t,e){var r=e.s=n+t,i=r-n,u=r-i;e.t=n-u+(t-i)}function ht(n,t){n&&wa.hasOwnProperty(n.type)&&wa[n.type](n,t)}function pt(n,t,e){var r,i=-1,u=n.length-e;for(t.lineStart();++i<u;)r=n[i],t.point(r[0],r[1],r[2]);t.lineEnd()}function gt(n,t){var e=-1,r=n.length;for(t.polygonStart();++e<r;)pt(n[e],t,1);t.polygonEnd()}function vt(){function n(n,t){n*=Yo,t=t*Yo/2+Fo/4;var e=n-r,o=e>=0?1:-1,a=o*e,l=Math.cos(t),c=Math.sin(t),f=u*c,s=i*l+f*Math.cos(a),h=f*o*Math.sin(a);ka.add(Math.atan2(h,s)),r=n,i=l,u=c}var t,e,r,i,u;Na.point=function(o,a){Na.point=n,r=(t=o)*Yo,i=Math.cos(a=(e=a)*Yo/2+Fo/4),u=Math.sin(a)},Na.lineEnd=function(){n(t,e)}}function dt(n){var t=n[0],e=n[1],r=Math.cos(e);return[r*Math.cos(t),r*Math.sin(t),Math.sin(e)]}function yt(n,t){return n[0]*t[0]+n[1]*t[1]+n[2]*t[2]}function mt(n,t){return[n[1]*t[2]-n[2]*t[1],n[2]*t[0]-n[0]*t[2],n[0]*t[1]-n[1]*t[0]]}function Mt(n,t){n[0]+=t[0],n[1]+=t[1],n[2]+=t[2]}function xt(n,t){return[n[0]*t,n[1]*t,n[2]*t]}function bt(n){var t=Math.sqrt(n[0]*n[0]+n[1]*n[1]+n[2]*n[2]);n[0]/=t,n[1]/=t,n[2]/=t}function _t(n){return[Math.atan2(n[1],n[0]),tn(n[2])]}function wt(n,t){return xo(n[0]-t[0])<Uo&&xo(n[1]-t[1])<Uo}function St(n,t){n*=Yo;var e=Math.cos(t*=Yo);kt(e*Math.cos(n),e*Math.sin(n),Math.sin(t))}function kt(n,t,e){++Ea,Ca+=(n-Ca)/Ea,za+=(t-za)/Ea,La+=(e-La)/Ea}function Nt(){function n(n,i){n*=Yo;var u=Math.cos(i*=Yo),o=u*Math.cos(n),a=u*Math.sin(n),l=Math.sin(i),c=Math.atan2(Math.sqrt((c=e*l-r*a)*c+(c=r*o-t*l)*c+(c=t*a-e*o)*c),t*o+e*a+r*l);Aa+=c,qa+=c*(t+(t=o)),Ta+=c*(e+(e=a)),Ra+=c*(r+(r=l)),kt(t,e,r)}var t,e,r;ja.point=function(i,u){i*=Yo;var o=Math.cos(u*=Yo);t=o*Math.cos(i),e=o*Math.sin(i),r=Math.sin(u),ja.point=n,kt(t,e,r)}}function Et(){ja.point=St}function At(){function n(n,t){n*=Yo;var e=Math.cos(t*=Yo),o=e*Math.cos(n),a=e*Math.sin(n),l=Math.sin(t),c=i*l-u*a,f=u*o-r*l,s=r*a-i*o,h=Math.sqrt(c*c+f*f+s*s),p=r*o+i*a+u*l,g=h&&-nn(p)/h,v=Math.atan2(h,p);Da+=g*c,Pa+=g*f,Ua+=g*s,Aa+=v,qa+=v*(r+(r=o)),Ta+=v*(i+(i=a)),Ra+=v*(u+(u=l)),kt(r,i,u)}var t,e,r,i,u;ja.point=function(o,a){t=o,e=a,ja.point=n,o*=Yo;var l=Math.cos(a*=Yo);r=l*Math.cos(o),i=l*Math.sin(o),u=Math.sin(a),kt(r,i,u)},ja.lineEnd=function(){n(t,e),ja.lineEnd=Et,ja.point=St}}function Ct(n,t){function e(e,r){return e=n(e,r),t(e[0],e[1])}return n.invert&&t.invert&&(e.invert=function(e,r){return e=t.invert(e,r),e&&n.invert(e[0],e[1])}),e}function zt(){return!0}function Lt(n,t,e,r,i){var u=[],o=[];if(n.forEach(function(n){if(!((t=n.length-1)<=0)){var t,e=n[0],r=n[t];if(wt(e,r)){i.lineStart();for(var a=0;t>a;++a)i.point((e=n[a])[0],e[1]);return void i.lineEnd()}var l=new Tt(e,n,null,!0),c=new Tt(e,null,l,!1);l.o=c,u.push(l),o.push(c),l=new Tt(r,n,null,!1),c=new Tt(r,null,l,!0),l.o=c,u.push(l),o.push(c)}}),o.sort(t),qt(u),qt(o),u.length){for(var a=0,l=e,c=o.length;c>a;++a)o[a].e=l=!l;for(var f,s,h=u[0];;){for(var p=h,g=!0;p.v;)if((p=p.n)===h)return;f=p.z,i.lineStart();do{if(p.v=p.o.v=!0,p.e){if(g)for(var a=0,c=f.length;c>a;++a)i.point((s=f[a])[0],s[1]);else r(p.x,p.n.x,1,i);p=p.n}else{if(g){f=p.p.z;for(var a=f.length-1;a>=0;--a)i.point((s=f[a])[0],s[1])}else r(p.x,p.p.x,-1,i);p=p.p}p=p.o,f=p.z,g=!g}while(!p.v);i.lineEnd()}}}function qt(n){if(t=n.length){for(var t,e,r=0,i=n[0];++r<t;)i.n=e=n[r],e.p=i,i=e;i.n=e=n[0],e.p=i}}function Tt(n,t,e,r){this.x=n,this.z=t,this.o=e,this.e=r,this.v=!1,this.n=this.p=null}function Rt(n,t,e,r){return function(i,u){function o(t,e){var r=i(t,e);n(t=r[0],e=r[1])&&u.point(t,e)}function a(n,t){var e=i(n,t);d.point(e[0],e[1])}function l(){m.point=a,d.lineStart()}function c(){m.point=o,d.lineEnd()}function f(n,t){v.push([n,t]);var e=i(n,t);x.point(e[0],e[1])}function s(){x.lineStart(),v=[]}function h(){f(v[0][0],v[0][1]),x.lineEnd();var n,t=x.clean(),e=M.buffer(),r=e.length;if(v.pop(),g.push(v),v=null,r)if(1&t){n=e[0];var i,r=n.length-1,o=-1;if(r>0){for(b||(u.polygonStart(),b=!0),u.lineStart();++o<r;)u.point((i=n[o])[0],i[1]);u.lineEnd()}}else r>1&&2&t&&e.push(e.pop().concat(e.shift())),p.push(e.filter(Dt))}var p,g,v,d=t(u),y=i.invert(r[0],r[1]),m={point:o,lineStart:l,lineEnd:c,polygonStart:function(){m.point=f,m.lineStart=s,m.lineEnd=h,p=[],g=[]},polygonEnd:function(){m.point=o,m.lineStart=l,m.lineEnd=c,p=ao.merge(p);var n=Ot(y,g);p.length?(b||(u.polygonStart(),b=!0),Lt(p,Ut,n,e,u)):n&&(b||(u.polygonStart(),b=!0),u.lineStart(),e(null,null,1,u),u.lineEnd()),b&&(u.polygonEnd(),b=!1),p=g=null},sphere:function(){u.polygonStart(),u.lineStart(),e(null,null,1,u),u.lineEnd(),u.polygonEnd()}},M=Pt(),x=t(M),b=!1;return m}}function Dt(n){return n.length>1}function Pt(){var n,t=[];return{lineStart:function(){t.push(n=[])},point:function(t,e){n.push([t,e])},lineEnd:b,buffer:function(){var e=t;return t=[],n=null,e},rejoin:function(){t.length>1&&t.push(t.pop().concat(t.shift()))}}}function Ut(n,t){return((n=n.x)[0]<0?n[1]-Io-Uo:Io-n[1])-((t=t.x)[0]<0?t[1]-Io-Uo:Io-t[1])}function jt(n){var t,e=NaN,r=NaN,i=NaN;return{lineStart:function(){n.lineStart(),t=1},point:function(u,o){var a=u>0?Fo:-Fo,l=xo(u-e);xo(l-Fo)<Uo?(n.point(e,r=(r+o)/2>0?Io:-Io),n.point(i,r),n.lineEnd(),n.lineStart(),n.point(a,r),n.point(u,r),t=0):i!==a&&l>=Fo&&(xo(e-i)<Uo&&(e-=i*Uo),xo(u-a)<Uo&&(u-=a*Uo),r=Ft(e,r,u,o),n.point(i,r),n.lineEnd(),n.lineStart(),n.point(a,r),t=0),n.point(e=u,r=o),i=a},lineEnd:function(){n.lineEnd(),e=r=NaN},clean:function(){return 2-t}}}function Ft(n,t,e,r){var i,u,o=Math.sin(n-e);return xo(o)>Uo?Math.atan((Math.sin(t)*(u=Math.cos(r))*Math.sin(e)-Math.sin(r)*(i=Math.cos(t))*Math.sin(n))/(i*u*o)):(t+r)/2}function Ht(n,t,e,r){var i;if(null==n)i=e*Io,r.point(-Fo,i),r.point(0,i),r.point(Fo,i),r.point(Fo,0),r.point(Fo,-i),r.point(0,-i),r.point(-Fo,-i),r.point(-Fo,0),r.point(-Fo,i);else if(xo(n[0]-t[0])>Uo){var u=n[0]<t[0]?Fo:-Fo;i=e*u/2,r.point(-u,i),r.point(0,i),r.point(u,i)}else r.point(t[0],t[1])}function Ot(n,t){var e=n[0],r=n[1],i=[Math.sin(e),-Math.cos(e),0],u=0,o=0;ka.reset();for(var a=0,l=t.length;l>a;++a){var c=t[a],f=c.length;if(f)for(var s=c[0],h=s[0],p=s[1]/2+Fo/4,g=Math.sin(p),v=Math.cos(p),d=1;;){d===f&&(d=0),n=c[d];var y=n[0],m=n[1]/2+Fo/4,M=Math.sin(m),x=Math.cos(m),b=y-h,_=b>=0?1:-1,w=_*b,S=w>Fo,k=g*M;if(ka.add(Math.atan2(k*_*Math.sin(w),v*x+k*Math.cos(w))),u+=S?b+_*Ho:b,S^h>=e^y>=e){var N=mt(dt(s),dt(n));bt(N);var E=mt(i,N);bt(E);var A=(S^b>=0?-1:1)*tn(E[2]);(r>A||r===A&&(N[0]||N[1]))&&(o+=S^b>=0?1:-1)}if(!d++)break;h=y,g=M,v=x,s=n}}return(-Uo>u||Uo>u&&-Uo>ka)^1&o}function It(n){function t(n,t){return Math.cos(n)*Math.cos(t)>u}function e(n){var e,u,l,c,f;return{lineStart:function(){c=l=!1,f=1},point:function(s,h){var p,g=[s,h],v=t(s,h),d=o?v?0:i(s,h):v?i(s+(0>s?Fo:-Fo),h):0;if(!e&&(c=l=v)&&n.lineStart(),v!==l&&(p=r(e,g),(wt(e,p)||wt(g,p))&&(g[0]+=Uo,g[1]+=Uo,v=t(g[0],g[1]))),v!==l)f=0,v?(n.lineStart(),p=r(g,e),n.point(p[0],p[1])):(p=r(e,g),n.point(p[0],p[1]),n.lineEnd()),e=p;else if(a&&e&&o^v){var y;d&u||!(y=r(g,e,!0))||(f=0,o?(n.lineStart(),n.point(y[0][0],y[0][1]),n.point(y[1][0],y[1][1]),n.lineEnd()):(n.point(y[1][0],y[1][1]),n.lineEnd(),n.lineStart(),n.point(y[0][0],y[0][1])))}!v||e&&wt(e,g)||n.point(g[0],g[1]),e=g,l=v,u=d},lineEnd:function(){l&&n.lineEnd(),e=null},clean:function(){return f|(c&&l)<<1}}}function r(n,t,e){var r=dt(n),i=dt(t),o=[1,0,0],a=mt(r,i),l=yt(a,a),c=a[0],f=l-c*c;if(!f)return!e&&n;var s=u*l/f,h=-u*c/f,p=mt(o,a),g=xt(o,s),v=xt(a,h);Mt(g,v);var d=p,y=yt(g,d),m=yt(d,d),M=y*y-m*(yt(g,g)-1);if(!(0>M)){var x=Math.sqrt(M),b=xt(d,(-y-x)/m);if(Mt(b,g),b=_t(b),!e)return b;var _,w=n[0],S=t[0],k=n[1],N=t[1];w>S&&(_=w,w=S,S=_);var E=S-w,A=xo(E-Fo)<Uo,C=A||Uo>E;if(!A&&k>N&&(_=k,k=N,N=_),C?A?k+N>0^b[1]<(xo(b[0]-w)<Uo?k:N):k<=b[1]&&b[1]<=N:E>Fo^(w<=b[0]&&b[0]<=S)){var z=xt(d,(-y+x)/m);return Mt(z,g),[b,_t(z)]}}}function i(t,e){var r=o?n:Fo-n,i=0;return-r>t?i|=1:t>r&&(i|=2),-r>e?i|=4:e>r&&(i|=8),i}var u=Math.cos(n),o=u>0,a=xo(u)>Uo,l=ve(n,6*Yo);return Rt(t,e,l,o?[0,-n]:[-Fo,n-Fo])}function Yt(n,t,e,r){return function(i){var u,o=i.a,a=i.b,l=o.x,c=o.y,f=a.x,s=a.y,h=0,p=1,g=f-l,v=s-c;if(u=n-l,g||!(u>0)){if(u/=g,0>g){if(h>u)return;p>u&&(p=u)}else if(g>0){if(u>p)return;u>h&&(h=u)}if(u=e-l,g||!(0>u)){if(u/=g,0>g){if(u>p)return;u>h&&(h=u)}else if(g>0){if(h>u)return;p>u&&(p=u)}if(u=t-c,v||!(u>0)){if(u/=v,0>v){if(h>u)return;p>u&&(p=u)}else if(v>0){if(u>p)return;u>h&&(h=u)}if(u=r-c,v||!(0>u)){if(u/=v,0>v){if(u>p)return;u>h&&(h=u)}else if(v>0){if(h>u)return;p>u&&(p=u)}return h>0&&(i.a={x:l+h*g,y:c+h*v}),1>p&&(i.b={x:l+p*g,y:c+p*v}),i}}}}}}function Zt(n,t,e,r){function i(r,i){return xo(r[0]-n)<Uo?i>0?0:3:xo(r[0]-e)<Uo?i>0?2:1:xo(r[1]-t)<Uo?i>0?1:0:i>0?3:2}function u(n,t){return o(n.x,t.x)}function o(n,t){var e=i(n,1),r=i(t,1);return e!==r?e-r:0===e?t[1]-n[1]:1===e?n[0]-t[0]:2===e?n[1]-t[1]:t[0]-n[0]}return function(a){function l(n){for(var t=0,e=d.length,r=n[1],i=0;e>i;++i)for(var u,o=1,a=d[i],l=a.length,c=a[0];l>o;++o)u=a[o],c[1]<=r?u[1]>r&&Q(c,u,n)>0&&++t:u[1]<=r&&Q(c,u,n)<0&&--t,c=u;return 0!==t}function c(u,a,l,c){var f=0,s=0;if(null==u||(f=i(u,l))!==(s=i(a,l))||o(u,a)<0^l>0){do c.point(0===f||3===f?n:e,f>1?r:t);while((f=(f+l+4)%4)!==s)}else c.point(a[0],a[1])}function f(i,u){return i>=n&&e>=i&&u>=t&&r>=u}function s(n,t){f(n,t)&&a.point(n,t)}function h(){C.point=g,d&&d.push(y=[]),S=!0,w=!1,b=_=NaN}function p(){v&&(g(m,M),x&&w&&E.rejoin(),v.push(E.buffer())),C.point=s,w&&a.lineEnd()}function g(n,t){n=Math.max(-Ha,Math.min(Ha,n)),t=Math.max(-Ha,Math.min(Ha,t));var e=f(n,t);if(d&&y.push([n,t]),S)m=n,M=t,x=e,S=!1,e&&(a.lineStart(),a.point(n,t));else if(e&&w)a.point(n,t);else{var r={a:{x:b,y:_},b:{x:n,y:t}};A(r)?(w||(a.lineStart(),a.point(r.a.x,r.a.y)),a.point(r.b.x,r.b.y),e||a.lineEnd(),k=!1):e&&(a.lineStart(),a.point(n,t),k=!1)}b=n,_=t,w=e}var v,d,y,m,M,x,b,_,w,S,k,N=a,E=Pt(),A=Yt(n,t,e,r),C={point:s,lineStart:h,lineEnd:p,polygonStart:function(){a=E,v=[],d=[],k=!0},polygonEnd:function(){a=N,v=ao.merge(v);var t=l([n,r]),e=k&&t,i=v.length;(e||i)&&(a.polygonStart(),e&&(a.lineStart(),c(null,null,1,a),a.lineEnd()),i&&Lt(v,u,t,c,a),a.polygonEnd()),v=d=y=null}};return C}}function Vt(n){var t=0,e=Fo/3,r=ae(n),i=r(t,e);return i.parallels=function(n){return arguments.length?r(t=n[0]*Fo/180,e=n[1]*Fo/180):[t/Fo*180,e/Fo*180]},i}function Xt(n,t){function e(n,t){var e=Math.sqrt(u-2*i*Math.sin(t))/i;return[e*Math.sin(n*=i),o-e*Math.cos(n)]}var r=Math.sin(n),i=(r+Math.sin(t))/2,u=1+r*(2*i-r),o=Math.sqrt(u)/i;return e.invert=function(n,t){var e=o-t;return[Math.atan2(n,e)/i,tn((u-(n*n+e*e)*i*i)/(2*i))]},e}function $t(){function n(n,t){Ia+=i*n-r*t,r=n,i=t}var t,e,r,i;$a.point=function(u,o){$a.point=n,t=r=u,e=i=o},$a.lineEnd=function(){n(t,e)}}function Bt(n,t){Ya>n&&(Ya=n),n>Va&&(Va=n),Za>t&&(Za=t),t>Xa&&(Xa=t)}function Wt(){function n(n,t){o.push("M",n,",",t,u)}function t(n,t){o.push("M",n,",",t),a.point=e}function e(n,t){o.push("L",n,",",t)}function r(){a.point=n}function i(){o.push("Z")}var u=Jt(4.5),o=[],a={point:n,lineStart:function(){a.point=t},lineEnd:r,polygonStart:function(){a.lineEnd=i},polygonEnd:function(){a.lineEnd=r,a.point=n},pointRadius:function(n){return u=Jt(n),a},result:function(){if(o.length){var n=o.join("");return o=[],n}}};return a}function Jt(n){return"m0,"+n+"a"+n+","+n+" 0 1,1 0,"+-2*n+"a"+n+","+n+" 0 1,1 0,"+2*n+"z"}function Gt(n,t){Ca+=n,za+=t,++La}function Kt(){function n(n,r){var i=n-t,u=r-e,o=Math.sqrt(i*i+u*u);qa+=o*(t+n)/2,Ta+=o*(e+r)/2,Ra+=o,Gt(t=n,e=r)}var t,e;Wa.point=function(r,i){Wa.point=n,Gt(t=r,e=i)}}function Qt(){Wa.point=Gt}function ne(){function n(n,t){var e=n-r,u=t-i,o=Math.sqrt(e*e+u*u);qa+=o*(r+n)/2,Ta+=o*(i+t)/2,Ra+=o,o=i*n-r*t,Da+=o*(r+n),Pa+=o*(i+t),Ua+=3*o,Gt(r=n,i=t)}var t,e,r,i;Wa.point=function(u,o){Wa.point=n,Gt(t=r=u,e=i=o)},Wa.lineEnd=function(){n(t,e)}}function te(n){function t(t,e){n.moveTo(t+o,e),n.arc(t,e,o,0,Ho)}function e(t,e){n.moveTo(t,e),a.point=r}function r(t,e){n.lineTo(t,e)}function i(){a.point=t}function u(){n.closePath()}var o=4.5,a={point:t,lineStart:function(){a.point=e},lineEnd:i,polygonStart:function(){a.lineEnd=u},polygonEnd:function(){a.lineEnd=i,a.point=t},pointRadius:function(n){return o=n,a},result:b};return a}function ee(n){function t(n){return(a?r:e)(n)}function e(t){return ue(t,function(e,r){e=n(e,r),t.point(e[0],e[1])})}function r(t){function e(e,r){e=n(e,r),t.point(e[0],e[1])}function r(){M=NaN,S.point=u,t.lineStart()}function u(e,r){var u=dt([e,r]),o=n(e,r);i(M,x,m,b,_,w,M=o[0],x=o[1],m=e,b=u[0],_=u[1],w=u[2],a,t),t.point(M,x)}function o(){S.point=e,t.lineEnd()}function l(){
@@ -17917,537 +17917,6 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
  Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */(function(e,t){'object'==typeof exports&&'undefined'!=typeof module?module.exports=t():'function'==typeof define&&define.amd?define(t):e.Popper=t()})(this,function(){'use strict';function e(e){return e&&'[object Function]'==={}.toString.call(e)}function t(e,t){if(1!==e.nodeType)return[];var o=window.getComputedStyle(e,null);return t?o[t]:o}function o(e){return'HTML'===e.nodeName?e:e.parentNode||e.host}function n(e){if(!e||-1!==['HTML','BODY','#document'].indexOf(e.nodeName))return window.document.body;var i=t(e),r=i.overflow,p=i.overflowX,s=i.overflowY;return /(auto|scroll)/.test(r+s+p)?e:n(o(e))}function r(e){var o=e&&e.offsetParent,i=o&&o.nodeName;return i&&'BODY'!==i&&'HTML'!==i?-1!==['TD','TABLE'].indexOf(o.nodeName)&&'static'===t(o,'position')?r(o):o:window.document.documentElement}function p(e){var t=e.nodeName;return'BODY'!==t&&('HTML'===t||r(e.firstElementChild)===e)}function s(e){return null===e.parentNode?e:s(e.parentNode)}function d(e,t){if(!e||!e.nodeType||!t||!t.nodeType)return window.document.documentElement;var o=e.compareDocumentPosition(t)&Node.DOCUMENT_POSITION_FOLLOWING,i=o?e:t,n=o?t:e,a=document.createRange();a.setStart(i,0),a.setEnd(n,0);var l=a.commonAncestorContainer;if(e!==l&&t!==l||i.contains(n))return p(l)?l:r(l);var f=s(e);return f.host?d(f.host,t):d(e,s(t).host)}function a(e){var t=1<arguments.length&&void 0!==arguments[1]?arguments[1]:'top',o='top'===t?'scrollTop':'scrollLeft',i=e.nodeName;if('BODY'===i||'HTML'===i){var n=window.document.documentElement,r=window.document.scrollingElement||n;return r[o]}return e[o]}function l(e,t){var o=2<arguments.length&&void 0!==arguments[2]&&arguments[2],i=a(t,'top'),n=a(t,'left'),r=o?-1:1;return e.top+=i*r,e.bottom+=i*r,e.left+=n*r,e.right+=n*r,e}function f(e,t){var o='x'===t?'Left':'Top',i='Left'==o?'Right':'Bottom';return+e['border'+o+'Width'].split('px')[0]+ +e['border'+i+'Width'].split('px')[0]}function m(e,t,o,i){return X(t['offset'+e],t['scroll'+e],o['client'+e],o['offset'+e],o['scroll'+e],ne()?o['offset'+e]+i['margin'+('Height'===e?'Top':'Left')]+i['margin'+('Height'===e?'Bottom':'Right')]:0)}function c(){var e=window.document.body,t=window.document.documentElement,o=ne()&&window.getComputedStyle(t);return{height:m('Height',e,t,o),width:m('Width',e,t,o)}}function h(e){return de({},e,{right:e.left+e.width,bottom:e.top+e.height})}function g(e){var o={};if(ne())try{o=e.getBoundingClientRect();var i=a(e,'top'),n=a(e,'left');o.top+=i,o.left+=n,o.bottom+=i,o.right+=n}catch(e){}else o=e.getBoundingClientRect();var r={left:o.left,top:o.top,width:o.right-o.left,height:o.bottom-o.top},p='HTML'===e.nodeName?c():{},s=p.width||e.clientWidth||r.right-r.left,d=p.height||e.clientHeight||r.bottom-r.top,l=e.offsetWidth-s,m=e.offsetHeight-d;if(l||m){var g=t(e);l-=f(g,'x'),m-=f(g,'y'),r.width-=l,r.height-=m}return h(r)}function u(e,o){var i=ne(),r='HTML'===o.nodeName,p=g(e),s=g(o),d=n(e),a=t(o),f=+a.borderTopWidth.split('px')[0],m=+a.borderLeftWidth.split('px')[0],c=h({top:p.top-s.top-f,left:p.left-s.left-m,width:p.width,height:p.height});if(c.marginTop=0,c.marginLeft=0,!i&&r){var u=+a.marginTop.split('px')[0],b=+a.marginLeft.split('px')[0];c.top-=f-u,c.bottom-=f-u,c.left-=m-b,c.right-=m-b,c.marginTop=u,c.marginLeft=b}return(i?o.contains(d):o===d&&'BODY'!==d.nodeName)&&(c=l(c,o)),c}function b(e){var t=window.document.documentElement,o=u(e,t),i=X(t.clientWidth,window.innerWidth||0),n=X(t.clientHeight,window.innerHeight||0),r=a(t),p=a(t,'left'),s={top:r-o.top+o.marginTop,left:p-o.left+o.marginLeft,width:i,height:n};return h(s)}function y(e){var i=e.nodeName;return'BODY'===i||'HTML'===i?!1:'fixed'===t(e,'position')||y(o(e))}function w(e,t,i,r){var p={top:0,left:0},s=d(e,t);if('viewport'===r)p=b(s);else{var a;'scrollParent'===r?(a=n(o(e)),'BODY'===a.nodeName&&(a=window.document.documentElement)):'window'===r?a=window.document.documentElement:a=r;var l=u(a,s);if('HTML'===a.nodeName&&!y(s)){var f=c(),m=f.height,h=f.width;p.top+=l.top-l.marginTop,p.bottom=m+l.top,p.left+=l.left-l.marginLeft,p.right=h+l.left}else p=l}return p.left+=i,p.top+=i,p.right-=i,p.bottom-=i,p}function E(e){var t=e.width,o=e.height;return t*o}function v(e,t,o,i,n){var r=5<arguments.length&&void 0!==arguments[5]?arguments[5]:0;if(-1===e.indexOf('auto'))return e;var p=w(o,i,r,n),s={top:{width:p.width,height:t.top-p.top},right:{width:p.right-t.right,height:p.height},bottom:{width:p.width,height:p.bottom-t.bottom},left:{width:t.left-p.left,height:p.height}},d=Object.keys(s).map(function(e){return de({key:e},s[e],{area:E(s[e])})}).sort(function(e,t){return t.area-e.area}),a=d.filter(function(e){var t=e.width,i=e.height;return t>=o.clientWidth&&i>=o.clientHeight}),l=0<a.length?a[0].key:d[0].key,f=e.split('-')[1];return l+(f?'-'+f:'')}function x(e,t,o){var i=d(t,o);return u(o,i)}function O(e){var t=window.getComputedStyle(e),o=parseFloat(t.marginTop)+parseFloat(t.marginBottom),i=parseFloat(t.marginLeft)+parseFloat(t.marginRight),n={width:e.offsetWidth+i,height:e.offsetHeight+o};return n}function L(e){var t={left:'right',right:'left',bottom:'top',top:'bottom'};return e.replace(/left|right|bottom|top/g,function(e){return t[e]})}function S(e,t,o){o=o.split('-')[0];var i=O(e),n={width:i.width,height:i.height},r=-1!==['right','left'].indexOf(o),p=r?'top':'left',s=r?'left':'top',d=r?'height':'width',a=r?'width':'height';return n[p]=t[p]+t[d]/2-i[d]/2,n[s]=o===s?t[s]-i[a]:t[L(s)],n}function T(e,t){return Array.prototype.find?e.find(t):e.filter(t)[0]}function C(e,t,o){if(Array.prototype.findIndex)return e.findIndex(function(e){return e[t]===o});var i=T(e,function(e){return e[t]===o});return e.indexOf(i)}function N(t,o,i){var n=void 0===i?t:t.slice(0,C(t,'name',i));return n.forEach(function(t){t.function&&console.warn('`modifier.function` is deprecated, use `modifier.fn`!');var i=t.function||t.fn;t.enabled&&e(i)&&(o.offsets.popper=h(o.offsets.popper),o.offsets.reference=h(o.offsets.reference),o=i(o,t))}),o}function k(){if(!this.state.isDestroyed){var e={instance:this,styles:{},arrowStyles:{},attributes:{},flipped:!1,offsets:{}};e.offsets.reference=x(this.state,this.popper,this.reference),e.placement=v(this.options.placement,e.offsets.reference,this.popper,this.reference,this.options.modifiers.flip.boundariesElement,this.options.modifiers.flip.padding),e.originalPlacement=e.placement,e.offsets.popper=S(this.popper,e.offsets.reference,e.placement),e.offsets.popper.position='absolute',e=N(this.modifiers,e),this.state.isCreated?this.options.onUpdate(e):(this.state.isCreated=!0,this.options.onCreate(e))}}function W(e,t){return e.some(function(e){var o=e.name,i=e.enabled;return i&&o===t})}function B(e){for(var t=[!1,'ms','Webkit','Moz','O'],o=e.charAt(0).toUpperCase()+e.slice(1),n=0;n<t.length-1;n++){var i=t[n],r=i?''+i+o:e;if('undefined'!=typeof window.document.body.style[r])return r}return null}function P(){return this.state.isDestroyed=!0,W(this.modifiers,'applyStyle')&&(this.popper.removeAttribute('x-placement'),this.popper.style.left='',this.popper.style.position='',this.popper.style.top='',this.popper.style[B('transform')]=''),this.disableEventListeners(),this.options.removeOnDestroy&&this.popper.parentNode.removeChild(this.popper),this}function D(e,t,o,i){var r='BODY'===e.nodeName,p=r?window:e;p.addEventListener(t,o,{passive:!0}),r||D(n(p.parentNode),t,o,i),i.push(p)}function H(e,t,o,i){o.updateBound=i,window.addEventListener('resize',o.updateBound,{passive:!0});var r=n(e);return D(r,'scroll',o.updateBound,o.scrollParents),o.scrollElement=r,o.eventsEnabled=!0,o}function A(){this.state.eventsEnabled||(this.state=H(this.reference,this.options,this.state,this.scheduleUpdate))}function M(e,t){return window.removeEventListener('resize',t.updateBound),t.scrollParents.forEach(function(e){e.removeEventListener('scroll',t.updateBound)}),t.updateBound=null,t.scrollParents=[],t.scrollElement=null,t.eventsEnabled=!1,t}function I(){this.state.eventsEnabled&&(window.cancelAnimationFrame(this.scheduleUpdate),this.state=M(this.reference,this.state))}function R(e){return''!==e&&!isNaN(parseFloat(e))&&isFinite(e)}function U(e,t){Object.keys(t).forEach(function(o){var i='';-1!==['width','height','top','right','bottom','left'].indexOf(o)&&R(t[o])&&(i='px'),e.style[o]=t[o]+i})}function Y(e,t){Object.keys(t).forEach(function(o){var i=t[o];!1===i?e.removeAttribute(o):e.setAttribute(o,t[o])})}function F(e,t,o){var i=T(e,function(e){var o=e.name;return o===t}),n=!!i&&e.some(function(e){return e.name===o&&e.enabled&&e.order<i.order});if(!n){var r='`'+t+'`';console.warn('`'+o+'`'+' modifier is required by '+r+' modifier in order to work, be sure to include it before '+r+'!')}return n}function j(e){return'end'===e?'start':'start'===e?'end':e}function K(e){var t=1<arguments.length&&void 0!==arguments[1]&&arguments[1],o=le.indexOf(e),i=le.slice(o+1).concat(le.slice(0,o));return t?i.reverse():i}function q(e,t,o,i){var n=e.match(/((?:\-|\+)?\d*\.?\d*)(.*)/),r=+n[1],p=n[2];if(!r)return e;if(0===p.indexOf('%')){var s;switch(p){case'%p':s=o;break;case'%':case'%r':default:s=i;}var d=h(s);return d[t]/100*r}if('vh'===p||'vw'===p){var a;return a='vh'===p?X(document.documentElement.clientHeight,window.innerHeight||0):X(document.documentElement.clientWidth,window.innerWidth||0),a/100*r}return r}function G(e,t,o,i){var n=[0,0],r=-1!==['right','left'].indexOf(i),p=e.split(/(\+|\-)/).map(function(e){return e.trim()}),s=p.indexOf(T(p,function(e){return-1!==e.search(/,|\s/)}));p[s]&&-1===p[s].indexOf(',')&&console.warn('Offsets separated by white space(s) are deprecated, use a comma (,) instead.');var d=/\s*,\s*|\s+/,a=-1===s?[p]:[p.slice(0,s).concat([p[s].split(d)[0]]),[p[s].split(d)[1]].concat(p.slice(s+1))];return a=a.map(function(e,i){var n=(1===i?!r:r)?'height':'width',p=!1;return e.reduce(function(e,t){return''===e[e.length-1]&&-1!==['+','-'].indexOf(t)?(e[e.length-1]=t,p=!0,e):p?(e[e.length-1]+=t,p=!1,e):e.concat(t)},[]).map(function(e){return q(e,n,t,o)})}),a.forEach(function(e,t){e.forEach(function(o,i){R(o)&&(n[t]+=o*('-'===e[i-1]?-1:1))})}),n}function z(e,t){var o,i=t.offset,n=e.placement,r=e.offsets,p=r.popper,s=r.reference,d=n.split('-')[0];return o=R(+i)?[+i,0]:G(i,p,s,d),'left'===d?(p.top+=o[0],p.left-=o[1]):'right'===d?(p.top+=o[0],p.left+=o[1]):'top'===d?(p.left+=o[0],p.top-=o[1]):'bottom'===d&&(p.left+=o[0],p.top+=o[1]),e.popper=p,e}for(var V=Math.min,_=Math.floor,X=Math.max,Q=['native code','[object MutationObserverConstructor]'],J=function(e){return Q.some(function(t){return-1<(e||'').toString().indexOf(t)})},Z='undefined'!=typeof window,$=['Edge','Trident','Firefox'],ee=0,te=0;te<$.length;te+=1)if(Z&&0<=navigator.userAgent.indexOf($[te])){ee=1;break}var i,oe=Z&&J(window.MutationObserver),ie=oe?function(e){var t=!1,o=0,i=document.createElement('span'),n=new MutationObserver(function(){e(),t=!1});return n.observe(i,{attributes:!0}),function(){t||(t=!0,i.setAttribute('x-index',o),++o)}}:function(e){var t=!1;return function(){t||(t=!0,setTimeout(function(){t=!1,e()},ee))}},ne=function(){return void 0==i&&(i=-1!==navigator.appVersion.indexOf('MSIE 10')),i},re=function(e,t){if(!(e instanceof t))throw new TypeError('Cannot call a class as a function')},pe=function(){function e(e,t){for(var o,n=0;n<t.length;n++)o=t[n],o.enumerable=o.enumerable||!1,o.configurable=!0,'value'in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}return function(t,o,i){return o&&e(t.prototype,o),i&&e(t,i),t}}(),se=function(e,t,o){return t in e?Object.defineProperty(e,t,{value:o,enumerable:!0,configurable:!0,writable:!0}):e[t]=o,e},de=Object.assign||function(e){for(var t,o=1;o<arguments.length;o++)for(var i in t=arguments[o],t)Object.prototype.hasOwnProperty.call(t,i)&&(e[i]=t[i]);return e},ae=['auto-start','auto','auto-end','top-start','top','top-end','right-start','right','right-end','bottom-end','bottom','bottom-start','left-end','left','left-start'],le=ae.slice(3),fe={FLIP:'flip',CLOCKWISE:'clockwise',COUNTERCLOCKWISE:'counterclockwise'},me=function(){function t(o,i){var n=this,r=2<arguments.length&&void 0!==arguments[2]?arguments[2]:{};re(this,t),this.scheduleUpdate=function(){return requestAnimationFrame(n.update)},this.update=ie(this.update.bind(this)),this.options=de({},t.Defaults,r),this.state={isDestroyed:!1,isCreated:!1,scrollParents:[]},this.reference=o.jquery?o[0]:o,this.popper=i.jquery?i[0]:i,this.options.modifiers={},Object.keys(de({},t.Defaults.modifiers,r.modifiers)).forEach(function(e){n.options.modifiers[e]=de({},t.Defaults.modifiers[e]||{},r.modifiers?r.modifiers[e]:{})}),this.modifiers=Object.keys(this.options.modifiers).map(function(e){return de({name:e},n.options.modifiers[e])}).sort(function(e,t){return e.order-t.order}),this.modifiers.forEach(function(t){t.enabled&&e(t.onLoad)&&t.onLoad(n.reference,n.popper,n.options,t,n.state)}),this.update();var p=this.options.eventsEnabled;p&&this.enableEventListeners(),this.state.eventsEnabled=p}return pe(t,[{key:'update',value:function(){return k.call(this)}},{key:'destroy',value:function(){return P.call(this)}},{key:'enableEventListeners',value:function(){return A.call(this)}},{key:'disableEventListeners',value:function(){return I.call(this)}}]),t}();return me.Utils=('undefined'==typeof window?global:window).PopperUtils,me.placements=ae,me.Defaults={placement:'bottom',eventsEnabled:!0,removeOnDestroy:!1,onCreate:function(){},onUpdate:function(){},modifiers:{shift:{order:100,enabled:!0,fn:function(e){var t=e.placement,o=t.split('-')[0],i=t.split('-')[1];if(i){var n=e.offsets,r=n.reference,p=n.popper,s=-1!==['bottom','top'].indexOf(o),d=s?'left':'top',a=s?'width':'height',l={start:se({},d,r[d]),end:se({},d,r[d]+r[a]-p[a])};e.offsets.popper=de({},p,l[i])}return e}},offset:{order:200,enabled:!0,fn:z,offset:0},preventOverflow:{order:300,enabled:!0,fn:function(e,t){var o=t.boundariesElement||r(e.instance.popper);e.instance.reference===o&&(o=r(o));var i=w(e.instance.popper,e.instance.reference,t.padding,o);t.boundaries=i;var n=t.priority,p=e.offsets.popper,s={primary:function(e){var o=p[e];return p[e]<i[e]&&!t.escapeWithReference&&(o=X(p[e],i[e])),se({},e,o)},secondary:function(e){var o='right'===e?'left':'top',n=p[o];return p[e]>i[e]&&!t.escapeWithReference&&(n=V(p[o],i[e]-('right'===e?p.width:p.height))),se({},o,n)}};return n.forEach(function(e){var t=-1===['left','top'].indexOf(e)?'secondary':'primary';p=de({},p,s[t](e))}),e.offsets.popper=p,e},priority:['left','right','top','bottom'],padding:5,boundariesElement:'scrollParent'},keepTogether:{order:400,enabled:!0,fn:function(e){var t=e.offsets,o=t.popper,i=t.reference,n=e.placement.split('-')[0],r=_,p=-1!==['top','bottom'].indexOf(n),s=p?'right':'bottom',d=p?'left':'top',a=p?'width':'height';return o[s]<r(i[d])&&(e.offsets.popper[d]=r(i[d])-o[a]),o[d]>r(i[s])&&(e.offsets.popper[d]=r(i[s])),e}},arrow:{order:500,enabled:!0,fn:function(e,o){if(!F(e.instance.modifiers,'arrow','keepTogether'))return e;var i=o.element;if('string'==typeof i){if(i=e.instance.popper.querySelector(i),!i)return e;}else if(!e.instance.popper.contains(i))return console.warn('WARNING: `arrow.element` must be child of its popper element!'),e;var n=e.placement.split('-')[0],r=e.offsets,p=r.popper,s=r.reference,d=-1!==['left','right'].indexOf(n),a=d?'height':'width',l=d?'Top':'Left',f=l.toLowerCase(),m=d?'left':'top',c=d?'bottom':'right',g=O(i)[a];s[c]-g<p[f]&&(e.offsets.popper[f]-=p[f]-(s[c]-g)),s[f]+g>p[c]&&(e.offsets.popper[f]+=s[f]+g-p[c]);var u=s[f]+s[a]/2-g/2,b=t(e.instance.popper,'margin'+l).replace('px',''),y=u-h(e.offsets.popper)[f]-b;return y=X(V(p[a]-g,y),0),e.arrowElement=i,e.offsets.arrow={},e.offsets.arrow[f]=Math.round(y),e.offsets.arrow[m]='',e},element:'[x-arrow]'},flip:{order:600,enabled:!0,fn:function(e,t){if(W(e.instance.modifiers,'inner'))return e;if(e.flipped&&e.placement===e.originalPlacement)return e;var o=w(e.instance.popper,e.instance.reference,t.padding,t.boundariesElement),i=e.placement.split('-')[0],n=L(i),r=e.placement.split('-')[1]||'',p=[];switch(t.behavior){case fe.FLIP:p=[i,n];break;case fe.CLOCKWISE:p=K(i);break;case fe.COUNTERCLOCKWISE:p=K(i,!0);break;default:p=t.behavior;}return p.forEach(function(s,d){if(i!==s||p.length===d+1)return e;i=e.placement.split('-')[0],n=L(i);var a=e.offsets.popper,l=e.offsets.reference,f=_,m='left'===i&&f(a.right)>f(l.left)||'right'===i&&f(a.left)<f(l.right)||'top'===i&&f(a.bottom)>f(l.top)||'bottom'===i&&f(a.top)<f(l.bottom),c=f(a.left)<f(o.left),h=f(a.right)>f(o.right),g=f(a.top)<f(o.top),u=f(a.bottom)>f(o.bottom),b='left'===i&&c||'right'===i&&h||'top'===i&&g||'bottom'===i&&u,y=-1!==['top','bottom'].indexOf(i),w=!!t.flipVariations&&(y&&'start'===r&&c||y&&'end'===r&&h||!y&&'start'===r&&g||!y&&'end'===r&&u);(m||b||w)&&(e.flipped=!0,(m||b)&&(i=p[d+1]),w&&(r=j(r)),e.placement=i+(r?'-'+r:''),e.offsets.popper=de({},e.offsets.popper,S(e.instance.popper,e.offsets.reference,e.placement)),e=N(e.instance.modifiers,e,'flip'))}),e},behavior:'flip',padding:5,boundariesElement:'viewport'},inner:{order:700,enabled:!1,fn:function(e){var t=e.placement,o=t.split('-')[0],i=e.offsets,n=i.popper,r=i.reference,p=-1!==['left','right'].indexOf(o),s=-1===['top','left'].indexOf(o);return n[p?'left':'top']=r[o]-(s?n[p?'width':'height']:0),e.placement=L(t),e.offsets.popper=h(n),e}},hide:{order:800,enabled:!0,fn:function(e){if(!F(e.instance.modifiers,'hide','preventOverflow'))return e;var t=e.offsets.reference,o=T(e.instance.modifiers,function(e){return'preventOverflow'===e.name}).boundaries;if(t.bottom<o.top||t.left>o.right||t.top>o.bottom||t.right<o.left){if(!0===e.hide)return e;e.hide=!0,e.attributes['x-out-of-boundaries']=''}else{if(!1===e.hide)return e;e.hide=!1,e.attributes['x-out-of-boundaries']=!1}return e}},computeStyle:{order:850,enabled:!0,fn:function(e,t){var o=t.x,i=t.y,n=e.offsets.popper,p=T(e.instance.modifiers,function(e){return'applyStyle'===e.name}).gpuAcceleration;void 0!==p&&console.warn('WARNING: `gpuAcceleration` option moved to `computeStyle` modifier and will not be supported in future versions of Popper.js!');var s,d,a=void 0===p?t.gpuAcceleration:p,l=r(e.instance.popper),f=g(l),m={position:n.position},c={left:_(n.left),top:_(n.top),bottom:_(n.bottom),right:_(n.right)},h='bottom'===o?'top':'bottom',u='right'===i?'left':'right',b=B('transform');if(d='bottom'==h?-f.height+c.bottom:c.top,s='right'==u?-f.width+c.right:c.left,a&&b)m[b]='translate3d('+s+'px, '+d+'px, 0)',m[h]=0,m[u]=0,m.willChange='transform';else{var y='bottom'==h?-1:1,w='right'==u?-1:1;m[h]=d*y,m[u]=s*w,m.willChange=h+', '+u}var E={"x-placement":e.placement};return e.attributes=de({},E,e.attributes),e.styles=de({},m,e.styles),e.arrowStyles=de({},e.offsets.arrow,e.arrowStyles),e},gpuAcceleration:!0,x:'bottom',y:'right'},applyStyle:{order:900,enabled:!0,fn:function(e){return U(e.instance.popper,e.styles),Y(e.instance.popper,e.attributes),e.arrowElement&&Object.keys(e.arrowStyles).length&&U(e.arrowElement,e.arrowStyles),e},onLoad:function(e,t,o,i,n){var r=x(n,t,e),p=v(o.placement,r,t,e,o.modifiers.flip.boundariesElement,o.modifiers.flip.padding);return t.setAttribute('x-placement',p),U(t,{position:'absolute'}),o},gpuAcceleration:void 0}}},me});
 //# sourceMappingURL=popper.min.js.map
-
-angular
-  .module('app')
-  .service('dataService', dataService);
-
-function dataService($rootScope, $filter) {
-  let service = this;
-
-  service.selectorProducts = PRODUCTS;
-
-  service.map = {
-    nodes: [],
-    links: []
-  };
-
-  service.manufactures = [];
-
-  service.observerCallbacks = [];
-
-  // register observer
-  service.registerObserverCallback = function (callback) {
-    service.observerCallbacks.push(callback);
-  };
-
-  // notify all observers
-  service.notifyObservers = function () {
-    angular.forEach(service.observerCallbacks, function (callback) {
-      callback();
-    });
-  };
-
-  service.calculateDiffCoefficient = function (mineDifficult) {
-    return Math.pow(1.4, Math.abs(3 - mineDifficult));
-  };
-
-  service.calculateWorkersQuantity = function (manufacture, product, ingredientQuantity) {
-    let workersQuantity = ingredientQuantity / (manufacture.efficiency / 100);
-    workersQuantity /= Math.pow(1.05, manufacture.technology - 1);
-    workersQuantity /= product.pbq;
-
-    if (manufacture.e.sym === 'tractor') {
-      // farm
-      workersQuantity *= 52;
-    }
-
-    if (manufacture.e.sym === 'drill') {
-      // mine
-      if (manufacture.mineDifficult >= 3) {
-        workersQuantity *= service.calculateDiffCoefficient(manufacture.mineDifficult);
-      } else {
-        workersQuantity /= service.calculateDiffCoefficient(manufacture.mineDifficult);
-      }
-    }
-
-    return Math.ceil(workersQuantity);
-  };
-
-  service.addManufacture = function (recipe, quantity, targetId, ingId) {
-    if (recipe.mnfId) {
-      // set source
-      service.selectedManufacture.ip[ingId].sourceMnf = recipe.mnfId;
-      service.notifyObservers();
-    } else {
-      recipe = angular.copy(recipe);
-      // set default values
-      recipe.bonus = 0;
-      recipe.technology = 1;
-      recipe.efficiency = 100;
-      recipe.workersSalary = 100;
-      recipe.mnfId = service.manufactures.length;
-      recipe.rp[recipe.targetProductIndex].targetMnfId = targetId;
-      recipe.rp[recipe.targetProductIndex].targetMnfIngId = ingId;
-      recipe.ip.forEach(function (ingredient) {
-        ingredient.quality = 1;
-        ingredient.price = 1;
-      });
-
-      // mine / plant
-      if (recipe.e.sym === 'tractor' || recipe.e.sym === 'saw') {
-        recipe.baseQuality = 1;
-      }
-
-      // mine
-      if (recipe.e.sym === 'drill') {
-        recipe.mineDifficult = 1;
-        recipe.baseQuality = 1;
-      }
-
-      // calc workersQuantity
-      let recipeProduct = recipe.rp.filter(function (product) {
-        return product.pi === service.selectedManufacture.ip[ingId].pi;
-      })[0];
-      recipe.workersQuantity = service.calculateWorkersQuantity(recipe, recipeProduct, quantity);
-
-      // set source
-      service.selectedManufacture.ip[ingId].sourceMnf = recipe.mnfId;
-
-      // add new recipe
-      service.manufactures.push(recipe);
-      service.selectedManufacture = recipe;
-
-      // show new recipe in calc
-      service.notifyObservers();
-    }
-  };
-
-  service.doCalc = function (manufacture, automaticUpdate = false) {
-    // set default values
-    if (!manufacture.efficiency) {
-      manufacture.efficiency = 100;
-    }
-    manufacture.bonus = manufacture.bonus | 0;
-
-    manufacture.workersQualification = Math.pow(manufacture.technology, 0.8);
-
-    if (manufacture.e.pc !== 'Животные') {
-      manufacture.machinesQuality = Math.pow(manufacture.technology, 1.2);
-    } else {
-      // farms
-      manufacture.recommendedAnimals = Math.pow(manufacture.technology, 1.2);
-    }
-
-    let ingredientsSumQuality = 0;
-    let ingredientsSumQuantity = 0;
-    let totalIngredientsPrice = 0;
-
-    manufacture.ip.forEach(function (ingredient) {
-
-      let oldQuantity = ingredient.quantity;
-
-      if (manufacture.e.pc === 'Животные') {
-        ingredient.quantity = ingredient.q * manufacture.epw; // ing.quan * eqip per worker
-        ingredient.quantity *= manufacture.workersQuantity;   // multiply by workers quantity
-      } else {
-        ingredient.quantity = ingredient.q / manufacture.rp[0].rq;         // ing.quantity / num of products by 1 product unit
-        ingredient.quantity *= manufacture.rp[0].pbq;                      // multiply by num of products by 1 worker
-        ingredient.quantity *= manufacture.workersQuantity;                // multiply by workers quantity
-        ingredient.quantity *= Math.pow(1.05, manufacture.technology - 1); // multiply by technology coefficient
-        ingredient.quantity *= (manufacture.efficiency / 100);             // multiply by efficiency
-        ingredient.quantity = Math.ceil(ingredient.quantity);
-      }
-
-      // update source if exist
-      if (ingredient.sourceMnf !== angular.undefined && ingredient.quantity && (ingredient.quantity !== oldQuantity)) {
-        let sourceManufacture = service.manufactures[ingredient.sourceMnf];
-        let sourceProduct = sourceManufacture.rp.filter(function (product) {
-          return product.pi === ingredient.pi;
-        })[0];
-
-        sourceManufacture.workersQuantity = service.calculateWorkersQuantity(sourceManufacture, sourceProduct, ingredient.quantity);
-
-        // we need go deeper... doCalc source manufacture
-        service.doCalc(sourceManufacture, true);
-      }
-
-      ingredient.totalPrice = ingredient.quantity * ingredient.price;
-
-      totalIngredientsPrice += ingredient.totalPrice;
-
-      ingredientsSumQuality += ingredient.quality * ingredient.q;
-      ingredientsSumQuantity += ingredient.q;
-    });
-
-    manufacture.totalIngredientsPrice = totalIngredientsPrice;
-
-    let ingredientsTotalQuality = 0;
-    if (manufacture.e.pc === 'Животные') {
-      ingredientsTotalQuality = (manufacture.ip[0].quality * 0.3 + manufacture.machinesQuality * 0.7) * (manufacture.efficiency / 100);
-    } else {
-      ingredientsTotalQuality = ingredientsSumQuality / ingredientsSumQuantity * (manufacture.efficiency / 100);
-    }
-
-    let totalSalary = manufacture.workersSalary * manufacture.workersQuantity;
-    let expenses = totalIngredientsPrice + totalSalary * 1.1;
-
-    manufacture.rp.forEach(function (product) {
-      let oldProductPrice = product.price;
-      let oldProductQuantity = product.quantity;
-
-      // QUANTITY
-      product.quantity = manufacture.workersQuantity * product.pbq;   // prod.quantity * num of products by 1 worker
-      product.quantity *= Math.pow(1.05, manufacture.technology - 1); // multiply by technology coefficient
-      product.quantity *= (manufacture.efficiency / 100);             // multiply by efficiency
-
-      if (manufacture.e.sym === 'drill') {
-        // mine
-        if (manufacture.mineDifficult >= 3) {
-          product.quantity /= service.calculateDiffCoefficient(manufacture.mineDifficult);
-        } else {
-          product.quantity *= service.calculateDiffCoefficient(manufacture.mineDifficult);
-        }
-      }
-
-      product.quantity = Math.floor(product.quantity);
-
-      // QUALITY
-      if (manufacture.e.sym === 'tractor' || manufacture.e.sym === 'saw') {
-        // plant
-        product.quality = Math.pow(manufacture.baseQuality, 0.5) * Math.pow(manufacture.technology, 0.65);
-      } else if (manufacture.e.sym === 'drill') {
-        // mine
-        let mineQuality = 0.277202073 * Math.pow(manufacture.baseQuality, 1.2975); //TODO: wtf is 0.277202073?
-        product.quality = mineQuality * Math.pow(manufacture.technology, 0.65);
-      } else {
-        // factory or farm
-        product.quality = Math.pow(ingredientsTotalQuality, 0.5) * Math.pow(manufacture.technology, 0.65);
-      }
-
-      // limit quality by tech lvl
-      if (product.quality > Math.pow(manufacture.technology, 1.3)) {
-        product.quality = Math.pow(manufacture.technology, 1.3);
-      } else if (product.quality < 1) {
-        product.quality = 1;
-      }
-
-      product.quality = product.quality * (1 + manufacture.bonus / 100);
-
-      // TEXES & PROFIT
-      if (manufacture.incomeTaxCoefficient === angular.undefined) {
-        manufacture.incomeTaxCoefficient = 20; // 20% by default
-      }
-      let incomeTaxCoefficient = manufacture.incomeTaxCoefficient / 100;
-      let envdCoefficient = ENVD[product.name] ? (ENVD[product.name] / 100) : 1;
-
-      product.netCost = expenses / product.quantity / manufacture.rp.length;
-      product.netCost = parseFloat(product.netCost.toFixed(2));
-
-      if (manufacture.e.sym === 'tractor') {
-        // farm
-        product.netCost *= 52;
-      }
-
-      // ENVD
-      product.envdTax = product.netCost * incomeTaxCoefficient * envdCoefficient;
-      product.changeTaxPoint = $filter('number', 2)(product.netCost * (1 + envdCoefficient));
-
-      if (!product.price || automaticUpdate) {
-        // automatic default price
-        product.price = parseFloat((product.netCost + product.envdTax).toFixed(2));
-      }
-
-      // INCOME TAX
-      product.incomeTax = (product.price - product.netCost) * incomeTaxCoefficient;
-
-      if (product.incomeTax < product.envdTax) {
-        product.totalCost = product.netCost + product.envdTax;
-      } else {
-        product.totalCost = product.netCost + product.incomeTax;
-      }
-
-      // PROFIT
-      product.profit = product.quantity * (product.price - product.totalCost);
-
-      // update target if exist
-      if (product.targetMnfId !== angular.undefined && product.price && product.quantity &&
-        (oldProductPrice !== product.price || oldProductQuantity !== product.quantity)) {
-
-        // search all targets
-        service.manufactures.forEach(function (targetManufacture) {
-          for (let i = 0; i < targetManufacture.ip.length; i++) {
-            if (targetManufacture.ip[i].sourceMnf === manufacture.mnfId) {
-              targetManufacture.ip[i].price = parseFloat(product.price.toFixed(2));
-              targetManufacture.ip[i].quality = parseFloat(product.quality.toFixed(2));
-
-              // we need go deeper... doCalc target manufacture
-              service.doCalc(service.manufactures[targetManufacture.mnfId], true);
-            }
-          }
-        });
-      }
-
-      // update map
-      service.buildMap();
-    });
-  };
-
-  service.mapType = 'scheme';
-
-  service.buildMap = function () {
-    let nodes = [];
-    let links = [];
-
-    service.manufactures.forEach(function (manufacture) {
-      let products = [];
-      manufacture.rp.forEach(function (product) {
-        products.push({
-          img: product.img,
-          quantity: product.quantity,
-          quality: product.quality,
-          price: product.price
-        });
-      });
-      manufacture.ip.forEach(function (product) {
-        if (product.sourceMnf !== angular.undefined) {
-          let value = 0;
-
-          switch (service.mapType) {
-            case 'scheme':
-              value = 1;
-              break;
-            case 'value':
-              value = product.quantity;
-              break;
-            case 'cost':
-              value = product.quantity * product.price;
-              break;
-          }
-
-          links.push({
-            source: product.sourceMnf,
-            target: manufacture.mnfId,
-            value
-          });
-        }
-      });
-
-      nodes.push({
-        node: manufacture.mnfId,
-        name: manufacture.s,
-        products: products
-      });
-    });
-
-    service.map = {
-      nodes: nodes,
-      links: links
-    };
-
-    $rootScope.$emit('dataService:mapUpdated');
-  };
-}
-
-angular
-  .module('app')
-  .component('factoryCalc', {
-    templateUrl: 'app/components/factoryCalc/factoryCalc.html',
-    controller: factoryCalcController
-  });
-
-function factoryCalcController($rootScope, dataService) {
-  let vm = this;
-
-  /**
-   * Search products with requested index
-   * @param recipes
-   * @param ingredientIndex
-   */
-  vm.filterRecipes = function(recipes, ingredientIndex) {
-    return recipes.filter(function(recipe) {
-      for (let i = 0; i < recipe.rp.length; i++) {
-        if (recipe.rp[i].pi === ingredientIndex) {
-          recipe.targetProductIndex = i;
-          return true;
-        }
-      }
-    });
-  };
-
-  /**
-   * Set new bonus amount
-   * @param newBonus
-   */
-  vm.setBonus = function(newBonus) {
-    vm.manufacture.bonus = newBonus;
-    vm.doCalc();
-  };
-
-  /**
-   * Call calc cycle for requested manufacture
-   */
-  vm.doCalc = function() {
-    dataService.doCalc(vm.manufacture);
-    $('[data-toggle="tooltip"]').tooltip();
-  };
-
-  /**
-   * Show all existing manufactures and recipes for requested index
-   * @param ingredientIndex
-   * @param ingQuantity
-   * @param ingId
-   */
-  vm.addSource = function(ingredientIndex, ingQuantity, ingId) {
-    let availableRecipes = vm.filterRecipes(PRODUCTS, ingredientIndex);
-    let availableManufactures = vm.filterRecipes(dataService.manufactures, ingredientIndex);
-
-    if (availableManufactures.length) {
-      // if manufactures with ingredient exist
-      availableRecipes = availableRecipes.concat(availableManufactures);
-    }
-
-    if (availableRecipes.length === 1) {
-      // if only source -> add manufacture
-      dataService.addManufacture(availableRecipes[0], ingQuantity, vm.manufacture.mnfId, ingId);
-    } else {
-      // many sources -> show manufacture selector
-      dataService.selectorProducts = availableRecipes;
-      $rootScope.$emit('factoryCalc:productsUpdated', ingQuantity, vm.manufacture.mnfId, ingId);
-      $('#productSelector').modal('show');
-      $('.modal-backdrop:last').css('z-index', 1050);
-    }
-  };
-
-  /**
-   * Function for callback subscription
-   */
-  vm.updateCalc = function() {
-    vm.manufacture = dataService.selectedManufacture;
-    vm.doCalc();
-  };
-
-  dataService.registerObserverCallback(vm.updateCalc);
-
-  /**
-   * Go to another manufacture
-   * @param mnfId
-   */
-  vm.changeManufacture = function(mnfId) {
-    dataService.selectedManufacture = dataService.manufactures[mnfId];
-    vm.updateCalc();
-  };
-
-  /**
-   * Generate color by string hash
-   * @param str
-   * @returns {string}
-   */
-  vm.getColorByString = function(str) {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    let colour = '#';
-    for (let i = 0; i < 3; i++) {
-      let value = (hash >> (i * 8)) & 0xFF;
-      colour += ('00' + value.toString(16)).substr(-2);
-    }
-    return colour;
-  };
-
-  /**
-   * Calculate ingredient proportion
-   * @param ingredient
-   * @returns {number}
-   */
-  vm.calculateIngredientPercent = function (ingredient) {
-    return ingredient.totalPrice / vm.manufacture.totalIngredientsPrice * 100
-  }
-}
-
-angular
-  .module('app')
-  .component('productSelector', {
-    templateUrl: 'app/components/productSelector/productSelector.html',
-    controller: productSelectorController
-  });
-
-function productSelectorController(dataService, $scope, $rootScope) {
-  let vm = this;
-  let firstSelect = true;
-
-  vm.products = dataService.selectorProducts;
-
-  /**
-   * Function for search box
-   */
-  vm.searchProducts = function() {
-    if (vm.search) {
-      vm.products = dataService.selectorProducts.filter(function(product) {
-        return product.s.toLowerCase().search(vm.search.toLowerCase()) > -1;
-      });
-    } else {
-      vm.products = dataService.selectorProducts;
-    }
-  };
-
-  /**
-   * Set first product or add new to service
-   * @param product
-   */
-  vm.selectProduct = function(product) {
-    if (firstSelect) {
-      dataService.manufactures = [product];
-      dataService.manufactures[0].mnfId = 0;
-    } else {
-      dataService.addManufacture(product, vm.newManufacture.ingQuantity, vm.newManufacture.targetMnfId, vm.newManufacture.ingId);
-    }
-    $('#productSelector').modal('hide');
-  };
-
-  /**
-   * Update collection of products
-   */
-  let updateDestroyer = $rootScope.$on('factoryCalc:productsUpdated', function(event, ingQuantity, targetMnfId, ingId) {
-    vm.newManufacture = {
-      ingQuantity,
-      targetMnfId,
-      ingId
-    };
-    vm.products = dataService.selectorProducts;
-    firstSelect = false;
-  });
-
-  /**
-   * Updater destroyer
-   */
-  $scope.$on('destroy', function() {
-    updateDestroyer();
-  });
-}
-
-angular
-  .module('app')
-  .component('welcomeBlock', {
-    templateUrl: 'app/components/welcomeBlock/welcomeBlock.html',
-    controller: welcomeBlockController,
-    bindings: {
-      showManufactureCalc: '&'
-    }
-  });
-
-function welcomeBlockController(dataService) {
-  let vm = this;
-
-  /**
-   * Get dataService selected product
-   * @returns {*}
-   */
-  vm.selectedProduct = function () {
-    return dataService.manufactures[0];
-  }
-}
 
 'use strict';
 angular.module('ngSankey', []).directive('ngSankey', function () {
@@ -19058,3 +18527,533 @@ d3.sankeyChart = function(data, options) {
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 if("undefined"==typeof jQuery)throw new Error("Bootstrap's JavaScript requires jQuery. jQuery must be included before Bootstrap's JavaScript.");!function(t){var e=jQuery.fn.jquery.split(" ")[0].split(".");if(e[0]<2&&e[1]<9||1==e[0]&&9==e[1]&&e[2]<1||e[0]>=4)throw new Error("Bootstrap's JavaScript requires at least jQuery v1.9.1 but less than v4.0.0")}(),function(){function t(t,e){if(!t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!e||"object"!=typeof e&&"function"!=typeof e?t:e}function e(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function, not "+typeof e);t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,enumerable:!1,writable:!0,configurable:!0}}),e&&(Object.setPrototypeOf?Object.setPrototypeOf(t,e):t.__proto__=e)}function n(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}var i="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},o=function(){function t(t,e){for(var n=0;n<e.length;n++){var i=e[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(t,i.key,i)}}return function(e,n,i){return n&&t(e.prototype,n),i&&t(e,i),e}}(),r=function(t){function e(t){return{}.toString.call(t).match(/\s([a-zA-Z]+)/)[1].toLowerCase()}function n(t){return(t[0]||t).nodeType}function i(){return{bindType:s.end,delegateType:s.end,handle:function(e){if(t(e.target).is(this))return e.handleObj.handler.apply(this,arguments)}}}function o(){if(window.QUnit)return!1;var t=document.createElement("bootstrap");for(var e in a)if(void 0!==t.style[e])return{end:a[e]};return!1}function r(e){var n=this,i=!1;return t(this).one(l.TRANSITION_END,function(){i=!0}),setTimeout(function(){i||l.triggerTransitionEnd(n)},e),this}var s=!1,a={WebkitTransition:"webkitTransitionEnd",MozTransition:"transitionend",OTransition:"oTransitionEnd otransitionend",transition:"transitionend"},l={TRANSITION_END:"bsTransitionEnd",getUID:function(t){do{t+=~~(1e6*Math.random())}while(document.getElementById(t));return t},getSelectorFromElement:function(e){var n=e.getAttribute("data-target");n&&"#"!==n||(n=e.getAttribute("href")||"");try{return t(n).length>0?n:null}catch(t){return null}},reflow:function(t){return t.offsetHeight},triggerTransitionEnd:function(e){t(e).trigger(s.end)},supportsTransitionEnd:function(){return Boolean(s)},typeCheckConfig:function(t,i,o){for(var r in o)if(o.hasOwnProperty(r)){var s=o[r],a=i[r],l=a&&n(a)?"element":e(a);if(!new RegExp(s).test(l))throw new Error(t.toUpperCase()+': Option "'+r+'" provided type "'+l+'" but expected type "'+s+'".')}}};return s=o(),t.fn.emulateTransitionEnd=r,l.supportsTransitionEnd()&&(t.event.special[l.TRANSITION_END]=i()),l}(jQuery),s=(function(t){var e="alert",i=t.fn[e],s={DISMISS:'[data-dismiss="alert"]'},a={CLOSE:"close.bs.alert",CLOSED:"closed.bs.alert",CLICK_DATA_API:"click.bs.alert.data-api"},l={ALERT:"alert",FADE:"fade",SHOW:"show"},h=function(){function e(t){n(this,e),this._element=t}return e.prototype.close=function(t){t=t||this._element;var e=this._getRootElement(t);this._triggerCloseEvent(e).isDefaultPrevented()||this._removeElement(e)},e.prototype.dispose=function(){t.removeData(this._element,"bs.alert"),this._element=null},e.prototype._getRootElement=function(e){var n=r.getSelectorFromElement(e),i=!1;return n&&(i=t(n)[0]),i||(i=t(e).closest("."+l.ALERT)[0]),i},e.prototype._triggerCloseEvent=function(e){var n=t.Event(a.CLOSE);return t(e).trigger(n),n},e.prototype._removeElement=function(e){var n=this;t(e).removeClass(l.SHOW),r.supportsTransitionEnd()&&t(e).hasClass(l.FADE)?t(e).one(r.TRANSITION_END,function(t){return n._destroyElement(e,t)}).emulateTransitionEnd(150):this._destroyElement(e)},e.prototype._destroyElement=function(e){t(e).detach().trigger(a.CLOSED).remove()},e._jQueryInterface=function(n){return this.each(function(){var i=t(this),o=i.data("bs.alert");o||(o=new e(this),i.data("bs.alert",o)),"close"===n&&o[n](this)})},e._handleDismiss=function(t){return function(e){e&&e.preventDefault(),t.close(this)}},o(e,null,[{key:"VERSION",get:function(){return"4.0.0-beta"}}]),e}();t(document).on(a.CLICK_DATA_API,s.DISMISS,h._handleDismiss(new h)),t.fn[e]=h._jQueryInterface,t.fn[e].Constructor=h,t.fn[e].noConflict=function(){return t.fn[e]=i,h._jQueryInterface}}(jQuery),function(t){var e="button",i=t.fn[e],r={ACTIVE:"active",BUTTON:"btn",FOCUS:"focus"},s={DATA_TOGGLE_CARROT:'[data-toggle^="button"]',DATA_TOGGLE:'[data-toggle="buttons"]',INPUT:"input",ACTIVE:".active",BUTTON:".btn"},a={CLICK_DATA_API:"click.bs.button.data-api",FOCUS_BLUR_DATA_API:"focus.bs.button.data-api blur.bs.button.data-api"},l=function(){function e(t){n(this,e),this._element=t}return e.prototype.toggle=function(){var e=!0,n=!0,i=t(this._element).closest(s.DATA_TOGGLE)[0];if(i){var o=t(this._element).find(s.INPUT)[0];if(o){if("radio"===o.type)if(o.checked&&t(this._element).hasClass(r.ACTIVE))e=!1;else{var a=t(i).find(s.ACTIVE)[0];a&&t(a).removeClass(r.ACTIVE)}if(e){if(o.hasAttribute("disabled")||i.hasAttribute("disabled")||o.classList.contains("disabled")||i.classList.contains("disabled"))return;o.checked=!t(this._element).hasClass(r.ACTIVE),t(o).trigger("change")}o.focus(),n=!1}}n&&this._element.setAttribute("aria-pressed",!t(this._element).hasClass(r.ACTIVE)),e&&t(this._element).toggleClass(r.ACTIVE)},e.prototype.dispose=function(){t.removeData(this._element,"bs.button"),this._element=null},e._jQueryInterface=function(n){return this.each(function(){var i=t(this).data("bs.button");i||(i=new e(this),t(this).data("bs.button",i)),"toggle"===n&&i[n]()})},o(e,null,[{key:"VERSION",get:function(){return"4.0.0-beta"}}]),e}();t(document).on(a.CLICK_DATA_API,s.DATA_TOGGLE_CARROT,function(e){e.preventDefault();var n=e.target;t(n).hasClass(r.BUTTON)||(n=t(n).closest(s.BUTTON)),l._jQueryInterface.call(t(n),"toggle")}).on(a.FOCUS_BLUR_DATA_API,s.DATA_TOGGLE_CARROT,function(e){var n=t(e.target).closest(s.BUTTON)[0];t(n).toggleClass(r.FOCUS,/^focus(in)?$/.test(e.type))}),t.fn[e]=l._jQueryInterface,t.fn[e].Constructor=l,t.fn[e].noConflict=function(){return t.fn[e]=i,l._jQueryInterface}}(jQuery),function(t){var e="carousel",s="bs.carousel",a="."+s,l=t.fn[e],h={interval:5e3,keyboard:!0,slide:!1,pause:"hover",wrap:!0},c={interval:"(number|boolean)",keyboard:"boolean",slide:"(boolean|string)",pause:"(string|boolean)",wrap:"boolean"},u={NEXT:"next",PREV:"prev",LEFT:"left",RIGHT:"right"},d={SLIDE:"slide"+a,SLID:"slid"+a,KEYDOWN:"keydown"+a,MOUSEENTER:"mouseenter"+a,MOUSELEAVE:"mouseleave"+a,TOUCHEND:"touchend"+a,LOAD_DATA_API:"load.bs.carousel.data-api",CLICK_DATA_API:"click.bs.carousel.data-api"},f={CAROUSEL:"carousel",ACTIVE:"active",SLIDE:"slide",RIGHT:"carousel-item-right",LEFT:"carousel-item-left",NEXT:"carousel-item-next",PREV:"carousel-item-prev",ITEM:"carousel-item"},p={ACTIVE:".active",ACTIVE_ITEM:".active.carousel-item",ITEM:".carousel-item",NEXT_PREV:".carousel-item-next, .carousel-item-prev",INDICATORS:".carousel-indicators",DATA_SLIDE:"[data-slide], [data-slide-to]",DATA_RIDE:'[data-ride="carousel"]'},_=function(){function l(e,i){n(this,l),this._items=null,this._interval=null,this._activeElement=null,this._isPaused=!1,this._isSliding=!1,this.touchTimeout=null,this._config=this._getConfig(i),this._element=t(e)[0],this._indicatorsElement=t(this._element).find(p.INDICATORS)[0],this._addEventListeners()}return l.prototype.next=function(){this._isSliding||this._slide(u.NEXT)},l.prototype.nextWhenVisible=function(){document.hidden||this.next()},l.prototype.prev=function(){this._isSliding||this._slide(u.PREV)},l.prototype.pause=function(e){e||(this._isPaused=!0),t(this._element).find(p.NEXT_PREV)[0]&&r.supportsTransitionEnd()&&(r.triggerTransitionEnd(this._element),this.cycle(!0)),clearInterval(this._interval),this._interval=null},l.prototype.cycle=function(t){t||(this._isPaused=!1),this._interval&&(clearInterval(this._interval),this._interval=null),this._config.interval&&!this._isPaused&&(this._interval=setInterval((document.visibilityState?this.nextWhenVisible:this.next).bind(this),this._config.interval))},l.prototype.to=function(e){var n=this;this._activeElement=t(this._element).find(p.ACTIVE_ITEM)[0];var i=this._getItemIndex(this._activeElement);if(!(e>this._items.length-1||e<0))if(this._isSliding)t(this._element).one(d.SLID,function(){return n.to(e)});else{if(i===e)return this.pause(),void this.cycle();var o=e>i?u.NEXT:u.PREV;this._slide(o,this._items[e])}},l.prototype.dispose=function(){t(this._element).off(a),t.removeData(this._element,s),this._items=null,this._config=null,this._element=null,this._interval=null,this._isPaused=null,this._isSliding=null,this._activeElement=null,this._indicatorsElement=null},l.prototype._getConfig=function(n){return n=t.extend({},h,n),r.typeCheckConfig(e,n,c),n},l.prototype._addEventListeners=function(){var e=this;this._config.keyboard&&t(this._element).on(d.KEYDOWN,function(t){return e._keydown(t)}),"hover"===this._config.pause&&(t(this._element).on(d.MOUSEENTER,function(t){return e.pause(t)}).on(d.MOUSELEAVE,function(t){return e.cycle(t)}),"ontouchstart"in document.documentElement&&t(this._element).on(d.TOUCHEND,function(){e.pause(),e.touchTimeout&&clearTimeout(e.touchTimeout),e.touchTimeout=setTimeout(function(t){return e.cycle(t)},500+e._config.interval)}))},l.prototype._keydown=function(t){if(!/input|textarea/i.test(t.target.tagName))switch(t.which){case 37:t.preventDefault(),this.prev();break;case 39:t.preventDefault(),this.next();break;default:return}},l.prototype._getItemIndex=function(e){return this._items=t.makeArray(t(e).parent().find(p.ITEM)),this._items.indexOf(e)},l.prototype._getItemByDirection=function(t,e){var n=t===u.NEXT,i=t===u.PREV,o=this._getItemIndex(e),r=this._items.length-1;if((i&&0===o||n&&o===r)&&!this._config.wrap)return e;var s=(o+(t===u.PREV?-1:1))%this._items.length;return-1===s?this._items[this._items.length-1]:this._items[s]},l.prototype._triggerSlideEvent=function(e,n){var i=this._getItemIndex(e),o=this._getItemIndex(t(this._element).find(p.ACTIVE_ITEM)[0]),r=t.Event(d.SLIDE,{relatedTarget:e,direction:n,from:o,to:i});return t(this._element).trigger(r),r},l.prototype._setActiveIndicatorElement=function(e){if(this._indicatorsElement){t(this._indicatorsElement).find(p.ACTIVE).removeClass(f.ACTIVE);var n=this._indicatorsElement.children[this._getItemIndex(e)];n&&t(n).addClass(f.ACTIVE)}},l.prototype._slide=function(e,n){var i=this,o=t(this._element).find(p.ACTIVE_ITEM)[0],s=this._getItemIndex(o),a=n||o&&this._getItemByDirection(e,o),l=this._getItemIndex(a),h=Boolean(this._interval),c=void 0,_=void 0,g=void 0;if(e===u.NEXT?(c=f.LEFT,_=f.NEXT,g=u.LEFT):(c=f.RIGHT,_=f.PREV,g=u.RIGHT),a&&t(a).hasClass(f.ACTIVE))this._isSliding=!1;else if(!this._triggerSlideEvent(a,g).isDefaultPrevented()&&o&&a){this._isSliding=!0,h&&this.pause(),this._setActiveIndicatorElement(a);var m=t.Event(d.SLID,{relatedTarget:a,direction:g,from:s,to:l});r.supportsTransitionEnd()&&t(this._element).hasClass(f.SLIDE)?(t(a).addClass(_),r.reflow(a),t(o).addClass(c),t(a).addClass(c),t(o).one(r.TRANSITION_END,function(){t(a).removeClass(c+" "+_).addClass(f.ACTIVE),t(o).removeClass(f.ACTIVE+" "+_+" "+c),i._isSliding=!1,setTimeout(function(){return t(i._element).trigger(m)},0)}).emulateTransitionEnd(600)):(t(o).removeClass(f.ACTIVE),t(a).addClass(f.ACTIVE),this._isSliding=!1,t(this._element).trigger(m)),h&&this.cycle()}},l._jQueryInterface=function(e){return this.each(function(){var n=t(this).data(s),o=t.extend({},h,t(this).data());"object"===(void 0===e?"undefined":i(e))&&t.extend(o,e);var r="string"==typeof e?e:o.slide;if(n||(n=new l(this,o),t(this).data(s,n)),"number"==typeof e)n.to(e);else if("string"==typeof r){if(void 0===n[r])throw new Error('No method named "'+r+'"');n[r]()}else o.interval&&(n.pause(),n.cycle())})},l._dataApiClickHandler=function(e){var n=r.getSelectorFromElement(this);if(n){var i=t(n)[0];if(i&&t(i).hasClass(f.CAROUSEL)){var o=t.extend({},t(i).data(),t(this).data()),a=this.getAttribute("data-slide-to");a&&(o.interval=!1),l._jQueryInterface.call(t(i),o),a&&t(i).data(s).to(a),e.preventDefault()}}},o(l,null,[{key:"VERSION",get:function(){return"4.0.0-beta"}},{key:"Default",get:function(){return h}}]),l}();t(document).on(d.CLICK_DATA_API,p.DATA_SLIDE,_._dataApiClickHandler),t(window).on(d.LOAD_DATA_API,function(){t(p.DATA_RIDE).each(function(){var e=t(this);_._jQueryInterface.call(e,e.data())})}),t.fn[e]=_._jQueryInterface,t.fn[e].Constructor=_,t.fn[e].noConflict=function(){return t.fn[e]=l,_._jQueryInterface}}(jQuery),function(t){var e="collapse",s="bs.collapse",a=t.fn[e],l={toggle:!0,parent:""},h={toggle:"boolean",parent:"string"},c={SHOW:"show.bs.collapse",SHOWN:"shown.bs.collapse",HIDE:"hide.bs.collapse",HIDDEN:"hidden.bs.collapse",CLICK_DATA_API:"click.bs.collapse.data-api"},u={SHOW:"show",COLLAPSE:"collapse",COLLAPSING:"collapsing",COLLAPSED:"collapsed"},d={WIDTH:"width",HEIGHT:"height"},f={ACTIVES:".show, .collapsing",DATA_TOGGLE:'[data-toggle="collapse"]'},p=function(){function a(e,i){n(this,a),this._isTransitioning=!1,this._element=e,this._config=this._getConfig(i),this._triggerArray=t.makeArray(t('[data-toggle="collapse"][href="#'+e.id+'"],[data-toggle="collapse"][data-target="#'+e.id+'"]'));for(var o=t(f.DATA_TOGGLE),s=0;s<o.length;s++){var l=o[s],h=r.getSelectorFromElement(l);null!==h&&t(h).filter(e).length>0&&this._triggerArray.push(l)}this._parent=this._config.parent?this._getParent():null,this._config.parent||this._addAriaAndCollapsedClass(this._element,this._triggerArray),this._config.toggle&&this.toggle()}return a.prototype.toggle=function(){t(this._element).hasClass(u.SHOW)?this.hide():this.show()},a.prototype.show=function(){var e=this;if(!this._isTransitioning&&!t(this._element).hasClass(u.SHOW)){var n=void 0,i=void 0;if(this._parent&&((n=t.makeArray(t(this._parent).children().children(f.ACTIVES))).length||(n=null)),!(n&&(i=t(n).data(s))&&i._isTransitioning)){var o=t.Event(c.SHOW);if(t(this._element).trigger(o),!o.isDefaultPrevented()){n&&(a._jQueryInterface.call(t(n),"hide"),i||t(n).data(s,null));var l=this._getDimension();t(this._element).removeClass(u.COLLAPSE).addClass(u.COLLAPSING),this._element.style[l]=0,this._triggerArray.length&&t(this._triggerArray).removeClass(u.COLLAPSED).attr("aria-expanded",!0),this.setTransitioning(!0);var h=function(){t(e._element).removeClass(u.COLLAPSING).addClass(u.COLLAPSE).addClass(u.SHOW),e._element.style[l]="",e.setTransitioning(!1),t(e._element).trigger(c.SHOWN)};if(r.supportsTransitionEnd()){var d="scroll"+(l[0].toUpperCase()+l.slice(1));t(this._element).one(r.TRANSITION_END,h).emulateTransitionEnd(600),this._element.style[l]=this._element[d]+"px"}else h()}}}},a.prototype.hide=function(){var e=this;if(!this._isTransitioning&&t(this._element).hasClass(u.SHOW)){var n=t.Event(c.HIDE);if(t(this._element).trigger(n),!n.isDefaultPrevented()){var i=this._getDimension();if(this._element.style[i]=this._element.getBoundingClientRect()[i]+"px",r.reflow(this._element),t(this._element).addClass(u.COLLAPSING).removeClass(u.COLLAPSE).removeClass(u.SHOW),this._triggerArray.length)for(var o=0;o<this._triggerArray.length;o++){var s=this._triggerArray[o],a=r.getSelectorFromElement(s);null!==a&&(t(a).hasClass(u.SHOW)||t(s).addClass(u.COLLAPSED).attr("aria-expanded",!1))}this.setTransitioning(!0);var l=function(){e.setTransitioning(!1),t(e._element).removeClass(u.COLLAPSING).addClass(u.COLLAPSE).trigger(c.HIDDEN)};this._element.style[i]="",r.supportsTransitionEnd()?t(this._element).one(r.TRANSITION_END,l).emulateTransitionEnd(600):l()}}},a.prototype.setTransitioning=function(t){this._isTransitioning=t},a.prototype.dispose=function(){t.removeData(this._element,s),this._config=null,this._parent=null,this._element=null,this._triggerArray=null,this._isTransitioning=null},a.prototype._getConfig=function(n){return n=t.extend({},l,n),n.toggle=Boolean(n.toggle),r.typeCheckConfig(e,n,h),n},a.prototype._getDimension=function(){return t(this._element).hasClass(d.WIDTH)?d.WIDTH:d.HEIGHT},a.prototype._getParent=function(){var e=this,n=t(this._config.parent)[0],i='[data-toggle="collapse"][data-parent="'+this._config.parent+'"]';return t(n).find(i).each(function(t,n){e._addAriaAndCollapsedClass(a._getTargetFromElement(n),[n])}),n},a.prototype._addAriaAndCollapsedClass=function(e,n){if(e){var i=t(e).hasClass(u.SHOW);n.length&&t(n).toggleClass(u.COLLAPSED,!i).attr("aria-expanded",i)}},a._getTargetFromElement=function(e){var n=r.getSelectorFromElement(e);return n?t(n)[0]:null},a._jQueryInterface=function(e){return this.each(function(){var n=t(this),o=n.data(s),r=t.extend({},l,n.data(),"object"===(void 0===e?"undefined":i(e))&&e);if(!o&&r.toggle&&/show|hide/.test(e)&&(r.toggle=!1),o||(o=new a(this,r),n.data(s,o)),"string"==typeof e){if(void 0===o[e])throw new Error('No method named "'+e+'"');o[e]()}})},o(a,null,[{key:"VERSION",get:function(){return"4.0.0-beta"}},{key:"Default",get:function(){return l}}]),a}();t(document).on(c.CLICK_DATA_API,f.DATA_TOGGLE,function(e){/input|textarea/i.test(e.target.tagName)||e.preventDefault();var n=t(this),i=r.getSelectorFromElement(this);t(i).each(function(){var e=t(this),i=e.data(s)?"toggle":n.data();p._jQueryInterface.call(e,i)})}),t.fn[e]=p._jQueryInterface,t.fn[e].Constructor=p,t.fn[e].noConflict=function(){return t.fn[e]=a,p._jQueryInterface}}(jQuery),function(t){if("undefined"==typeof Popper)throw new Error("Bootstrap dropdown require Popper.js (https://popper.js.org)");var e="dropdown",s="bs.dropdown",a="."+s,l=t.fn[e],h=new RegExp("38|40|27"),c={HIDE:"hide"+a,HIDDEN:"hidden"+a,SHOW:"show"+a,SHOWN:"shown"+a,CLICK:"click"+a,CLICK_DATA_API:"click.bs.dropdown.data-api",KEYDOWN_DATA_API:"keydown.bs.dropdown.data-api",KEYUP_DATA_API:"keyup.bs.dropdown.data-api"},u={DISABLED:"disabled",SHOW:"show",DROPUP:"dropup",MENURIGHT:"dropdown-menu-right",MENULEFT:"dropdown-menu-left"},d={DATA_TOGGLE:'[data-toggle="dropdown"]',FORM_CHILD:".dropdown form",MENU:".dropdown-menu",NAVBAR_NAV:".navbar-nav",VISIBLE_ITEMS:".dropdown-menu .dropdown-item:not(.disabled)"},f={TOP:"top-start",TOPEND:"top-end",BOTTOM:"bottom-start",BOTTOMEND:"bottom-end"},p={placement:f.BOTTOM,offset:0,flip:!0},_={placement:"string",offset:"(number|string)",flip:"boolean"},g=function(){function l(t,e){n(this,l),this._element=t,this._popper=null,this._config=this._getConfig(e),this._menu=this._getMenuElement(),this._inNavbar=this._detectNavbar(),this._addEventListeners()}return l.prototype.toggle=function(){if(!this._element.disabled&&!t(this._element).hasClass(u.DISABLED)){var e=l._getParentFromElement(this._element),n=t(this._menu).hasClass(u.SHOW);if(l._clearMenus(),!n){var i={relatedTarget:this._element},o=t.Event(c.SHOW,i);if(t(e).trigger(o),!o.isDefaultPrevented()){var r=this._element;t(e).hasClass(u.DROPUP)&&(t(this._menu).hasClass(u.MENULEFT)||t(this._menu).hasClass(u.MENURIGHT))&&(r=e),this._popper=new Popper(r,this._menu,this._getPopperConfig()),"ontouchstart"in document.documentElement&&!t(e).closest(d.NAVBAR_NAV).length&&t("body").children().on("mouseover",null,t.noop),this._element.focus(),this._element.setAttribute("aria-expanded",!0),t(this._menu).toggleClass(u.SHOW),t(e).toggleClass(u.SHOW).trigger(t.Event(c.SHOWN,i))}}}},l.prototype.dispose=function(){t.removeData(this._element,s),t(this._element).off(a),this._element=null,this._menu=null,null!==this._popper&&this._popper.destroy(),this._popper=null},l.prototype.update=function(){this._inNavbar=this._detectNavbar(),null!==this._popper&&this._popper.scheduleUpdate()},l.prototype._addEventListeners=function(){var e=this;t(this._element).on(c.CLICK,function(t){t.preventDefault(),t.stopPropagation(),e.toggle()})},l.prototype._getConfig=function(n){var i=t(this._element).data();return void 0!==i.placement&&(i.placement=f[i.placement.toUpperCase()]),n=t.extend({},this.constructor.Default,t(this._element).data(),n),r.typeCheckConfig(e,n,this.constructor.DefaultType),n},l.prototype._getMenuElement=function(){if(!this._menu){var e=l._getParentFromElement(this._element);this._menu=t(e).find(d.MENU)[0]}return this._menu},l.prototype._getPlacement=function(){var e=t(this._element).parent(),n=this._config.placement;return e.hasClass(u.DROPUP)||this._config.placement===f.TOP?(n=f.TOP,t(this._menu).hasClass(u.MENURIGHT)&&(n=f.TOPEND)):t(this._menu).hasClass(u.MENURIGHT)&&(n=f.BOTTOMEND),n},l.prototype._detectNavbar=function(){return t(this._element).closest(".navbar").length>0},l.prototype._getPopperConfig=function(){var t={placement:this._getPlacement(),modifiers:{offset:{offset:this._config.offset},flip:{enabled:this._config.flip}}};return this._inNavbar&&(t.modifiers.applyStyle={enabled:!this._inNavbar}),t},l._jQueryInterface=function(e){return this.each(function(){var n=t(this).data(s),o="object"===(void 0===e?"undefined":i(e))?e:null;if(n||(n=new l(this,o),t(this).data(s,n)),"string"==typeof e){if(void 0===n[e])throw new Error('No method named "'+e+'"');n[e]()}})},l._clearMenus=function(e){if(!e||3!==e.which&&("keyup"!==e.type||9===e.which))for(var n=t.makeArray(t(d.DATA_TOGGLE)),i=0;i<n.length;i++){var o=l._getParentFromElement(n[i]),r=t(n[i]).data(s),a={relatedTarget:n[i]};if(r){var h=r._menu;if(t(o).hasClass(u.SHOW)&&!(e&&("click"===e.type&&/input|textarea/i.test(e.target.tagName)||"keyup"===e.type&&9===e.which)&&t.contains(o,e.target))){var f=t.Event(c.HIDE,a);t(o).trigger(f),f.isDefaultPrevented()||("ontouchstart"in document.documentElement&&t("body").children().off("mouseover",null,t.noop),n[i].setAttribute("aria-expanded","false"),t(h).removeClass(u.SHOW),t(o).removeClass(u.SHOW).trigger(t.Event(c.HIDDEN,a)))}}}},l._getParentFromElement=function(e){var n=void 0,i=r.getSelectorFromElement(e);return i&&(n=t(i)[0]),n||e.parentNode},l._dataApiKeydownHandler=function(e){if(!(!h.test(e.which)||/button/i.test(e.target.tagName)&&32===e.which||/input|textarea/i.test(e.target.tagName)||(e.preventDefault(),e.stopPropagation(),this.disabled||t(this).hasClass(u.DISABLED)))){var n=l._getParentFromElement(this),i=t(n).hasClass(u.SHOW);if((i||27===e.which&&32===e.which)&&(!i||27!==e.which&&32!==e.which)){var o=t(n).find(d.VISIBLE_ITEMS).get();if(o.length){var r=o.indexOf(e.target);38===e.which&&r>0&&r--,40===e.which&&r<o.length-1&&r++,r<0&&(r=0),o[r].focus()}}else{if(27===e.which){var s=t(n).find(d.DATA_TOGGLE)[0];t(s).trigger("focus")}t(this).trigger("click")}}},o(l,null,[{key:"VERSION",get:function(){return"4.0.0-beta"}},{key:"Default",get:function(){return p}},{key:"DefaultType",get:function(){return _}}]),l}();t(document).on(c.KEYDOWN_DATA_API,d.DATA_TOGGLE,g._dataApiKeydownHandler).on(c.KEYDOWN_DATA_API,d.MENU,g._dataApiKeydownHandler).on(c.CLICK_DATA_API+" "+c.KEYUP_DATA_API,g._clearMenus).on(c.CLICK_DATA_API,d.DATA_TOGGLE,function(e){e.preventDefault(),e.stopPropagation(),g._jQueryInterface.call(t(this),"toggle")}).on(c.CLICK_DATA_API,d.FORM_CHILD,function(t){t.stopPropagation()}),t.fn[e]=g._jQueryInterface,t.fn[e].Constructor=g,t.fn[e].noConflict=function(){return t.fn[e]=l,g._jQueryInterface}}(jQuery),function(t){var e="modal",s=".bs.modal",a=t.fn[e],l={backdrop:!0,keyboard:!0,focus:!0,show:!0},h={backdrop:"(boolean|string)",keyboard:"boolean",focus:"boolean",show:"boolean"},c={HIDE:"hide.bs.modal",HIDDEN:"hidden.bs.modal",SHOW:"show.bs.modal",SHOWN:"shown.bs.modal",FOCUSIN:"focusin.bs.modal",RESIZE:"resize.bs.modal",CLICK_DISMISS:"click.dismiss.bs.modal",KEYDOWN_DISMISS:"keydown.dismiss.bs.modal",MOUSEUP_DISMISS:"mouseup.dismiss.bs.modal",MOUSEDOWN_DISMISS:"mousedown.dismiss.bs.modal",CLICK_DATA_API:"click.bs.modal.data-api"},u={SCROLLBAR_MEASURER:"modal-scrollbar-measure",BACKDROP:"modal-backdrop",OPEN:"modal-open",FADE:"fade",SHOW:"show"},d={DIALOG:".modal-dialog",DATA_TOGGLE:'[data-toggle="modal"]',DATA_DISMISS:'[data-dismiss="modal"]',FIXED_CONTENT:".fixed-top, .fixed-bottom, .is-fixed, .sticky-top",NAVBAR_TOGGLER:".navbar-toggler"},f=function(){function a(e,i){n(this,a),this._config=this._getConfig(i),this._element=e,this._dialog=t(e).find(d.DIALOG)[0],this._backdrop=null,this._isShown=!1,this._isBodyOverflowing=!1,this._ignoreBackdropClick=!1,this._originalBodyPadding=0,this._scrollbarWidth=0}return a.prototype.toggle=function(t){return this._isShown?this.hide():this.show(t)},a.prototype.show=function(e){var n=this;if(!this._isTransitioning){r.supportsTransitionEnd()&&t(this._element).hasClass(u.FADE)&&(this._isTransitioning=!0);var i=t.Event(c.SHOW,{relatedTarget:e});t(this._element).trigger(i),this._isShown||i.isDefaultPrevented()||(this._isShown=!0,this._checkScrollbar(),this._setScrollbar(),t(document.body).addClass(u.OPEN),this._setEscapeEvent(),this._setResizeEvent(),t(this._element).on(c.CLICK_DISMISS,d.DATA_DISMISS,function(t){return n.hide(t)}),t(this._dialog).on(c.MOUSEDOWN_DISMISS,function(){t(n._element).one(c.MOUSEUP_DISMISS,function(e){t(e.target).is(n._element)&&(n._ignoreBackdropClick=!0)})}),this._showBackdrop(function(){return n._showElement(e)}))}},a.prototype.hide=function(e){var n=this;if(e&&e.preventDefault(),!this._isTransitioning&&this._isShown){var i=r.supportsTransitionEnd()&&t(this._element).hasClass(u.FADE);i&&(this._isTransitioning=!0);var o=t.Event(c.HIDE);t(this._element).trigger(o),this._isShown&&!o.isDefaultPrevented()&&(this._isShown=!1,this._setEscapeEvent(),this._setResizeEvent(),t(document).off(c.FOCUSIN),t(this._element).removeClass(u.SHOW),t(this._element).off(c.CLICK_DISMISS),t(this._dialog).off(c.MOUSEDOWN_DISMISS),i?t(this._element).one(r.TRANSITION_END,function(t){return n._hideModal(t)}).emulateTransitionEnd(300):this._hideModal())}},a.prototype.dispose=function(){t.removeData(this._element,"bs.modal"),t(window,document,this._element,this._backdrop).off(s),this._config=null,this._element=null,this._dialog=null,this._backdrop=null,this._isShown=null,this._isBodyOverflowing=null,this._ignoreBackdropClick=null,this._scrollbarWidth=null},a.prototype.handleUpdate=function(){this._adjustDialog()},a.prototype._getConfig=function(n){return n=t.extend({},l,n),r.typeCheckConfig(e,n,h),n},a.prototype._showElement=function(e){var n=this,i=r.supportsTransitionEnd()&&t(this._element).hasClass(u.FADE);this._element.parentNode&&this._element.parentNode.nodeType===Node.ELEMENT_NODE||document.body.appendChild(this._element),this._element.style.display="block",this._element.removeAttribute("aria-hidden"),this._element.scrollTop=0,i&&r.reflow(this._element),t(this._element).addClass(u.SHOW),this._config.focus&&this._enforceFocus();var o=t.Event(c.SHOWN,{relatedTarget:e}),s=function(){n._config.focus&&n._element.focus(),n._isTransitioning=!1,t(n._element).trigger(o)};i?t(this._dialog).one(r.TRANSITION_END,s).emulateTransitionEnd(300):s()},a.prototype._enforceFocus=function(){var e=this;t(document).off(c.FOCUSIN).on(c.FOCUSIN,function(n){document===n.target||e._element===n.target||t(e._element).has(n.target).length||e._element.focus()})},a.prototype._setEscapeEvent=function(){var e=this;this._isShown&&this._config.keyboard?t(this._element).on(c.KEYDOWN_DISMISS,function(t){27===t.which&&(t.preventDefault(),e.hide())}):this._isShown||t(this._element).off(c.KEYDOWN_DISMISS)},a.prototype._setResizeEvent=function(){var e=this;this._isShown?t(window).on(c.RESIZE,function(t){return e.handleUpdate(t)}):t(window).off(c.RESIZE)},a.prototype._hideModal=function(){var e=this;this._element.style.display="none",this._element.setAttribute("aria-hidden",!0),this._isTransitioning=!1,this._showBackdrop(function(){t(document.body).removeClass(u.OPEN),e._resetAdjustments(),e._resetScrollbar(),t(e._element).trigger(c.HIDDEN)})},a.prototype._removeBackdrop=function(){this._backdrop&&(t(this._backdrop).remove(),this._backdrop=null)},a.prototype._showBackdrop=function(e){var n=this,i=t(this._element).hasClass(u.FADE)?u.FADE:"";if(this._isShown&&this._config.backdrop){var o=r.supportsTransitionEnd()&&i;if(this._backdrop=document.createElement("div"),this._backdrop.className=u.BACKDROP,i&&t(this._backdrop).addClass(i),t(this._backdrop).appendTo(document.body),t(this._element).on(c.CLICK_DISMISS,function(t){n._ignoreBackdropClick?n._ignoreBackdropClick=!1:t.target===t.currentTarget&&("static"===n._config.backdrop?n._element.focus():n.hide())}),o&&r.reflow(this._backdrop),t(this._backdrop).addClass(u.SHOW),!e)return;if(!o)return void e();t(this._backdrop).one(r.TRANSITION_END,e).emulateTransitionEnd(150)}else if(!this._isShown&&this._backdrop){t(this._backdrop).removeClass(u.SHOW);var s=function(){n._removeBackdrop(),e&&e()};r.supportsTransitionEnd()&&t(this._element).hasClass(u.FADE)?t(this._backdrop).one(r.TRANSITION_END,s).emulateTransitionEnd(150):s()}else e&&e()},a.prototype._adjustDialog=function(){var t=this._element.scrollHeight>document.documentElement.clientHeight;!this._isBodyOverflowing&&t&&(this._element.style.paddingLeft=this._scrollbarWidth+"px"),this._isBodyOverflowing&&!t&&(this._element.style.paddingRight=this._scrollbarWidth+"px")},a.prototype._resetAdjustments=function(){this._element.style.paddingLeft="",this._element.style.paddingRight=""},a.prototype._checkScrollbar=function(){this._isBodyOverflowing=document.body.clientWidth<window.innerWidth,this._scrollbarWidth=this._getScrollbarWidth()},a.prototype._setScrollbar=function(){var e=this;if(this._isBodyOverflowing){t(d.FIXED_CONTENT).each(function(n,i){var o=t(i)[0].style.paddingRight,r=t(i).css("padding-right");t(i).data("padding-right",o).css("padding-right",parseFloat(r)+e._scrollbarWidth+"px")}),t(d.NAVBAR_TOGGLER).each(function(n,i){var o=t(i)[0].style.marginRight,r=t(i).css("margin-right");t(i).data("margin-right",o).css("margin-right",parseFloat(r)+e._scrollbarWidth+"px")});var n=document.body.style.paddingRight,i=t("body").css("padding-right");t("body").data("padding-right",n).css("padding-right",parseFloat(i)+this._scrollbarWidth+"px")}},a.prototype._resetScrollbar=function(){t(d.FIXED_CONTENT).each(function(e,n){var i=t(n).data("padding-right");void 0!==i&&t(n).css("padding-right",i).removeData("padding-right")}),t(d.NAVBAR_TOGGLER).each(function(e,n){var i=t(n).data("margin-right");void 0!==i&&t(n).css("margin-right",i).removeData("margin-right")});var e=t("body").data("padding-right");void 0!==e&&t("body").css("padding-right",e).removeData("padding-right")},a.prototype._getScrollbarWidth=function(){var t=document.createElement("div");t.className=u.SCROLLBAR_MEASURER,document.body.appendChild(t);var e=t.getBoundingClientRect().width-t.clientWidth;return document.body.removeChild(t),e},a._jQueryInterface=function(e,n){return this.each(function(){var o=t(this).data("bs.modal"),r=t.extend({},a.Default,t(this).data(),"object"===(void 0===e?"undefined":i(e))&&e);if(o||(o=new a(this,r),t(this).data("bs.modal",o)),"string"==typeof e){if(void 0===o[e])throw new Error('No method named "'+e+'"');o[e](n)}else r.show&&o.show(n)})},o(a,null,[{key:"VERSION",get:function(){return"4.0.0-beta"}},{key:"Default",get:function(){return l}}]),a}();t(document).on(c.CLICK_DATA_API,d.DATA_TOGGLE,function(e){var n=this,i=void 0,o=r.getSelectorFromElement(this);o&&(i=t(o)[0]);var s=t(i).data("bs.modal")?"toggle":t.extend({},t(i).data(),t(this).data());"A"!==this.tagName&&"AREA"!==this.tagName||e.preventDefault();var a=t(i).one(c.SHOW,function(e){e.isDefaultPrevented()||a.one(c.HIDDEN,function(){t(n).is(":visible")&&n.focus()})});f._jQueryInterface.call(t(i),s,this)}),t.fn[e]=f._jQueryInterface,t.fn[e].Constructor=f,t.fn[e].noConflict=function(){return t.fn[e]=a,f._jQueryInterface}}(jQuery),function(t){var e="scrollspy",s=t.fn[e],a={offset:10,method:"auto",target:""},l={offset:"number",method:"string",target:"(string|element)"},h={ACTIVATE:"activate.bs.scrollspy",SCROLL:"scroll.bs.scrollspy",LOAD_DATA_API:"load.bs.scrollspy.data-api"},c={DROPDOWN_ITEM:"dropdown-item",DROPDOWN_MENU:"dropdown-menu",ACTIVE:"active"},u={DATA_SPY:'[data-spy="scroll"]',ACTIVE:".active",NAV_LIST_GROUP:".nav, .list-group",NAV_LINKS:".nav-link",LIST_ITEMS:".list-group-item",DROPDOWN:".dropdown",DROPDOWN_ITEMS:".dropdown-item",DROPDOWN_TOGGLE:".dropdown-toggle"},d={OFFSET:"offset",POSITION:"position"},f=function(){function s(e,i){var o=this;n(this,s),this._element=e,this._scrollElement="BODY"===e.tagName?window:e,this._config=this._getConfig(i),this._selector=this._config.target+" "+u.NAV_LINKS+","+this._config.target+" "+u.LIST_ITEMS+","+this._config.target+" "+u.DROPDOWN_ITEMS,this._offsets=[],this._targets=[],this._activeTarget=null,this._scrollHeight=0,t(this._scrollElement).on(h.SCROLL,function(t){return o._process(t)}),this.refresh(),this._process()}return s.prototype.refresh=function(){var e=this,n=this._scrollElement!==this._scrollElement.window?d.POSITION:d.OFFSET,i="auto"===this._config.method?n:this._config.method,o=i===d.POSITION?this._getScrollTop():0;this._offsets=[],this._targets=[],this._scrollHeight=this._getScrollHeight(),t.makeArray(t(this._selector)).map(function(e){var n=void 0,s=r.getSelectorFromElement(e);if(s&&(n=t(s)[0]),n){var a=n.getBoundingClientRect();if(a.width||a.height)return[t(n)[i]().top+o,s]}return null}).filter(function(t){return t}).sort(function(t,e){return t[0]-e[0]}).forEach(function(t){e._offsets.push(t[0]),e._targets.push(t[1])})},s.prototype.dispose=function(){t.removeData(this._element,"bs.scrollspy"),t(this._scrollElement).off(".bs.scrollspy"),this._element=null,this._scrollElement=null,this._config=null,this._selector=null,this._offsets=null,this._targets=null,this._activeTarget=null,this._scrollHeight=null},s.prototype._getConfig=function(n){if("string"!=typeof(n=t.extend({},a,n)).target){var i=t(n.target).attr("id");i||(i=r.getUID(e),t(n.target).attr("id",i)),n.target="#"+i}return r.typeCheckConfig(e,n,l),n},s.prototype._getScrollTop=function(){return this._scrollElement===window?this._scrollElement.pageYOffset:this._scrollElement.scrollTop},s.prototype._getScrollHeight=function(){return this._scrollElement.scrollHeight||Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},s.prototype._getOffsetHeight=function(){return this._scrollElement===window?window.innerHeight:this._scrollElement.getBoundingClientRect().height},s.prototype._process=function(){var t=this._getScrollTop()+this._config.offset,e=this._getScrollHeight(),n=this._config.offset+e-this._getOffsetHeight();if(this._scrollHeight!==e&&this.refresh(),t>=n){var i=this._targets[this._targets.length-1];this._activeTarget!==i&&this._activate(i)}else{if(this._activeTarget&&t<this._offsets[0]&&this._offsets[0]>0)return this._activeTarget=null,void this._clear();for(var o=this._offsets.length;o--;)this._activeTarget!==this._targets[o]&&t>=this._offsets[o]&&(void 0===this._offsets[o+1]||t<this._offsets[o+1])&&this._activate(this._targets[o])}},s.prototype._activate=function(e){this._activeTarget=e,this._clear();var n=this._selector.split(",");n=n.map(function(t){return t+'[data-target="'+e+'"],'+t+'[href="'+e+'"]'});var i=t(n.join(","));i.hasClass(c.DROPDOWN_ITEM)?(i.closest(u.DROPDOWN).find(u.DROPDOWN_TOGGLE).addClass(c.ACTIVE),i.addClass(c.ACTIVE)):(i.addClass(c.ACTIVE),i.parents(u.NAV_LIST_GROUP).prev(u.NAV_LINKS+", "+u.LIST_ITEMS).addClass(c.ACTIVE)),t(this._scrollElement).trigger(h.ACTIVATE,{relatedTarget:e})},s.prototype._clear=function(){t(this._selector).filter(u.ACTIVE).removeClass(c.ACTIVE)},s._jQueryInterface=function(e){return this.each(function(){var n=t(this).data("bs.scrollspy"),o="object"===(void 0===e?"undefined":i(e))&&e;if(n||(n=new s(this,o),t(this).data("bs.scrollspy",n)),"string"==typeof e){if(void 0===n[e])throw new Error('No method named "'+e+'"');n[e]()}})},o(s,null,[{key:"VERSION",get:function(){return"4.0.0-beta"}},{key:"Default",get:function(){return a}}]),s}();t(window).on(h.LOAD_DATA_API,function(){for(var e=t.makeArray(t(u.DATA_SPY)),n=e.length;n--;){var i=t(e[n]);f._jQueryInterface.call(i,i.data())}}),t.fn[e]=f._jQueryInterface,t.fn[e].Constructor=f,t.fn[e].noConflict=function(){return t.fn[e]=s,f._jQueryInterface}}(jQuery),function(t){var e=t.fn.tab,i={HIDE:"hide.bs.tab",HIDDEN:"hidden.bs.tab",SHOW:"show.bs.tab",SHOWN:"shown.bs.tab",CLICK_DATA_API:"click.bs.tab.data-api"},s={DROPDOWN_MENU:"dropdown-menu",ACTIVE:"active",DISABLED:"disabled",FADE:"fade",SHOW:"show"},a={DROPDOWN:".dropdown",NAV_LIST_GROUP:".nav, .list-group",ACTIVE:".active",DATA_TOGGLE:'[data-toggle="tab"], [data-toggle="pill"], [data-toggle="list"]',DROPDOWN_TOGGLE:".dropdown-toggle",DROPDOWN_ACTIVE_CHILD:"> .dropdown-menu .active"},l=function(){function e(t){n(this,e),this._element=t}return e.prototype.show=function(){var e=this;if(!(this._element.parentNode&&this._element.parentNode.nodeType===Node.ELEMENT_NODE&&t(this._element).hasClass(s.ACTIVE)||t(this._element).hasClass(s.DISABLED))){var n=void 0,o=void 0,l=t(this._element).closest(a.NAV_LIST_GROUP)[0],h=r.getSelectorFromElement(this._element);l&&(o=t.makeArray(t(l).find(a.ACTIVE)),o=o[o.length-1]);var c=t.Event(i.HIDE,{relatedTarget:this._element}),u=t.Event(i.SHOW,{relatedTarget:o});if(o&&t(o).trigger(c),t(this._element).trigger(u),!u.isDefaultPrevented()&&!c.isDefaultPrevented()){h&&(n=t(h)[0]),this._activate(this._element,l);var d=function(){var n=t.Event(i.HIDDEN,{relatedTarget:e._element}),r=t.Event(i.SHOWN,{relatedTarget:o});t(o).trigger(n),t(e._element).trigger(r)};n?this._activate(n,n.parentNode,d):d()}}},e.prototype.dispose=function(){t.removeData(this._element,"bs.tab"),this._element=null},e.prototype._activate=function(e,n,i){var o=this,l=t(n).find(a.ACTIVE)[0],h=i&&r.supportsTransitionEnd()&&l&&t(l).hasClass(s.FADE),c=function(){return o._transitionComplete(e,l,h,i)};l&&h?t(l).one(r.TRANSITION_END,c).emulateTransitionEnd(150):c(),l&&t(l).removeClass(s.SHOW)},e.prototype._transitionComplete=function(e,n,i,o){if(n){t(n).removeClass(s.ACTIVE);var l=t(n.parentNode).find(a.DROPDOWN_ACTIVE_CHILD)[0];l&&t(l).removeClass(s.ACTIVE),n.setAttribute("aria-expanded",!1)}if(t(e).addClass(s.ACTIVE),e.setAttribute("aria-expanded",!0),i?(r.reflow(e),t(e).addClass(s.SHOW)):t(e).removeClass(s.FADE),e.parentNode&&t(e.parentNode).hasClass(s.DROPDOWN_MENU)){var h=t(e).closest(a.DROPDOWN)[0];h&&t(h).find(a.DROPDOWN_TOGGLE).addClass(s.ACTIVE),e.setAttribute("aria-expanded",!0)}o&&o()},e._jQueryInterface=function(n){return this.each(function(){var i=t(this),o=i.data("bs.tab");if(o||(o=new e(this),i.data("bs.tab",o)),"string"==typeof n){if(void 0===o[n])throw new Error('No method named "'+n+'"');o[n]()}})},o(e,null,[{key:"VERSION",get:function(){return"4.0.0-beta"}}]),e}();t(document).on(i.CLICK_DATA_API,a.DATA_TOGGLE,function(e){e.preventDefault(),l._jQueryInterface.call(t(this),"show")}),t.fn.tab=l._jQueryInterface,t.fn.tab.Constructor=l,t.fn.tab.noConflict=function(){return t.fn.tab=e,l._jQueryInterface}}(jQuery),function(t){if("undefined"==typeof Popper)throw new Error("Bootstrap tooltips require Popper.js (https://popper.js.org)");var e="tooltip",s=".bs.tooltip",a=t.fn[e],l=new RegExp("(^|\\s)bs-tooltip\\S+","g"),h={animation:"boolean",template:"string",title:"(string|element|function)",trigger:"string",delay:"(number|object)",html:"boolean",selector:"(string|boolean)",placement:"(string|function)",offset:"(number|string)",container:"(string|element|boolean)",fallbackPlacement:"(string|array)"},c={AUTO:"auto",TOP:"top",RIGHT:"right",BOTTOM:"bottom",LEFT:"left"},u={animation:!0,template:'<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>',trigger:"hover focus",title:"",delay:0,html:!1,selector:!1,placement:"top",offset:0,container:!1,fallbackPlacement:"flip"},d={SHOW:"show",OUT:"out"},f={HIDE:"hide"+s,HIDDEN:"hidden"+s,SHOW:"show"+s,SHOWN:"shown"+s,INSERTED:"inserted"+s,CLICK:"click"+s,FOCUSIN:"focusin"+s,FOCUSOUT:"focusout"+s,MOUSEENTER:"mouseenter"+s,MOUSELEAVE:"mouseleave"+s},p={FADE:"fade",SHOW:"show"},_={TOOLTIP:".tooltip",TOOLTIP_INNER:".tooltip-inner",ARROW:".arrow"},g={HOVER:"hover",FOCUS:"focus",CLICK:"click",MANUAL:"manual"},m=function(){function a(t,e){n(this,a),this._isEnabled=!0,this._timeout=0,this._hoverState="",this._activeTrigger={},this._popper=null,this.element=t,this.config=this._getConfig(e),this.tip=null,this._setListeners()}return a.prototype.enable=function(){this._isEnabled=!0},a.prototype.disable=function(){this._isEnabled=!1},a.prototype.toggleEnabled=function(){this._isEnabled=!this._isEnabled},a.prototype.toggle=function(e){if(e){var n=this.constructor.DATA_KEY,i=t(e.currentTarget).data(n);i||(i=new this.constructor(e.currentTarget,this._getDelegateConfig()),t(e.currentTarget).data(n,i)),i._activeTrigger.click=!i._activeTrigger.click,i._isWithActiveTrigger()?i._enter(null,i):i._leave(null,i)}else{if(t(this.getTipElement()).hasClass(p.SHOW))return void this._leave(null,this);this._enter(null,this)}},a.prototype.dispose=function(){clearTimeout(this._timeout),t.removeData(this.element,this.constructor.DATA_KEY),t(this.element).off(this.constructor.EVENT_KEY),t(this.element).closest(".modal").off("hide.bs.modal"),this.tip&&t(this.tip).remove(),this._isEnabled=null,this._timeout=null,this._hoverState=null,this._activeTrigger=null,null!==this._popper&&this._popper.destroy(),this._popper=null,this.element=null,this.config=null,this.tip=null},a.prototype.show=function(){var e=this;if("none"===t(this.element).css("display"))throw new Error("Please use show on visible elements");var n=t.Event(this.constructor.Event.SHOW);if(this.isWithContent()&&this._isEnabled){t(this.element).trigger(n);var i=t.contains(this.element.ownerDocument.documentElement,this.element);if(n.isDefaultPrevented()||!i)return;var o=this.getTipElement(),s=r.getUID(this.constructor.NAME);o.setAttribute("id",s),this.element.setAttribute("aria-describedby",s),this.setContent(),this.config.animation&&t(o).addClass(p.FADE);var l="function"==typeof this.config.placement?this.config.placement.call(this,o,this.element):this.config.placement,h=this._getAttachment(l);this.addAttachmentClass(h);var c=!1===this.config.container?document.body:t(this.config.container);t(o).data(this.constructor.DATA_KEY,this),t.contains(this.element.ownerDocument.documentElement,this.tip)||t(o).appendTo(c),t(this.element).trigger(this.constructor.Event.INSERTED),this._popper=new Popper(this.element,o,{placement:h,modifiers:{offset:{offset:this.config.offset},flip:{behavior:this.config.fallbackPlacement},arrow:{element:_.ARROW}},onCreate:function(t){t.originalPlacement!==t.placement&&e._handlePopperPlacementChange(t)},onUpdate:function(t){e._handlePopperPlacementChange(t)}}),t(o).addClass(p.SHOW),"ontouchstart"in document.documentElement&&t("body").children().on("mouseover",null,t.noop);var u=function(){e.config.animation&&e._fixTransition();var n=e._hoverState;e._hoverState=null,t(e.element).trigger(e.constructor.Event.SHOWN),n===d.OUT&&e._leave(null,e)};r.supportsTransitionEnd()&&t(this.tip).hasClass(p.FADE)?t(this.tip).one(r.TRANSITION_END,u).emulateTransitionEnd(a._TRANSITION_DURATION):u()}},a.prototype.hide=function(e){var n=this,i=this.getTipElement(),o=t.Event(this.constructor.Event.HIDE),s=function(){n._hoverState!==d.SHOW&&i.parentNode&&i.parentNode.removeChild(i),n._cleanTipClass(),n.element.removeAttribute("aria-describedby"),t(n.element).trigger(n.constructor.Event.HIDDEN),null!==n._popper&&n._popper.destroy(),e&&e()};t(this.element).trigger(o),o.isDefaultPrevented()||(t(i).removeClass(p.SHOW),"ontouchstart"in document.documentElement&&t("body").children().off("mouseover",null,t.noop),this._activeTrigger[g.CLICK]=!1,this._activeTrigger[g.FOCUS]=!1,this._activeTrigger[g.HOVER]=!1,r.supportsTransitionEnd()&&t(this.tip).hasClass(p.FADE)?t(i).one(r.TRANSITION_END,s).emulateTransitionEnd(150):s(),this._hoverState="")},a.prototype.update=function(){null!==this._popper&&this._popper.scheduleUpdate()},a.prototype.isWithContent=function(){return Boolean(this.getTitle())},a.prototype.addAttachmentClass=function(e){t(this.getTipElement()).addClass("bs-tooltip-"+e)},a.prototype.getTipElement=function(){return this.tip=this.tip||t(this.config.template)[0]},a.prototype.setContent=function(){var e=t(this.getTipElement());this.setElementContent(e.find(_.TOOLTIP_INNER),this.getTitle()),e.removeClass(p.FADE+" "+p.SHOW)},a.prototype.setElementContent=function(e,n){var o=this.config.html;"object"===(void 0===n?"undefined":i(n))&&(n.nodeType||n.jquery)?o?t(n).parent().is(e)||e.empty().append(n):e.text(t(n).text()):e[o?"html":"text"](n)},a.prototype.getTitle=function(){var t=this.element.getAttribute("data-original-title");return t||(t="function"==typeof this.config.title?this.config.title.call(this.element):this.config.title),t},a.prototype._getAttachment=function(t){return c[t.toUpperCase()]},a.prototype._setListeners=function(){var e=this;this.config.trigger.split(" ").forEach(function(n){if("click"===n)t(e.element).on(e.constructor.Event.CLICK,e.config.selector,function(t){return e.toggle(t)});else if(n!==g.MANUAL){var i=n===g.HOVER?e.constructor.Event.MOUSEENTER:e.constructor.Event.FOCUSIN,o=n===g.HOVER?e.constructor.Event.MOUSELEAVE:e.constructor.Event.FOCUSOUT;t(e.element).on(i,e.config.selector,function(t){return e._enter(t)}).on(o,e.config.selector,function(t){return e._leave(t)})}t(e.element).closest(".modal").on("hide.bs.modal",function(){return e.hide()})}),this.config.selector?this.config=t.extend({},this.config,{trigger:"manual",selector:""}):this._fixTitle()},a.prototype._fixTitle=function(){var t=i(this.element.getAttribute("data-original-title"));(this.element.getAttribute("title")||"string"!==t)&&(this.element.setAttribute("data-original-title",this.element.getAttribute("title")||""),this.element.setAttribute("title",""))},a.prototype._enter=function(e,n){var i=this.constructor.DATA_KEY;(n=n||t(e.currentTarget).data(i))||(n=new this.constructor(e.currentTarget,this._getDelegateConfig()),t(e.currentTarget).data(i,n)),e&&(n._activeTrigger["focusin"===e.type?g.FOCUS:g.HOVER]=!0),t(n.getTipElement()).hasClass(p.SHOW)||n._hoverState===d.SHOW?n._hoverState=d.SHOW:(clearTimeout(n._timeout),n._hoverState=d.SHOW,n.config.delay&&n.config.delay.show?n._timeout=setTimeout(function(){n._hoverState===d.SHOW&&n.show()},n.config.delay.show):n.show())},a.prototype._leave=function(e,n){var i=this.constructor.DATA_KEY;(n=n||t(e.currentTarget).data(i))||(n=new this.constructor(e.currentTarget,this._getDelegateConfig()),t(e.currentTarget).data(i,n)),e&&(n._activeTrigger["focusout"===e.type?g.FOCUS:g.HOVER]=!1),n._isWithActiveTrigger()||(clearTimeout(n._timeout),n._hoverState=d.OUT,n.config.delay&&n.config.delay.hide?n._timeout=setTimeout(function(){n._hoverState===d.OUT&&n.hide()},n.config.delay.hide):n.hide())},a.prototype._isWithActiveTrigger=function(){for(var t in this._activeTrigger)if(this._activeTrigger[t])return!0;return!1},a.prototype._getConfig=function(n){return(n=t.extend({},this.constructor.Default,t(this.element).data(),n)).delay&&"number"==typeof n.delay&&(n.delay={show:n.delay,hide:n.delay}),n.title&&"number"==typeof n.title&&(n.title=n.title.toString()),n.content&&"number"==typeof n.content&&(n.content=n.content.toString()),r.typeCheckConfig(e,n,this.constructor.DefaultType),n},a.prototype._getDelegateConfig=function(){var t={};if(this.config)for(var e in this.config)this.constructor.Default[e]!==this.config[e]&&(t[e]=this.config[e]);return t},a.prototype._cleanTipClass=function(){var e=t(this.getTipElement()),n=e.attr("class").match(l);null!==n&&n.length>0&&e.removeClass(n.join(""))},a.prototype._handlePopperPlacementChange=function(t){this._cleanTipClass(),this.addAttachmentClass(this._getAttachment(t.placement))},a.prototype._fixTransition=function(){var e=this.getTipElement(),n=this.config.animation;null===e.getAttribute("x-placement")&&(t(e).removeClass(p.FADE),this.config.animation=!1,this.hide(),this.show(),this.config.animation=n)},a._jQueryInterface=function(e){return this.each(function(){var n=t(this).data("bs.tooltip"),o="object"===(void 0===e?"undefined":i(e))&&e;if((n||!/dispose|hide/.test(e))&&(n||(n=new a(this,o),t(this).data("bs.tooltip",n)),"string"==typeof e)){if(void 0===n[e])throw new Error('No method named "'+e+'"');n[e]()}})},o(a,null,[{key:"VERSION",get:function(){return"4.0.0-beta"}},{key:"Default",get:function(){return u}},{key:"NAME",get:function(){return e}},{key:"DATA_KEY",get:function(){return"bs.tooltip"}},{key:"Event",get:function(){return f}},{key:"EVENT_KEY",get:function(){return s}},{key:"DefaultType",get:function(){return h}}]),a}();return t.fn[e]=m._jQueryInterface,t.fn[e].Constructor=m,t.fn[e].noConflict=function(){return t.fn[e]=a,m._jQueryInterface},m}(jQuery));!function(r){var a="popover",l=".bs.popover",h=r.fn[a],c=new RegExp("(^|\\s)bs-popover\\S+","g"),u=r.extend({},s.Default,{placement:"right",trigger:"click",content:"",template:'<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'}),d=r.extend({},s.DefaultType,{content:"(string|element|function)"}),f={FADE:"fade",SHOW:"show"},p={TITLE:".popover-header",CONTENT:".popover-body"},_={HIDE:"hide"+l,HIDDEN:"hidden"+l,SHOW:"show"+l,SHOWN:"shown"+l,INSERTED:"inserted"+l,CLICK:"click"+l,FOCUSIN:"focusin"+l,FOCUSOUT:"focusout"+l,MOUSEENTER:"mouseenter"+l,MOUSELEAVE:"mouseleave"+l},g=function(s){function h(){return n(this,h),t(this,s.apply(this,arguments))}return e(h,s),h.prototype.isWithContent=function(){return this.getTitle()||this._getContent()},h.prototype.addAttachmentClass=function(t){r(this.getTipElement()).addClass("bs-popover-"+t)},h.prototype.getTipElement=function(){return this.tip=this.tip||r(this.config.template)[0]},h.prototype.setContent=function(){var t=r(this.getTipElement());this.setElementContent(t.find(p.TITLE),this.getTitle()),this.setElementContent(t.find(p.CONTENT),this._getContent()),t.removeClass(f.FADE+" "+f.SHOW)},h.prototype._getContent=function(){return this.element.getAttribute("data-content")||("function"==typeof this.config.content?this.config.content.call(this.element):this.config.content)},h.prototype._cleanTipClass=function(){var t=r(this.getTipElement()),e=t.attr("class").match(c);null!==e&&e.length>0&&t.removeClass(e.join(""))},h._jQueryInterface=function(t){return this.each(function(){var e=r(this).data("bs.popover"),n="object"===(void 0===t?"undefined":i(t))?t:null;if((e||!/destroy|hide/.test(t))&&(e||(e=new h(this,n),r(this).data("bs.popover",e)),"string"==typeof t)){if(void 0===e[t])throw new Error('No method named "'+t+'"');e[t]()}})},o(h,null,[{key:"VERSION",get:function(){return"4.0.0-beta"}},{key:"Default",get:function(){return u}},{key:"NAME",get:function(){return a}},{key:"DATA_KEY",get:function(){return"bs.popover"}},{key:"Event",get:function(){return _}},{key:"EVENT_KEY",get:function(){return l}},{key:"DefaultType",get:function(){return d}}]),h}(s);r.fn[a]=g._jQueryInterface,r.fn[a].Constructor=g,r.fn[a].noConflict=function(){return r.fn[a]=h,g._jQueryInterface}}(jQuery)}();
+angular
+  .module('app')
+  .service('dataService', dataService);
+
+function dataService($rootScope, $filter) {
+  let service = this;
+
+  service.selectorProducts = PRODUCTS;
+
+  service.map = {
+    nodes: [],
+    links: []
+  };
+
+  service.manufactures = [];
+
+  service.observerCallbacks = [];
+
+  // register observer
+  service.registerObserverCallback = function (callback) {
+    service.observerCallbacks.push(callback);
+  };
+
+  // notify all observers
+  service.notifyObservers = function () {
+    angular.forEach(service.observerCallbacks, function (callback) {
+      callback();
+    });
+  };
+
+  service.calculateDiffCoefficient = function (mineDifficult) {
+    return Math.pow(1.4, Math.abs(3 - mineDifficult));
+  };
+
+  service.calculateWorkersQuantity = function (manufacture, product, ingredientQuantity) {
+    let workersQuantity = ingredientQuantity / (manufacture.efficiency / 100);
+    workersQuantity /= Math.pow(1.05, manufacture.technology - 1);
+    workersQuantity /= product.pbq;
+
+    if (manufacture.e.sym === 'tractor') {
+      // farm
+      workersQuantity *= 52;
+    }
+
+    if (manufacture.e.sym === 'drill') {
+      // mine
+      if (manufacture.mineDifficult >= 3) {
+        workersQuantity *= service.calculateDiffCoefficient(manufacture.mineDifficult);
+      } else {
+        workersQuantity /= service.calculateDiffCoefficient(manufacture.mineDifficult);
+      }
+    }
+
+    return Math.ceil(workersQuantity);
+  };
+
+  service.addManufacture = function (recipe, quantity, targetId, ingId) {
+    if (recipe.mnfId) {
+      // set source
+      service.selectedManufacture.ip[ingId].sourceMnf = recipe.mnfId;
+      service.notifyObservers();
+    } else {
+      recipe = angular.copy(recipe);
+      // set default values
+      recipe.bonus = 0;
+      recipe.technology = 1;
+      recipe.efficiency = 100;
+      recipe.workersSalary = 100;
+      recipe.mnfId = service.manufactures.length;
+      recipe.rp[recipe.targetProductIndex].targetMnfId = targetId;
+      recipe.rp[recipe.targetProductIndex].targetMnfIngId = ingId;
+      recipe.ip.forEach(function (ingredient) {
+        ingredient.quality = 1;
+        ingredient.price = 1;
+      });
+
+      // mine / plant
+      if (recipe.e.sym === 'tractor' || recipe.e.sym === 'saw') {
+        recipe.baseQuality = 1;
+      }
+
+      // mine
+      if (recipe.e.sym === 'drill') {
+        recipe.mineDifficult = 1;
+        recipe.baseQuality = 1;
+      }
+
+      // calc workersQuantity
+      let recipeProduct = recipe.rp.filter(function (product) {
+        return product.pi === service.selectedManufacture.ip[ingId].pi;
+      })[0];
+      recipe.workersQuantity = service.calculateWorkersQuantity(recipe, recipeProduct, quantity);
+
+      // set source
+      service.selectedManufacture.ip[ingId].sourceMnf = recipe.mnfId;
+
+      // add new recipe
+      service.manufactures.push(recipe);
+      service.selectedManufacture = recipe;
+
+      // show new recipe in calc
+      service.notifyObservers();
+    }
+  };
+
+  service.doCalc = function (manufacture, automaticUpdate = false) {
+    // set default values
+    if (!manufacture.efficiency) {
+      manufacture.efficiency = 100;
+    }
+    manufacture.bonus = manufacture.bonus | 0;
+
+    manufacture.workersQualification = Math.pow(manufacture.technology, 0.8);
+
+    if (manufacture.e.pc !== 'Животные') {
+      manufacture.machinesQuality = Math.pow(manufacture.technology, 1.2);
+    } else {
+      // farms
+      manufacture.recommendedAnimals = Math.pow(manufacture.technology, 1.2);
+    }
+
+    let ingredientsSumQuality = 0;
+    let ingredientsSumQuantity = 0;
+    let totalIngredientsPrice = 0;
+
+    manufacture.ip.forEach(function (ingredient) {
+
+      let oldQuantity = ingredient.quantity;
+
+      if (manufacture.e.pc === 'Животные') {
+        ingredient.quantity = ingredient.q * manufacture.epw; // ing.quan * eqip per worker
+        ingredient.quantity *= manufacture.workersQuantity;   // multiply by workers quantity
+      } else {
+        ingredient.quantity = ingredient.q / manufacture.rp[0].rq;         // ing.quantity / num of products by 1 product unit
+        ingredient.quantity *= manufacture.rp[0].pbq;                      // multiply by num of products by 1 worker
+        ingredient.quantity *= manufacture.workersQuantity;                // multiply by workers quantity
+        ingredient.quantity *= Math.pow(1.05, manufacture.technology - 1); // multiply by technology coefficient
+        ingredient.quantity *= (manufacture.efficiency / 100);             // multiply by efficiency
+        ingredient.quantity = Math.ceil(ingredient.quantity);
+      }
+
+      // update source if exist
+      if (ingredient.sourceMnf !== angular.undefined && ingredient.quantity && (ingredient.quantity !== oldQuantity)) {
+        let sourceManufacture = service.manufactures[ingredient.sourceMnf];
+        let sourceProduct = sourceManufacture.rp.filter(function (product) {
+          return product.pi === ingredient.pi;
+        })[0];
+
+        sourceManufacture.workersQuantity = service.calculateWorkersQuantity(sourceManufacture, sourceProduct, ingredient.quantity);
+
+        // we need go deeper... doCalc source manufacture
+        service.doCalc(sourceManufacture, true);
+      }
+
+      ingredient.totalPrice = ingredient.quantity * ingredient.price;
+
+      totalIngredientsPrice += ingredient.totalPrice;
+
+      ingredientsSumQuality += ingredient.quality * ingredient.q;
+      ingredientsSumQuantity += ingredient.q;
+    });
+
+    manufacture.totalIngredientsPrice = totalIngredientsPrice;
+
+    let ingredientsTotalQuality = 0;
+    if (manufacture.e.pc === 'Животные') {
+      ingredientsTotalQuality = (manufacture.ip[0].quality * 0.3 + manufacture.machinesQuality * 0.7) * (manufacture.efficiency / 100);
+    } else {
+      ingredientsTotalQuality = ingredientsSumQuality / ingredientsSumQuantity * (manufacture.efficiency / 100);
+    }
+
+    let totalSalary = manufacture.workersSalary * manufacture.workersQuantity;
+    let expenses = totalIngredientsPrice + totalSalary * 1.1;
+
+    manufacture.rp.forEach(function (product) {
+      let oldProductPrice = product.price;
+      let oldProductQuantity = product.quantity;
+
+      // QUANTITY
+      product.quantity = manufacture.workersQuantity * product.pbq;   // prod.quantity * num of products by 1 worker
+      product.quantity *= Math.pow(1.05, manufacture.technology - 1); // multiply by technology coefficient
+      product.quantity *= (manufacture.efficiency / 100);             // multiply by efficiency
+
+      if (manufacture.e.sym === 'drill') {
+        // mine
+        if (manufacture.mineDifficult >= 3) {
+          product.quantity /= service.calculateDiffCoefficient(manufacture.mineDifficult);
+        } else {
+          product.quantity *= service.calculateDiffCoefficient(manufacture.mineDifficult);
+        }
+      }
+
+      product.quantity = Math.floor(product.quantity);
+
+      // QUALITY
+      if (manufacture.e.sym === 'tractor' || manufacture.e.sym === 'saw') {
+        // plant
+        product.quality = Math.pow(manufacture.baseQuality, 0.5) * Math.pow(manufacture.technology, 0.65);
+      } else if (manufacture.e.sym === 'drill') {
+        // mine
+        let mineQuality = 0.277202073 * Math.pow(manufacture.baseQuality, 1.2975); //TODO: wtf is 0.277202073?
+        product.quality = mineQuality * Math.pow(manufacture.technology, 0.65);
+      } else {
+        // factory or farm
+        product.quality = Math.pow(ingredientsTotalQuality, 0.5) * Math.pow(manufacture.technology, 0.65);
+      }
+
+      // limit quality by tech lvl
+      if (product.quality > Math.pow(manufacture.technology, 1.3)) {
+        product.quality = Math.pow(manufacture.technology, 1.3);
+      } else if (product.quality < 1) {
+        product.quality = 1;
+      }
+
+      product.quality = product.quality * (1 + (manufacture.bonus + product.qbp) / 100);
+
+      // TEXES & PROFIT
+      if (manufacture.incomeTaxCoefficient === angular.undefined) {
+        manufacture.incomeTaxCoefficient = 20; // 20% by default
+      }
+      let incomeTaxCoefficient = manufacture.incomeTaxCoefficient / 100;
+      let envdCoefficient = ENVD[product.name] ? (ENVD[product.name] / 100) : 1;
+
+      product.netCost = expenses / product.quantity / manufacture.rp.length;
+      product.netCost = parseFloat(product.netCost.toFixed(2));
+
+      if (manufacture.e.sym === 'tractor') {
+        // farm
+        product.netCost *= 52;
+      }
+
+      // ENVD
+      product.envdTax = product.netCost * incomeTaxCoefficient * envdCoefficient;
+      product.changeTaxPoint = $filter('number', 2)(product.netCost * (1 + envdCoefficient));
+
+      if (!product.price || automaticUpdate) {
+        // automatic default price
+        product.price = parseFloat((product.netCost + product.envdTax).toFixed(2));
+      }
+
+      // INCOME TAX
+      product.incomeTax = (product.price - product.netCost) * incomeTaxCoefficient;
+
+      if (product.incomeTax < product.envdTax) {
+        product.totalCost = product.netCost + product.envdTax;
+      } else {
+        product.totalCost = product.netCost + product.incomeTax;
+      }
+
+      // PROFIT
+      product.profit = product.quantity * (product.price - product.totalCost);
+
+      // update target if exist
+      if (product.targetMnfId !== angular.undefined && product.price && product.quantity &&
+        (oldProductPrice !== product.price || oldProductQuantity !== product.quantity)) {
+
+        // search all targets
+        service.manufactures.forEach(function (targetManufacture) {
+          for (let i = 0; i < targetManufacture.ip.length; i++) {
+            if (targetManufacture.ip[i].sourceMnf === manufacture.mnfId) {
+              targetManufacture.ip[i].price = parseFloat(product.price.toFixed(2));
+              targetManufacture.ip[i].quality = parseFloat(product.quality.toFixed(2));
+
+              // we need go deeper... doCalc target manufacture
+              service.doCalc(service.manufactures[targetManufacture.mnfId], true);
+            }
+          }
+        });
+      }
+
+      // update map
+      service.buildMap();
+    });
+  };
+
+  service.mapType = 'scheme';
+
+  service.buildMap = function () {
+    let nodes = [];
+    let links = [];
+
+    service.manufactures.forEach(function (manufacture) {
+      let products = [];
+      manufacture.rp.forEach(function (product) {
+        products.push({
+          img: product.img,
+          quantity: product.quantity,
+          quality: product.quality,
+          price: product.price
+        });
+      });
+      manufacture.ip.forEach(function (product) {
+        if (product.sourceMnf !== angular.undefined) {
+          let value = 0;
+
+          switch (service.mapType) {
+            case 'scheme':
+              value = 1;
+              break;
+            case 'value':
+              value = product.quantity;
+              break;
+            case 'cost':
+              value = product.quantity * product.price;
+              break;
+          }
+
+          links.push({
+            source: product.sourceMnf,
+            target: manufacture.mnfId,
+            value
+          });
+        }
+      });
+
+      nodes.push({
+        node: manufacture.mnfId,
+        name: manufacture.s,
+        products: products
+      });
+    });
+
+    service.map = {
+      nodes: nodes,
+      links: links
+    };
+
+    $rootScope.$emit('dataService:mapUpdated');
+  };
+}
+
+angular
+  .module('app')
+  .component('factoryCalc', {
+    templateUrl: 'app/components/factoryCalc/factoryCalc.html',
+    controller: factoryCalcController
+  });
+
+function factoryCalcController($rootScope, dataService) {
+  let vm = this;
+
+  /**
+   * Search products with requested index
+   * @param recipes
+   * @param ingredientIndex
+   */
+  vm.filterRecipes = function(recipes, ingredientIndex) {
+    return recipes.filter(function(recipe) {
+      for (let i = 0; i < recipe.rp.length; i++) {
+        if (recipe.rp[i].pi === ingredientIndex) {
+          recipe.targetProductIndex = i;
+          return true;
+        }
+      }
+    });
+  };
+
+  /**
+   * Set new bonus amount
+   * @param newBonus
+   */
+  vm.setBonus = function(newBonus) {
+    vm.manufacture.bonus = newBonus;
+    vm.doCalc();
+  };
+
+  /**
+   * Call calc cycle for requested manufacture
+   */
+  vm.doCalc = function() {
+    dataService.doCalc(vm.manufacture);
+    $('[data-toggle="tooltip"]').tooltip();
+  };
+
+  /**
+   * Show all existing manufactures and recipes for requested index
+   * @param ingredientIndex
+   * @param ingQuantity
+   * @param ingId
+   */
+  vm.addSource = function(ingredientIndex, ingQuantity, ingId) {
+    let availableRecipes = vm.filterRecipes(PRODUCTS, ingredientIndex);
+    let availableManufactures = vm.filterRecipes(dataService.manufactures, ingredientIndex);
+
+    if (availableManufactures.length) {
+      // if manufactures with ingredient exist
+      availableRecipes = availableRecipes.concat(availableManufactures);
+    }
+
+    if (availableRecipes.length === 1) {
+      // if only source -> add manufacture
+      dataService.addManufacture(availableRecipes[0], ingQuantity, vm.manufacture.mnfId, ingId);
+    } else {
+      // many sources -> show manufacture selector
+      dataService.selectorProducts = availableRecipes;
+      $rootScope.$emit('factoryCalc:productsUpdated', ingQuantity, vm.manufacture.mnfId, ingId);
+      $('#productSelector').modal('show');
+      $('.modal-backdrop:last').css('z-index', 1050);
+    }
+  };
+
+  /**
+   * Function for callback subscription
+   */
+  vm.updateCalc = function() {
+    vm.manufacture = dataService.selectedManufacture;
+    vm.doCalc();
+  };
+
+  dataService.registerObserverCallback(vm.updateCalc);
+
+  /**
+   * Go to another manufacture
+   * @param mnfId
+   */
+  vm.changeManufacture = function(mnfId) {
+    dataService.selectedManufacture = dataService.manufactures[mnfId];
+    vm.updateCalc();
+  };
+
+  /**
+   * Generate color by string hash
+   * @param str
+   * @returns {string}
+   */
+  vm.getColorByString = function(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    let colour = '#';
+    for (let i = 0; i < 3; i++) {
+      let value = (hash >> (i * 8)) & 0xFF;
+      colour += ('00' + value.toString(16)).substr(-2);
+    }
+    return colour;
+  };
+
+  /**
+   * Calculate ingredient proportion
+   * @param ingredient
+   * @returns {number}
+   */
+  vm.calculateIngredientPercent = function (ingredient) {
+    return ingredient.totalPrice / vm.manufacture.totalIngredientsPrice * 100
+  }
+}
+
+angular
+  .module('app')
+  .component('productSelector', {
+    templateUrl: 'app/components/productSelector/productSelector.html',
+    controller: productSelectorController
+  });
+
+function productSelectorController(dataService, $scope, $rootScope) {
+  let vm = this;
+  let firstSelect = true;
+
+  vm.products = dataService.selectorProducts;
+
+  /**
+   * Function for search box
+   */
+  vm.searchProducts = function() {
+    if (vm.search) {
+      vm.products = dataService.selectorProducts.filter(function(product) {
+        return product.s.toLowerCase().search(vm.search.toLowerCase()) > -1;
+      });
+    } else {
+      vm.products = dataService.selectorProducts;
+    }
+  };
+
+  /**
+   * Set first product or add new to service
+   * @param product
+   */
+  vm.selectProduct = function(product) {
+    if (firstSelect) {
+      dataService.manufactures = [product];
+      dataService.manufactures[0].mnfId = 0;
+    } else {
+      dataService.addManufacture(product, vm.newManufacture.ingQuantity, vm.newManufacture.targetMnfId, vm.newManufacture.ingId);
+    }
+    $('#productSelector').modal('hide');
+  };
+
+  /**
+   * Update collection of products
+   */
+  let updateDestroyer = $rootScope.$on('factoryCalc:productsUpdated', function(event, ingQuantity, targetMnfId, ingId) {
+    vm.newManufacture = {
+      ingQuantity,
+      targetMnfId,
+      ingId
+    };
+    vm.products = dataService.selectorProducts;
+    firstSelect = false;
+  });
+
+  /**
+   * Updater destroyer
+   */
+  $scope.$on('destroy', function() {
+    updateDestroyer();
+  });
+}
+
+angular
+  .module('app')
+  .component('welcomeBlock', {
+    templateUrl: 'app/components/welcomeBlock/welcomeBlock.html',
+    controller: welcomeBlockController,
+    bindings: {
+      showManufactureCalc: '&'
+    }
+  });
+
+function welcomeBlockController(dataService) {
+  let vm = this;
+
+  /**
+   * Get dataService selected product
+   * @returns {*}
+   */
+  vm.selectedProduct = function () {
+    return dataService.manufactures[0];
+  }
+}
