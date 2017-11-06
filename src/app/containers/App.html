@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="jumbotron jumbotron-fluid col-md-12 p-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-8">
+            <h1 class="display-5">OpenVirtaMixer</h1>
+            <p class="lead">Инструмент для комплексного расчета производства.</p>
+          </div>
+          <div class="col-4" ng-if="$ctrl.data.nodes.length > 1">
+            <div class="alert alert-dark" role="alert">
+              <h5>Тип диаграммы</h5>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" value="scheme"
+                         ng-model="$ctrl.mapType" ng-change="$ctrl.changeMapType()"> Схема
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" value="value"
+                         ng-model="$ctrl.mapType" ng-change="$ctrl.changeMapType()"> Объем
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" value="cost"
+                         ng-model="$ctrl.mapType" ng-change="$ctrl.changeMapType()"> Стоимость
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="flow" class="col-md-12">
+      <ng-sankey ng-if="$ctrl.data.nodes.length > 1" id="sankeyChart" options="$ctrl.options"
+                 data="$ctrl.data"></ng-sankey>
+    </div>
+    <welcome-block ng-show="$ctrl.data.nodes.length < 2" class="col-md-6"
+                   show-manufacture-calc="$ctrl.showManufactureCalc(0)"></welcome-block>
+    <product-selector></product-selector>
+    <factory-calc></factory-calc>
+  </div>
+</div>

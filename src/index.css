@@ -1,0 +1,28 @@
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-help {
+    cursor: help;
+}
+
+.productBlock {
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.dropdown-menu.small-menu {
+    min-width: 5rem;
+}
+
+input.ng-invalid {
+    background-color: #ffd1d1;
+}
+
+product-selector {
+  z-index: 1051;
+}
+
+.input-group-addon.fixed-width {
+  width:28px;
+}
