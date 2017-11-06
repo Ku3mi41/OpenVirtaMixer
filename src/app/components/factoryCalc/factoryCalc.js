@@ -105,6 +105,11 @@ function factoryCalcController($rootScope, dataService) {
     return colour;
   };
 
+  /**
+   * Calculate ingredient proportion
+   * @param ingredient
+   * @returns {number}
+   */
   vm.calculateIngredientPercent = function (ingredient) {
     return ingredient.totalPrice / vm.manufacture.totalIngredientsPrice * 100
   }
