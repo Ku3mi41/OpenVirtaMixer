@@ -13,7 +13,7 @@
 .sprite {
     display: inline-block;
     overflow: hidden;
-    background: url(img/sprite.png) no-repeat;
+    background: url(/app/assets/img/sprite.png) no-repeat;
 }
 
 .aircraftengine {
