@@ -254,7 +254,7 @@
                         ng-show="product.envdTax >= product.incomeTax">
                     {{product.envdTax | number : 2}} $
                   </span>
-                  <span class="badge badge-info cursor-help"
+                  <span class="badge badge-info cursor-help" ng-show="product.netCost"
                         ng-attr-title="Переход с\на ЕНВД при цене продажи ${{product.changeTaxPoint}}">
                     i
                   </span>
