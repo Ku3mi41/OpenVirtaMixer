@@ -3,7 +3,7 @@
     <div class="jumbotron jumbotron-fluid col-md-12 p-2">
       <div class="container">
         <div class="row">
-          <div class="col-8">
+          <div class="col-6">
             <h1 class="display-5">OpenVirtaMixer</h1>
             <p class="lead">Инструмент для комплексного расчета производства.</p>
           </div>
@@ -28,6 +28,14 @@
                          ng-model="$ctrl.mapType" ng-change="$ctrl.changeMapType()"> Стоимость
                 </label>
               </div>
+            </div>
+          </div>
+          <div class="col-2" ng-if="$ctrl.data.nodes.length > 1">
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon" data-toggle="tooltip" data-placement="left"
+                    title="Прибыль на 1 работника">$</span>
+              <input class="form-control" type="text" ng-change="$ctrl.setGlobalProfitByWorker()" placeholder="Прибыль/раб."
+                     pattern="[\d\.\-]+" ng-model="$ctrl.globalProfitByWorker">
             </div>
           </div>
         </div>

@@ -86,8 +86,13 @@ var sankeyCore = function() {
     links.forEach(function(link) {
       var source = link.source,
         target = link.target;
-      if (typeof source === 'number') source = link.source = nodes[link.source];
-      if (typeof target === 'number') target = link.target = nodes[link.target];
+
+      if (typeof source === 'number') source = link.source = nodes.filter(function (item) {
+        return item.node === link.source;
+      })[0];
+      if (typeof target === 'number') target = link.target = nodes.filter(function (item) {
+        return item.node === link.target;
+      })[0];
       source.sourceLinks.push(link);
       target.targetLinks.push(link);
     });

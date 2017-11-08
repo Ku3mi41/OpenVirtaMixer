@@ -6,6 +6,7 @@ function dataService($rootScope, $filter) {
   let service = this;
 
   service.selectorProducts = PRODUCTS;
+  service.globalProfitByWorker = 0;
 
   service.map = {
     nodes: [],
@@ -13,53 +14,103 @@ function dataService($rootScope, $filter) {
   };
 
   service.manufactures = [];
-
   service.observerCallbacks = [];
 
-  // register observer
-  service.registerObserverCallback = function (callback) {
+  /**
+   * Register observer
+   * @param callback
+   */
+  service.registerObserverCallback = function(callback) {
     service.observerCallbacks.push(callback);
   };
 
-  // notify all observers
-  service.notifyObservers = function () {
-    angular.forEach(service.observerCallbacks, function (callback) {
+  /**
+   * Notify all observers
+   */
+  service.notifyObservers = function() {
+    angular.forEach(service.observerCallbacks, function(callback) {
       callback();
     });
   };
 
-  service.calculateDiffCoefficient = function (mineDifficult) {
+  /**
+   * Calculate mine difficult coefficient
+   * @param mineDifficult
+   * @returns {number}
+   */
+  service.calculateDiffCoefficient = function(mineDifficult) {
     return Math.pow(1.4, Math.abs(3 - mineDifficult));
   };
 
-  service.calculateWorkersQuantity = function (manufacture, product, ingredientQuantity) {
-    let workersQuantity = ingredientQuantity / (manufacture.efficiency / 100);
-    workersQuantity /= Math.pow(1.05, manufacture.technology - 1);
-    workersQuantity /= product.pbq;
+  /**
+   * Calculate new workers quantity for requested product number
+   * @param quantity
+   * @param manufacture
+   * @param pbq
+   * @returns {*}
+   */
+  service.reverseCalcWorkersQuantity = function(quantity, manufacture, pbq) {
+    quantity /= (manufacture.efficiency / 100);
+    quantity /= Math.pow(1.05, manufacture.technology - 1);
+    quantity /= pbq;
 
-    if (manufacture.e.sym === 'tractor') {
-      // farm
-      workersQuantity *= 52;
+    switch (manufacture.e.sym) {
+      case 'tractor':
+        // farm
+        return quantity * 52;
+      case 'drill':
+        // mine
+        if (manufacture.mineDifficult >= 3) {
+          return quantity * service.calculateDiffCoefficient(manufacture.mineDifficult);
+        } else {
+          return quantity /= service.calculateDiffCoefficient(manufacture.mineDifficult);
+        }
     }
-
-    if (manufacture.e.sym === 'drill') {
-      // mine
-      if (manufacture.mineDifficult >= 3) {
-        workersQuantity *= service.calculateDiffCoefficient(manufacture.mineDifficult);
-      } else {
-        workersQuantity /= service.calculateDiffCoefficient(manufacture.mineDifficult);
-      }
-    }
-
-    return Math.ceil(workersQuantity);
+    return quantity;
   };
 
-  service.addManufacture = function (recipe, quantity, targetId, ingId) {
-    if (recipe.mnfId) {
-      // set source
-      service.selectedManufacture.ip[ingId].sourceMnf = recipe.mnfId;
-      service.notifyObservers();
-    } else {
+  /**
+   * Calculate requested workers quantity
+   * @param manufacture
+   * @returns {*}
+   */
+  service.calculateWorkersQuantity = function(manufacture) {
+    let i = 0;
+    let resultWorkersQuantity = [];
+
+    /**
+     * Calculate requested workers quantity for product at this manufacture
+     * @param result
+     * @returns {number}
+     */
+    let calculateWorkersQuantity = function(result) {
+      let neededQuantity = 0;
+      service.manufactures.filter(n => n).forEach(function(serviceManufacture) {
+        serviceManufacture.ip.forEach(function(serviceManufactureIngredient) {
+          if (serviceManufactureIngredient.pi === result.pi && serviceManufactureIngredient.sourceMnf === manufacture.mnfId) {
+            neededQuantity += serviceManufactureIngredient.quantity;
+          }
+        });
+      });
+
+      return Math.ceil(service.reverseCalcWorkersQuantity(neededQuantity, manufacture, result.pbq));
+    };
+
+    manufacture.rp.forEach(function(result) {
+      resultWorkersQuantity[i++] = calculateWorkersQuantity(result);
+    });
+
+    return Math.max.apply(null, resultWorkersQuantity);
+  };
+
+  /**
+   * Add new manufacture
+   * @param recipe
+   * @param targetId
+   * @param ingId
+   */
+  service.addManufacture = function(recipe, targetId, ingId) {
+    if (!recipe.mnfId) {
       recipe = angular.copy(recipe);
       // set default values
       recipe.bonus = 0;
@@ -69,46 +120,54 @@ function dataService($rootScope, $filter) {
       recipe.mnfId = service.manufactures.length;
       recipe.rp[recipe.targetProductIndex].targetMnfId = targetId;
       recipe.rp[recipe.targetProductIndex].targetMnfIngId = ingId;
-      recipe.ip.forEach(function (ingredient) {
-        ingredient.quality = 1;
+      recipe.ip.forEach(function(ingredient) {
+        ingredient.quality = ingredient.mq || 1;
         ingredient.price = 1;
       });
 
       // mine / plant
       if (recipe.e.sym === 'tractor' || recipe.e.sym === 'saw') {
-        recipe.baseQuality = 1;
+        recipe.baseQuality = 3;
       }
 
       // mine
       if (recipe.e.sym === 'drill') {
         recipe.mineDifficult = 1;
-        recipe.baseQuality = 1;
+        recipe.baseQuality = 3;
       }
 
       // calc workersQuantity
-      let recipeProduct = recipe.rp.filter(function (product) {
-        return product.pi === service.selectedManufacture.ip[ingId].pi;
-      })[0];
-      recipe.workersQuantity = service.calculateWorkersQuantity(recipe, recipeProduct, quantity);
-
-      // set source
-      service.selectedManufacture.ip[ingId].sourceMnf = recipe.mnfId;
+      recipe.workersQuantity = service.calculateWorkersQuantity(recipe);
 
       // add new recipe
       service.manufactures.push(recipe);
-      service.selectedManufacture = recipe;
-
-      // show new recipe in calc
-      service.notifyObservers();
     }
+
+    // set source
+    service.selectedManufacture.ip[ingId].sourceMnf = recipe.mnfId;
+    service.selectedManufacture = recipe;
+    // show new recipe in calc
+    service.notifyObservers();
   };
 
-  service.doCalc = function (manufacture, automaticUpdate = false) {
+  /**
+   * All factory calculations
+   * @param manufacture
+   * @param automaticUpdate
+   */
+  service.doCalc = function(manufacture, automaticUpdate = false) {
     // set default values
     if (!manufacture.efficiency) {
       manufacture.efficiency = 100;
     }
+    if (!manufacture.profitByWorker) {
+      manufacture.profitByWorker = 0;
+    }
     manufacture.bonus = manufacture.bonus | 0;
+
+    if (manufacture.mnfId !== 0) {
+      manufacture.workersQuantity = service.calculateWorkersQuantity(manufacture);
+    }
 
     manufacture.workersQualification = Math.pow(manufacture.technology, 0.8);
 
@@ -123,7 +182,7 @@ function dataService($rootScope, $filter) {
     let ingredientsSumQuantity = 0;
     let totalIngredientsPrice = 0;
 
-    manufacture.ip.forEach(function (ingredient) {
+    manufacture.ip.forEach(function(ingredient) {
 
       let oldQuantity = ingredient.quantity;
 
@@ -142,11 +201,6 @@ function dataService($rootScope, $filter) {
       // update source if exist
       if (ingredient.sourceMnf !== angular.undefined && ingredient.quantity && (ingredient.quantity !== oldQuantity)) {
         let sourceManufacture = service.manufactures[ingredient.sourceMnf];
-        let sourceProduct = sourceManufacture.rp.filter(function (product) {
-          return product.pi === ingredient.pi;
-        })[0];
-
-        sourceManufacture.workersQuantity = service.calculateWorkersQuantity(sourceManufacture, sourceProduct, ingredient.quantity);
 
         // we need go deeper... doCalc source manufacture
         service.doCalc(sourceManufacture, true);
@@ -172,7 +226,9 @@ function dataService($rootScope, $filter) {
     let totalSalary = manufacture.workersSalary * manufacture.workersQuantity;
     let expenses = totalIngredientsPrice + totalSalary * 1.1;
 
-    manufacture.rp.forEach(function (product) {
+    let totalProfit = 0;
+
+    manufacture.rp.forEach(function(product) {
       let oldProductPrice = product.price;
       let oldProductQuantity = product.quantity;
 
@@ -233,9 +289,20 @@ function dataService($rootScope, $filter) {
       product.envdTax = product.netCost * incomeTaxCoefficient * envdCoefficient;
       product.changeTaxPoint = $filter('number', 2)(product.netCost * (1 + envdCoefficient));
 
-      if (!product.price || automaticUpdate) {
+      if (!product.price || automaticUpdate || service.globalProfitByWorker) {
         // automatic default price
-        product.price = parseFloat((product.netCost + product.envdTax).toFixed(2));
+        let numberOfProducts = manufacture.rp.length;
+        let workersProfit = (service.globalProfitByWorker || manufacture.profitByWorker) * manufacture.workersQuantity / numberOfProducts;
+        let profitByUnit = workersProfit / product.quantity;
+        let newPrice = product.netCost + profitByUnit;
+
+        if (newPrice > product.changeTaxPoint) {
+          // INCOME TAX
+          product.price = parseFloat((product.netCost + profitByUnit / (1 - incomeTaxCoefficient)).toFixed(2));
+        } else {
+          // ENVD
+          product.price = parseFloat((newPrice + product.envdTax).toFixed(2));
+        }
       }
 
       // INCOME TAX
@@ -249,13 +316,14 @@ function dataService($rootScope, $filter) {
 
       // PROFIT
       product.profit = product.quantity * (product.price - product.totalCost);
+      totalProfit += product.profit;
 
       // update target if exist
       if (product.targetMnfId !== angular.undefined && product.price && product.quantity &&
         (oldProductPrice !== product.price || oldProductQuantity !== product.quantity)) {
 
         // search all targets
-        service.manufactures.forEach(function (targetManufacture) {
+        service.manufactures.filter(n => n).forEach(function(targetManufacture) {
           for (let i = 0; i < targetManufacture.ip.length; i++) {
             if (targetManufacture.ip[i].sourceMnf === manufacture.mnfId) {
               targetManufacture.ip[i].price = parseFloat(product.price.toFixed(2));
@@ -271,17 +339,23 @@ function dataService($rootScope, $filter) {
       // update map
       service.buildMap();
     });
+
+    manufacture.profitByWorker = parseFloat((totalProfit / manufacture.workersQuantity).toFixed(2));
   };
 
   service.mapType = 'scheme';
 
-  service.buildMap = function () {
+  /**
+   * Build new sankey map
+   */
+  service.buildMap = function() {
     let nodes = [];
     let links = [];
 
-    service.manufactures.forEach(function (manufacture) {
+    service.manufactures.filter(n => n).forEach(function(manufacture) {
       let products = [];
-      manufacture.rp.forEach(function (product) {
+
+      manufacture.rp.forEach(function(product) {
         products.push({
           img: product.img,
           quantity: product.quantity,
@@ -289,7 +363,8 @@ function dataService($rootScope, $filter) {
           price: product.price
         });
       });
-      manufacture.ip.forEach(function (product) {
+
+      manufacture.ip.forEach(function(product) {
         if (product.sourceMnf !== angular.undefined) {
           let value = 0;
 

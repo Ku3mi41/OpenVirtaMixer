@@ -10,6 +10,18 @@ function App($scope, $rootScope, $window, dataService) {
 
   let headHeight = document.querySelectorAll('.jumbotron')[0].clientHeight + 50;
 
+  vm.globalProfitByWorker = dataService.globalProfitByWorker;
+
+  /**
+   * Set global profit by worker
+   */
+  vm.setGlobalProfitByWorker = function() {
+    dataService.globalProfitByWorker = vm.globalProfitByWorker;
+    dataService.manufactures.filter(n => n).forEach(function(manufacture) {
+      dataService.doCalc(manufacture, true);
+    })
+  };
+
   // map options
   vm.data = dataService.map;
   vm.options = {

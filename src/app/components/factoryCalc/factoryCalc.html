@@ -14,11 +14,24 @@
               <thead class="thead-default">
               <tr>
                 <th class="text-center">
-                  Работники
-                  <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
-                          title="Квалификация работников" ng-show="$ctrl.manufacture.workersQualification">
-                    {{$ctrl.manufacture.workersQualification | number : 2}}
-                  </button>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      Работники
+                      <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                              title="Квалификация работников" ng-show="$ctrl.manufacture.workersQualification">
+                        {{$ctrl.manufacture.workersQualification | number : 2}}
+                      </button>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="input-group input-group-sm" ng-show="$ctrl.manufacture.profitByWorker >= 0">
+                        <span class="input-group-addon" data-toggle="tooltip" data-placement="left"
+                              title="Прибыль на 1 работника">$</span>
+                        <input class="form-control" type="text" ng-blur="$ctrl.doAutoCalc()" placeholder="Прибыль/раб."
+                               ng-disabled="$ctrl.getGlobalProfitByWorker()"
+                               pattern="[\d\.\-]+" ng-model="$ctrl.manufacture.profitByWorker">
+                      </div>
+                    </div>
+                  </div>
                 </th>
                 <th class="text-center">
                   <span ng-if="$ctrl.manufacture.e.pc !== 'Животные'">Станки</span>
@@ -56,6 +69,7 @@
                           title="Количество работников">#</span>
                     <input class="form-control" type="number" placeholder="Количество" min="1"
                            ng-change="$ctrl.doCalc()"
+                           ng-disabled="$ctrl.manufacture.mnfId !== 0"
                            ng-model="$ctrl.manufacture.workersQuantity">
                     <input class="form-control" type="number" placeholder="Зарплата" min="1" ng-change="$ctrl.doCalc()"
                            ng-model="$ctrl.manufacture.workersSalary">
@@ -101,9 +115,16 @@
                             tabindex="999">
                       <strong>+</strong>
                     </button>
-                    <button type="button" class="btn btn-sm btn-success float-right cursor-pointer"
+                    <button type="button" class="btn btn-sm btn-secondary float-right cursor-pointer"
                             ng-show="ingredient.sourceMnf"
-                            ng-click="$ctrl.changeManufacture(ingredient.sourceMnf)">
+                            ng-click="$ctrl.removeSource(ingredient)"
+                            tabindex="998">
+                      <strong>-</strong>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-success float-left cursor-pointer"
+                            ng-show="ingredient.sourceMnf"
+                            ng-click="$ctrl.changeManufacture(ingredient.sourceMnf)"
+                            tabindex="997">
                       <strong>&#8662;</strong>
                     </button>
                     <div class="alert alert-secondary" role="alert">
@@ -250,13 +271,21 @@
                   </button>
                 </td>
                 <td class="d-inline-block col-2">
-                  <span class="badge badge-light" ng-show="product.quantity">
+                  <span class="badge badge-light" ng-show="product.quantity && $ctrl.manufacture.mnfId !== 0">
                     {{product.quantity | number : 0}} шт.
                   </span>
                   <span class="badge badge-light" title="В неделю" data-toggle="tooltip" data-placement="bottom"
                         ng-if="$ctrl.manufacture.e.sym === 'tractor'" ng-show="product.quantity">
                     {{product.quantity / 52 | number : 0}} шт.
                   </span>
+                  <div class="input-group input-group-sm" ng-show="$ctrl.manufacture.mnfId === 0">
+                    <span class="input-group-addon" data-toggle="tooltip" data-placement="left"
+                          title="Желаемое количество">#</span>
+                    <input class="form-control" type="text"
+                           ng-blur="$ctrl.calculateNewWorkersQuantity(product.quantity, product.pbq)"
+                           placeholder="Желаемое количество"
+                           pattern="[\d\.\-]+" ng-model="product.quantity">
+                  </div>
                 </td>
                 <td class="d-inline-block col-1">
                   <span class="badge badge-info" ng-show="product.quality">
@@ -290,6 +319,7 @@
                 <td class="d-inline-block col-2">
                   <input class="form-control-sm form-control" type="number" min="0" step="0.01"
                          ng-change="$ctrl.doCalc()"
+                         ng-disabled="$ctrl.getGlobalProfitByWorker()"
                          placeholder="Цена" ng-model="product.price">
                 </td>
                 <td class="d-inline-block col-2">

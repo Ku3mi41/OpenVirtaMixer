@@ -33,7 +33,7 @@ function productSelectorController(dataService, $scope, $rootScope) {
       dataService.manufactures = [product];
       dataService.manufactures[0].mnfId = 0;
     } else {
-      dataService.addManufacture(product, vm.newManufacture.ingQuantity, vm.newManufacture.targetMnfId, vm.newManufacture.ingId);
+      dataService.addManufacture(product, vm.newManufacture.targetMnfId, vm.newManufacture.ingId);
     }
     $('#productSelector').modal('hide');
   };
