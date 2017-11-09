@@ -287,7 +287,7 @@ function dataService($rootScope, $filter) {
 
       // ENVD
       product.envdTax = product.netCost * incomeTaxCoefficient * envdCoefficient;
-      product.changeTaxPoint = $filter('number', 2)(product.netCost * (1 + envdCoefficient));
+      product.changeTaxPoint = product.netCost * (1 + envdCoefficient);
 
       if (!product.price || automaticUpdate || service.globalProfitByWorker) {
         // automatic default price
